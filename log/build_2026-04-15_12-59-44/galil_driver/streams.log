@@ -1,0 +1,147 @@
+[0.018s] Invoking command in '/home/yujie/Daniel_ws/galil_test/galil-amiro/build/galil_driver': CMAKE_PREFIX_PATH=/home/yujie/camera_ros2_ws/install/spinnaker_synchronized_camera_driver:/home/yujie/camera_ros2_ws/install/spinnaker_camera_driver:/home/yujie/camera_ros2_ws/install/flir_camera_msgs:/home/yujie/camera_ros2_ws/install/flir_camera_description:/home/yujie/ros2_ws/install/spinnaker_synchronized_camera_driver:/opt/ros/humble:/home/yujie/ros2_ws/install/spinnaker_camera_driver:/home/yujie/ros2_ws/install/flir_camera_msgs:/home/yujie/ros2_ws/install/flir_camera_description /usr/bin/cmake /home/yujie/Daniel_ws/galil_test/galil-amiro/galil_driver -DCMAKE_INSTALL_PREFIX=/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver
+[0.521s] -- The C compiler identification is GNU 11.4.0
+[0.670s] -- The CXX compiler identification is GNU 11.4.0
+[0.687s] -- Detecting C compiler ABI info
+[0.926s] -- Detecting C compiler ABI info - done
+[0.941s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.941s] -- Detecting C compile features
+[0.958s] -- Detecting C compile features - done
+[0.964s] -- Detecting CXX compiler ABI info
+[1.156s] -- Detecting CXX compiler ABI info - done
+[1.171s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[1.172s] -- Detecting CXX compile features
+[1.172s] -- Detecting CXX compile features - done
+[1.272s] -- Found ament_cmake: 1.3.12 (/opt/ros/humble/share/ament_cmake/cmake)
+[1.702s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+[2.049s] -- Found controller_manager: 2.53.0 (/opt/ros/humble/share/controller_manager/cmake)
+[2.389s] -- Found rosidl_generator_c: 3.1.8 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[2.453s] -- Found rosidl_adapter: 3.1.8 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[2.507s] -- Found rosidl_generator_cpp: 3.1.8 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[2.669s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[2.765s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[3.982s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[3.987s] -- Found rmw_fastrtps_cpp: 6.2.9 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[4.040s] -- Found TinyXML2 via Config file: TinyXML2_DIR-NOTFOUND
+[4.261s] -- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.2")  
+[4.331s] -- Found TinyXML2 via Config file: TinyXML2_DIR-NOTFOUND
+[4.361s] -- Found FastRTPS: /opt/ros/humble/include  
+[4.368s] -- Found TinyXML2 via Config file: TinyXML2_DIR-NOTFOUND
+[4.385s] -- Found TinyXML2 via Config file: TinyXML2_DIR-NOTFOUND
+[4.407s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[4.474s] -- Looking for pthread.h
+[4.698s] -- Looking for pthread.h - found
+[4.699s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+[4.871s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+[4.873s] -- Found Threads: TRUE  
+[5.362s] -- Found std_srvs: 4.9.0 (/opt/ros/humble/share/std_srvs/cmake)
+[5.394s] -- Found tf2_geometry_msgs: 0.25.18 (/opt/ros/humble/share/tf2_geometry_msgs/cmake)
+[5.425s] -- Found eigen3_cmake_module: 0.1.1 (/opt/ros/humble/share/eigen3_cmake_module/cmake)
+[5.427s] -- Found Eigen3: TRUE (found version "3.4.0") 
+[5.427s] -- Ensuring Eigen3 include directory is part of orocos-kdl CMake target
+[5.613s] -- Found ament_lint_auto: 0.12.14 (/opt/ros/humble/share/ament_lint_auto/cmake)
+[6.079s] -- Added test 'cppcheck' to perform static code analysis on C / C++ code
+[6.079s] -- Configured cppcheck include dirs: /home/yujie/Daniel_ws/galil_test/galil-amiro/galil_driver/include
+[6.079s] -- Configured cppcheck exclude dirs and/or files: 
+[6.079s] -- Added test 'flake8' to check Python code syntax and style conventions
+[6.080s] -- Added test 'lint_cmake' to check CMake code style
+[6.081s] -- Added test 'pep257' to check Python code against some of the docstring style conventions in PEP 257
+[6.084s] -- Added test 'uncrustify' to check C / C++ code style
+[6.084s] -- Configured uncrustify additional arguments: 
+[6.085s] -- Added test 'xmllint' to check XML markup files
+[6.089s] -- Configuring done
+[6.121s] -- Generating done
+[6.131s] -- Build files have been written to: /home/yujie/Daniel_ws/galil_test/galil-amiro/build/galil_driver
+[6.153s] Invoked command in '/home/yujie/Daniel_ws/galil_test/galil-amiro/build/galil_driver' returned '0': CMAKE_PREFIX_PATH=/home/yujie/camera_ros2_ws/install/spinnaker_synchronized_camera_driver:/home/yujie/camera_ros2_ws/install/spinnaker_camera_driver:/home/yujie/camera_ros2_ws/install/flir_camera_msgs:/home/yujie/camera_ros2_ws/install/flir_camera_description:/home/yujie/ros2_ws/install/spinnaker_synchronized_camera_driver:/opt/ros/humble:/home/yujie/ros2_ws/install/spinnaker_camera_driver:/home/yujie/ros2_ws/install/flir_camera_msgs:/home/yujie/ros2_ws/install/flir_camera_description /usr/bin/cmake /home/yujie/Daniel_ws/galil_test/galil-amiro/galil_driver -DCMAKE_INSTALL_PREFIX=/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver
+[6.156s] Invoking command in '/home/yujie/Daniel_ws/galil_test/galil-amiro/build/galil_driver': CMAKE_PREFIX_PATH=/home/yujie/camera_ros2_ws/install/spinnaker_synchronized_camera_driver:/home/yujie/camera_ros2_ws/install/spinnaker_camera_driver:/home/yujie/camera_ros2_ws/install/flir_camera_msgs:/home/yujie/camera_ros2_ws/install/flir_camera_description:/home/yujie/ros2_ws/install/spinnaker_synchronized_camera_driver:/opt/ros/humble:/home/yujie/ros2_ws/install/spinnaker_camera_driver:/home/yujie/ros2_ws/install/flir_camera_msgs:/home/yujie/ros2_ws/install/flir_camera_description /usr/bin/cmake --build /home/yujie/Daniel_ws/galil_test/galil-amiro/build/galil_driver -- -j8 -l8
+[6.270s] [ 50%] [32mBuilding CXX object CMakeFiles/galil_driver_plugin.dir/src/hardware_interface.cpp.o[0m
+[12.473s] [01m[K/home/yujie/Daniel_ws/galil_test/galil-amiro/galil_driver/src/hardware_interface.cpp:[m[K In member function ‘[01m[Kvirtual hardware_interface::CallbackReturn galil_driver::GalilSystemHardwareInterface::on_configure(const rclcpp_lifecycle::State&)[m[K’:
+[12.473s] [01m[K/home/yujie/Daniel_ws/galil_test/galil-amiro/galil_driver/src/hardware_interface.cpp:58:11:[m[K [01;35m[Kwarning: [m[Kunused variable ‘[01m[KBUFFER_LENGTH[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable-Wunused-variable]8;;[m[K]
+[12.473s]    58 |     GSize [01;35m[KBUFFER_LENGTH[m[K=32;
+[12.474s]       |           [01;35m[K^~~~~~~~~~~~~[m[K
+[12.474s] [01m[K/home/yujie/Daniel_ws/galil_test/galil-amiro/galil_driver/src/hardware_interface.cpp:59:11:[m[K [01;35m[Kwarning: [m[Kunused variable ‘[01m[Kbytes_returned[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable-Wunused-variable]8;;[m[K]
+[12.474s]    59 |     GSize [01;35m[Kbytes_returned[m[K;
+[12.474s]       |           [01;35m[K^~~~~~~~~~~~~~[m[K
+[12.474s] [01m[K/home/yujie/Daniel_ws/galil_test/galil-amiro/galil_driver/src/hardware_interface.cpp:60:10:[m[K [01;35m[Kwarning: [m[Kunused variable ‘[01m[Kbuffer[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable-Wunused-variable]8;;[m[K]
+[12.474s]    60 |     char [01;35m[Kbuffer[m[K[32];
+[12.474s]       |          [01;35m[K^~~~~~[m[K
+[12.490s] [01m[K/home/yujie/Daniel_ws/galil_test/galil-amiro/galil_driver/src/hardware_interface.cpp:[m[K In member function ‘[01m[Kvirtual hardware_interface::return_type galil_driver::GalilSystemHardwareInterface::prepare_command_mode_switch(const std::vector<std::__cxx11::basic_string<char> >&, const std::vector<std::__cxx11::basic_string<char> >&)[m[K’:
+[12.491s] [01m[K/home/yujie/Daniel_ws/galil_test/galil-amiro/galil_driver/src/hardware_interface.cpp:156:16:[m[K [01;35m[Kwarning: [m[Kunused variable ‘[01m[Kchannels[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable-Wunused-variable]8;;[m[K]
+[12.491s]   156 |           char [01;35m[Kchannels[m[K[] = "ABCD";
+[12.491s]       |                [01;35m[K^~~~~~~~[m[K
+[12.497s] [01m[K/home/yujie/Daniel_ws/galil_test/galil-amiro/galil_driver/src/hardware_interface.cpp:[m[K In member function ‘[01m[Kvirtual hardware_interface::return_type galil_driver::GalilSystemHardwareInterface::perform_command_mode_switch(const std::vector<std::__cxx11::basic_string<char> >&, const std::vector<std::__cxx11::basic_string<char> >&)[m[K’:
+[12.498s] [01m[K/home/yujie/Daniel_ws/galil_test/galil-amiro/galil_driver/src/hardware_interface.cpp:220:16:[m[K [01;35m[Kwarning: [m[Kunused variable ‘[01m[Kchannels[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable-Wunused-variable]8;;[m[K]
+[12.498s]   220 |           char [01;35m[Kchannels[m[K[] = "ABCD";
+[12.498s]       |                [01;35m[K^~~~~~~~[m[K
+[12.499s] [01m[K/home/yujie/Daniel_ws/galil_test/galil-amiro/galil_driver/src/hardware_interface.cpp:[m[K In member function ‘[01m[Kvirtual hardware_interface::return_type galil_driver::GalilSystemHardwareInterface::read(const rclcpp::Time&, const rclcpp::Duration&)[m[K’:
+[12.499s] [01m[K/home/yujie/Daniel_ws/galil_test/galil-amiro/galil_driver/src/hardware_interface.cpp:256:40:[m[K [01;35m[Kwarning: [m[Kstatement has no effect [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-value-Wunused-value]8;;[m[K]
+[12.499s]   256 |       [01;35m[Khardware_interface::return_type::ERROR[m[K;
+[12.499s]       |       [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~[m[K
+[12.500s] [01m[K/home/yujie/Daniel_ws/galil_test/galil-amiro/galil_driver/src/hardware_interface.cpp:270:40:[m[K [01;35m[Kwarning: [m[Kstatement has no effect [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-value-Wunused-value]8;;[m[K]
+[12.500s]   270 |       [01;35m[Khardware_interface::return_type::ERROR[m[K;
+[12.500s]       |       [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~[m[K
+[12.504s] [01m[K/home/yujie/Daniel_ws/galil_test/galil-amiro/galil_driver/src/hardware_interface.cpp:[m[K In member function ‘[01m[Kvirtual hardware_interface::return_type galil_driver::GalilSystemHardwareInterface::write(const rclcpp::Time&, const rclcpp::Duration&)[m[K’:
+[12.504s] [01m[K/home/yujie/Daniel_ws/galil_test/galil-amiro/galil_driver/src/hardware_interface.cpp:324:46:[m[K [01;35m[Kwarning: [m[Kstatement has no effect [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-value-Wunused-value]8;;[m[K]
+[12.504s]   324 |             [01;35m[Khardware_interface::return_type::ERROR[m[K;
+[12.504s]       |             [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~[m[K
+[12.505s] [01m[K/home/yujie/Daniel_ws/galil_test/galil-amiro/galil_driver/src/hardware_interface.cpp:333:42:[m[K [01;35m[Kwarning: [m[Kstatement has no effect [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-value-Wunused-value]8;;[m[K]
+[12.505s]   333 |         [01;35m[Khardware_interface::return_type::ERROR[m[K;
+[12.505s]       |         [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~[m[K
+[13.544s] [01m[K/home/yujie/Daniel_ws/galil_test/galil-amiro/galil_driver/src/hardware_interface.cpp:299:36:[m[K [01;35m[Kwarning: [m[K‘[01m[K%c[m[K’ directive writing 1 byte into a region of size between 0 and 1023 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wformat-overflow=-Wformat-overflow=]8;;[m[K]
+[13.544s]   299 |           { sprintf( command, "%s%d[01;35m[K%c[m[K", command, ((int)(hw_commands_position_[i]*gears_m_2_cnt[i])), separator ); }
+[13.544s]       |                                    [01;35m[K^~[m[K
+[13.544s] [01m[K/home/yujie/Daniel_ws/galil_test/galil-amiro/galil_driver/src/hardware_interface.cpp:299:20:[m[K [01;36m[Knote: [m[K‘[01m[Ksprintf[m[K’ output between 3 and 1036 bytes into a destination of size 1024
+[13.544s]   299 |           { [01;36m[Ksprintf( command, "%s%d%c", command, ((int)(hw_commands_position_[i]*gears_m_2_cnt[i])), separator )[m[K; }
+[13.544s]       |             [01;36m[K~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[13.544s] [01m[K/home/yujie/Daniel_ws/galil_test/galil-amiro/galil_driver/src/hardware_interface.cpp:299:20:[m[K [01;35m[Kwarning: [m[K‘[01m[Ksprintf[m[K’ argument 3 overlaps destination object ‘[01m[Kcommand[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wrestrict-Wrestrict]8;;[m[K]
+[13.544s] [01m[K/home/yujie/Daniel_ws/galil_test/galil-amiro/galil_driver/src/hardware_interface.cpp:278:10:[m[K [01;36m[Knote: [m[Kdestination object referenced by ‘[01m[Krestrict[m[K’-qualified argument 1 was declared here
+[13.544s]   278 |     char [01;36m[Kcommand[m[K[1024]="";
+[13.545s]       |          [01;36m[K^~~~~~~[m[K
+[13.545s] [01m[K/home/yujie/Daniel_ws/galil_test/galil-amiro/galil_driver/src/hardware_interface.cpp:305:34:[m[K [01;35m[Kwarning: [m[K‘[01m[K%c[m[K’ directive writing 1 byte into a region of size between 0 and 1023 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wformat-overflow=-Wformat-overflow=]8;;[m[K]
+[13.545s]   305 |           sprintf( command, "%s%d[01;35m[K%c[m[K", command, ((int)(hw_commands_position_[i]*gears_m_2_cnt[i])), separator );
+[13.545s]       |                                  [01;35m[K^~[m[K
+[13.545s] [01m[K/home/yujie/Daniel_ws/galil_test/galil-amiro/galil_driver/src/hardware_interface.cpp:305:18:[m[K [01;36m[Knote: [m[K‘[01m[Ksprintf[m[K’ output between 3 and 1036 bytes into a destination of size 1024
+[13.545s]   305 |           [01;36m[Ksprintf( command, "%s%d%c", command, ((int)(hw_commands_position_[i]*gears_m_2_cnt[i])), separator )[m[K;
+[13.545s]       |           [01;36m[K~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[13.545s] [01m[K/home/yujie/Daniel_ws/galil_test/galil-amiro/galil_driver/src/hardware_interface.cpp:305:18:[m[K [01;35m[Kwarning: [m[K‘[01m[Ksprintf[m[K’ argument 3 overlaps destination object ‘[01m[Kcommand[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wrestrict-Wrestrict]8;;[m[K]
+[13.545s] [01m[K/home/yujie/Daniel_ws/galil_test/galil-amiro/galil_driver/src/hardware_interface.cpp:278:10:[m[K [01;36m[Knote: [m[Kdestination object referenced by ‘[01m[Krestrict[m[K’-qualified argument 1 was declared here
+[13.545s]   278 |     char [01;36m[Kcommand[m[K[1024]="";
+[13.546s]       |          [01;36m[K^~~~~~~[m[K
+[14.637s] [100%] [32m[1mLinking CXX shared library libgalil_driver_plugin.so[0m
+[15.458s] [100%] Built target galil_driver_plugin
+[15.482s] Invoked command in '/home/yujie/Daniel_ws/galil_test/galil-amiro/build/galil_driver' returned '0': CMAKE_PREFIX_PATH=/home/yujie/camera_ros2_ws/install/spinnaker_synchronized_camera_driver:/home/yujie/camera_ros2_ws/install/spinnaker_camera_driver:/home/yujie/camera_ros2_ws/install/flir_camera_msgs:/home/yujie/camera_ros2_ws/install/flir_camera_description:/home/yujie/ros2_ws/install/spinnaker_synchronized_camera_driver:/opt/ros/humble:/home/yujie/ros2_ws/install/spinnaker_camera_driver:/home/yujie/ros2_ws/install/flir_camera_msgs:/home/yujie/ros2_ws/install/flir_camera_description /usr/bin/cmake --build /home/yujie/Daniel_ws/galil_test/galil-amiro/build/galil_driver -- -j8 -l8
+[15.484s] Invoking command in '/home/yujie/Daniel_ws/galil_test/galil-amiro/build/galil_driver': CMAKE_PREFIX_PATH=/home/yujie/camera_ros2_ws/install/spinnaker_synchronized_camera_driver:/home/yujie/camera_ros2_ws/install/spinnaker_camera_driver:/home/yujie/camera_ros2_ws/install/flir_camera_msgs:/home/yujie/camera_ros2_ws/install/flir_camera_description:/home/yujie/ros2_ws/install/spinnaker_synchronized_camera_driver:/opt/ros/humble:/home/yujie/ros2_ws/install/spinnaker_camera_driver:/home/yujie/ros2_ws/install/flir_camera_msgs:/home/yujie/ros2_ws/install/flir_camera_description /usr/bin/cmake --install /home/yujie/Daniel_ws/galil_test/galil-amiro/build/galil_driver
+[15.501s] -- Install configuration: ""
+[15.501s] -- Installing: /home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver/share/galil_driver/hardware_interface_plugin.xml
+[15.501s] -- Installing: /home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver/lib/libgalil_driver_plugin.so
+[15.503s] -- Set runtime path of "/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver/lib/libgalil_driver_plugin.so" to ""
+[15.503s] -- Installing: /home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver/share/galil_driver/launch
+[15.503s] -- Installing: /home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver/share/galil_driver/launch/mariana_view.launch.py
+[15.504s] -- Installing: /home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver/share/galil_driver/launch/view.launch.py
+[15.504s] -- Installing: /home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver/share/galil_driver/launch/demo.launch.py
+[15.505s] -- Installing: /home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver/share/galil_driver/config
+[15.505s] -- Installing: /home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver/share/galil_driver/config/galil_controllers.yaml
+[15.505s] -- Installing: /home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver/include/include
+[15.505s] -- Installing: /home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver/include/include/galil_driver
+[15.505s] -- Installing: /home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver/include/include/galil_driver/hardware_interface.hpp
+[15.505s] -- Installing: /home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver/share/galil_driver/environment/library_path.sh
+[15.505s] -- Installing: /home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver/share/galil_driver/environment/library_path.dsv
+[15.506s] -- Installing: /home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver/share/ament_index/resource_index/package_run_dependencies/galil_driver
+[15.506s] -- Installing: /home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver/share/ament_index/resource_index/parent_prefix_path/galil_driver
+[15.506s] -- Installing: /home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver/share/galil_driver/environment/ament_prefix_path.sh
+[15.506s] -- Installing: /home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver/share/galil_driver/environment/ament_prefix_path.dsv
+[15.507s] -- Installing: /home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver/share/galil_driver/environment/path.sh
+[15.507s] -- Installing: /home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver/share/galil_driver/environment/path.dsv
+[15.507s] -- Installing: /home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver/share/galil_driver/local_setup.bash
+[15.508s] -- Installing: /home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver/share/galil_driver/local_setup.sh
+[15.508s] -- Installing: /home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver/share/galil_driver/local_setup.zsh
+[15.508s] -- Installing: /home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver/share/galil_driver/local_setup.dsv
+[15.508s] -- Installing: /home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver/share/galil_driver/package.dsv
+[15.509s] -- Installing: /home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver/share/ament_index/resource_index/packages/galil_driver
+[15.509s] -- Installing: /home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver/share/ament_index/resource_index/hardware_interface__pluginlib__plugin/galil_driver
+[15.509s] -- Installing: /home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver/share/galil_driver/cmake/ament_cmake_export_include_directories-extras.cmake
+[15.510s] -- Installing: /home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver/share/galil_driver/cmake/ament_cmake_export_libraries-extras.cmake
+[15.510s] -- Installing: /home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver/share/galil_driver/cmake/ament_cmake_export_dependencies-extras.cmake
+[15.510s] -- Installing: /home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver/share/galil_driver/cmake/galil_driverConfig.cmake
+[15.510s] -- Installing: /home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver/share/galil_driver/cmake/galil_driverConfig-version.cmake
+[15.510s] -- Installing: /home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver/share/galil_driver/package.xml
+[15.515s] Invoked command in '/home/yujie/Daniel_ws/galil_test/galil-amiro/build/galil_driver' returned '0': CMAKE_PREFIX_PATH=/home/yujie/camera_ros2_ws/install/spinnaker_synchronized_camera_driver:/home/yujie/camera_ros2_ws/install/spinnaker_camera_driver:/home/yujie/camera_ros2_ws/install/flir_camera_msgs:/home/yujie/camera_ros2_ws/install/flir_camera_description:/home/yujie/ros2_ws/install/spinnaker_synchronized_camera_driver:/opt/ros/humble:/home/yujie/ros2_ws/install/spinnaker_camera_driver:/home/yujie/ros2_ws/install/flir_camera_msgs:/home/yujie/ros2_ws/install/flir_camera_description /usr/bin/cmake --install /home/yujie/Daniel_ws/galil_test/galil-amiro/build/galil_driver

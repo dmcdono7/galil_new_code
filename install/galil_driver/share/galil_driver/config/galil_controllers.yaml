@@ -1,0 +1,59 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 50
+
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcasters
+
+    spacenav_controller:
+      type: needle_controllers/SpacenavTeleopController
+      
+    broyden_controller:
+      type: needle_controllers/BroydenController
+      
+    velocity_controller:
+      type: velocity_controllers/JointGroupVelocityController
+
+    position_controller:
+      type: position_controllers/JointGroupPositionController
+
+broyden_controller:
+  ros__parameters:
+    joints:
+      - horizontal_joint
+      - insertion_joint
+      - vertical_joint
+    robot_base_link: world
+    end_effector_link: tip
+    interface_name: velocity
+
+spacenav_controller:
+  ros__parameters:
+    joints:
+      - horizontal_joint
+      - insertion_joint
+      - vertical_joint
+    joints:
+      - horizontal_joint
+      - insertion_joint
+      - vertical_joint
+    robot_base_link: world
+    end_effector_link: tip
+    interface_name: velocity
+
+velocity_controller:
+  ros__parameters:
+    joints:
+      - insertion_joint
+      - horizontal_joint
+      - vertical_joint
+      - needle_drive_joint
+    interface_name: velocity
+
+position_controller:
+  ros__parameters:
+    joints:
+      - insertion_joint
+      - horizontal_joint
+      - vertical_joint
+      - needle_drive_joint

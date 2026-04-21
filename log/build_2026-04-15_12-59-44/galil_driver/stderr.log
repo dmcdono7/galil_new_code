@@ -1,0 +1,52 @@
+[01m[K/home/yujie/Daniel_ws/galil_test/galil-amiro/galil_driver/src/hardware_interface.cpp:[m[K In member function ‘[01m[Kvirtual hardware_interface::CallbackReturn galil_driver::GalilSystemHardwareInterface::on_configure(const rclcpp_lifecycle::State&)[m[K’:
+[01m[K/home/yujie/Daniel_ws/galil_test/galil-amiro/galil_driver/src/hardware_interface.cpp:58:11:[m[K [01;35m[Kwarning: [m[Kunused variable ‘[01m[KBUFFER_LENGTH[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable-Wunused-variable]8;;[m[K]
+   58 |     GSize [01;35m[KBUFFER_LENGTH[m[K=32;
+      |           [01;35m[K^~~~~~~~~~~~~[m[K
+[01m[K/home/yujie/Daniel_ws/galil_test/galil-amiro/galil_driver/src/hardware_interface.cpp:59:11:[m[K [01;35m[Kwarning: [m[Kunused variable ‘[01m[Kbytes_returned[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable-Wunused-variable]8;;[m[K]
+   59 |     GSize [01;35m[Kbytes_returned[m[K;
+      |           [01;35m[K^~~~~~~~~~~~~~[m[K
+[01m[K/home/yujie/Daniel_ws/galil_test/galil-amiro/galil_driver/src/hardware_interface.cpp:60:10:[m[K [01;35m[Kwarning: [m[Kunused variable ‘[01m[Kbuffer[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable-Wunused-variable]8;;[m[K]
+   60 |     char [01;35m[Kbuffer[m[K[32];
+      |          [01;35m[K^~~~~~[m[K
+[01m[K/home/yujie/Daniel_ws/galil_test/galil-amiro/galil_driver/src/hardware_interface.cpp:[m[K In member function ‘[01m[Kvirtual hardware_interface::return_type galil_driver::GalilSystemHardwareInterface::prepare_command_mode_switch(const std::vector<std::__cxx11::basic_string<char> >&, const std::vector<std::__cxx11::basic_string<char> >&)[m[K’:
+[01m[K/home/yujie/Daniel_ws/galil_test/galil-amiro/galil_driver/src/hardware_interface.cpp:156:16:[m[K [01;35m[Kwarning: [m[Kunused variable ‘[01m[Kchannels[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable-Wunused-variable]8;;[m[K]
+  156 |           char [01;35m[Kchannels[m[K[] = "ABCD";
+      |                [01;35m[K^~~~~~~~[m[K
+[01m[K/home/yujie/Daniel_ws/galil_test/galil-amiro/galil_driver/src/hardware_interface.cpp:[m[K In member function ‘[01m[Kvirtual hardware_interface::return_type galil_driver::GalilSystemHardwareInterface::perform_command_mode_switch(const std::vector<std::__cxx11::basic_string<char> >&, const std::vector<std::__cxx11::basic_string<char> >&)[m[K’:
+[01m[K/home/yujie/Daniel_ws/galil_test/galil-amiro/galil_driver/src/hardware_interface.cpp:220:16:[m[K [01;35m[Kwarning: [m[Kunused variable ‘[01m[Kchannels[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable-Wunused-variable]8;;[m[K]
+  220 |           char [01;35m[Kchannels[m[K[] = "ABCD";
+      |                [01;35m[K^~~~~~~~[m[K
+[01m[K/home/yujie/Daniel_ws/galil_test/galil-amiro/galil_driver/src/hardware_interface.cpp:[m[K In member function ‘[01m[Kvirtual hardware_interface::return_type galil_driver::GalilSystemHardwareInterface::read(const rclcpp::Time&, const rclcpp::Duration&)[m[K’:
+[01m[K/home/yujie/Daniel_ws/galil_test/galil-amiro/galil_driver/src/hardware_interface.cpp:256:40:[m[K [01;35m[Kwarning: [m[Kstatement has no effect [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-value-Wunused-value]8;;[m[K]
+  256 |       [01;35m[Khardware_interface::return_type::ERROR[m[K;
+      |       [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~[m[K
+[01m[K/home/yujie/Daniel_ws/galil_test/galil-amiro/galil_driver/src/hardware_interface.cpp:270:40:[m[K [01;35m[Kwarning: [m[Kstatement has no effect [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-value-Wunused-value]8;;[m[K]
+  270 |       [01;35m[Khardware_interface::return_type::ERROR[m[K;
+      |       [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~[m[K
+[01m[K/home/yujie/Daniel_ws/galil_test/galil-amiro/galil_driver/src/hardware_interface.cpp:[m[K In member function ‘[01m[Kvirtual hardware_interface::return_type galil_driver::GalilSystemHardwareInterface::write(const rclcpp::Time&, const rclcpp::Duration&)[m[K’:
+[01m[K/home/yujie/Daniel_ws/galil_test/galil-amiro/galil_driver/src/hardware_interface.cpp:324:46:[m[K [01;35m[Kwarning: [m[Kstatement has no effect [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-value-Wunused-value]8;;[m[K]
+  324 |             [01;35m[Khardware_interface::return_type::ERROR[m[K;
+      |             [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~[m[K
+[01m[K/home/yujie/Daniel_ws/galil_test/galil-amiro/galil_driver/src/hardware_interface.cpp:333:42:[m[K [01;35m[Kwarning: [m[Kstatement has no effect [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-value-Wunused-value]8;;[m[K]
+  333 |         [01;35m[Khardware_interface::return_type::ERROR[m[K;
+      |         [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~[m[K
+[01m[K/home/yujie/Daniel_ws/galil_test/galil-amiro/galil_driver/src/hardware_interface.cpp:299:36:[m[K [01;35m[Kwarning: [m[K‘[01m[K%c[m[K’ directive writing 1 byte into a region of size between 0 and 1023 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wformat-overflow=-Wformat-overflow=]8;;[m[K]
+  299 |           { sprintf( command, "%s%d[01;35m[K%c[m[K", command, ((int)(hw_commands_position_[i]*gears_m_2_cnt[i])), separator ); }
+      |                                    [01;35m[K^~[m[K
+[01m[K/home/yujie/Daniel_ws/galil_test/galil-amiro/galil_driver/src/hardware_interface.cpp:299:20:[m[K [01;36m[Knote: [m[K‘[01m[Ksprintf[m[K’ output between 3 and 1036 bytes into a destination of size 1024
+  299 |           { [01;36m[Ksprintf( command, "%s%d%c", command, ((int)(hw_commands_position_[i]*gears_m_2_cnt[i])), separator )[m[K; }
+      |             [01;36m[K~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/yujie/Daniel_ws/galil_test/galil-amiro/galil_driver/src/hardware_interface.cpp:299:20:[m[K [01;35m[Kwarning: [m[K‘[01m[Ksprintf[m[K’ argument 3 overlaps destination object ‘[01m[Kcommand[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wrestrict-Wrestrict]8;;[m[K]
+[01m[K/home/yujie/Daniel_ws/galil_test/galil-amiro/galil_driver/src/hardware_interface.cpp:278:10:[m[K [01;36m[Knote: [m[Kdestination object referenced by ‘[01m[Krestrict[m[K’-qualified argument 1 was declared here
+  278 |     char [01;36m[Kcommand[m[K[1024]="";
+      |          [01;36m[K^~~~~~~[m[K
+[01m[K/home/yujie/Daniel_ws/galil_test/galil-amiro/galil_driver/src/hardware_interface.cpp:305:34:[m[K [01;35m[Kwarning: [m[K‘[01m[K%c[m[K’ directive writing 1 byte into a region of size between 0 and 1023 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wformat-overflow=-Wformat-overflow=]8;;[m[K]
+  305 |           sprintf( command, "%s%d[01;35m[K%c[m[K", command, ((int)(hw_commands_position_[i]*gears_m_2_cnt[i])), separator );
+      |                                  [01;35m[K^~[m[K
+[01m[K/home/yujie/Daniel_ws/galil_test/galil-amiro/galil_driver/src/hardware_interface.cpp:305:18:[m[K [01;36m[Knote: [m[K‘[01m[Ksprintf[m[K’ output between 3 and 1036 bytes into a destination of size 1024
+  305 |           [01;36m[Ksprintf( command, "%s%d%c", command, ((int)(hw_commands_position_[i]*gears_m_2_cnt[i])), separator )[m[K;
+      |           [01;36m[K~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/yujie/Daniel_ws/galil_test/galil-amiro/galil_driver/src/hardware_interface.cpp:305:18:[m[K [01;35m[Kwarning: [m[K‘[01m[Ksprintf[m[K’ argument 3 overlaps destination object ‘[01m[Kcommand[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wrestrict-Wrestrict]8;;[m[K]
+[01m[K/home/yujie/Daniel_ws/galil_test/galil-amiro/galil_driver/src/hardware_interface.cpp:278:10:[m[K [01;36m[Knote: [m[Kdestination object referenced by ‘[01m[Krestrict[m[K’-qualified argument 1 was declared here
+  278 |     char [01;36m[Kcommand[m[K[1024]="";
+      |          [01;36m[K^~~~~~~[m[K

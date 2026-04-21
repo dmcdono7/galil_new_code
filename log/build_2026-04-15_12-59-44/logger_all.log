@@ -1,0 +1,202 @@
+[0.554s] DEBUG:colcon:Command line arguments: ['/usr/bin/colcon', 'build']
+[0.554s] DEBUG:colcon:Parsed command line arguments: Namespace(log_base=None, log_level=None, verb_name='build', build_base='build', install_base='install', merge_install=False, symlink_install=False, test_result_base=None, continue_on_error=False, executor='parallel', parallel_workers=8, event_handlers=None, ignore_user_meta=False, metas=['./colcon.meta'], base_paths=['.'], packages_ignore=None, packages_ignore_regex=None, paths=None, packages_up_to=None, packages_up_to_regex=None, packages_above=None, packages_above_and_dependencies=None, packages_above_depth=None, packages_select_by_dep=None, packages_skip_by_dep=None, packages_skip_up_to=None, packages_select_build_failed=False, packages_skip_build_finished=False, packages_select_test_failures=False, packages_skip_test_passed=False, packages_select=None, packages_skip=None, packages_select_regex=None, packages_skip_regex=None, packages_start=None, packages_end=None, allow_overriding=[], cmake_args=None, cmake_target=None, cmake_target_skip_unavailable=False, cmake_clean_cache=False, cmake_clean_first=False, cmake_force_configure=False, ament_cmake_args=None, catkin_cmake_args=None, catkin_skip_building_tests=False, mixin_files=None, mixin=None, verb_parser=<colcon_mixin.mixin.mixin_argument.MixinArgumentDecorator object at 0x766d3f271db0>, verb_extension=<colcon_core.verb.build.BuildVerb object at 0x766d3f3eb610>, main=<bound method BuildVerb.main of <colcon_core.verb.build.BuildVerb object at 0x766d3f3eb610>>, mixin_verb=('build',))
+[2.477s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) check parameters
+[2.477s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) check parameters
+[2.478s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) check parameters
+[2.478s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) check parameters
+[2.478s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) discover
+[2.478s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) discover
+[2.478s] INFO:colcon.colcon_core.package_discovery:Crawling recursively for packages in '/home/yujie/Daniel_ws/galil_test/galil-amiro'
+[2.478s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ignore', 'ignore_ament_install']
+[2.478s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore'
+[2.478s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore_ament_install'
+[2.478s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_pkg']
+[2.478s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_pkg'
+[2.478s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_meta']
+[2.479s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_meta'
+[2.479s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ros']
+[2.479s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ros'
+[2.518s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['cmake', 'python']
+[2.519s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'cmake'
+[2.519s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python'
+[2.519s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['python_setup_py']
+[2.519s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python_setup_py'
+[2.519s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extensions ['ignore', 'ignore_ament_install']
+[2.519s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extension 'ignore'
+[2.519s] Level 1:colcon.colcon_core.package_identification:_identify(build) ignored
+[2.519s] Level 1:colcon.colcon_core.package_identification:_identify(galil_description) by extensions ['ignore', 'ignore_ament_install']
+[2.520s] Level 1:colcon.colcon_core.package_identification:_identify(galil_description) by extension 'ignore'
+[2.520s] Level 1:colcon.colcon_core.package_identification:_identify(galil_description) by extension 'ignore_ament_install'
+[2.520s] Level 1:colcon.colcon_core.package_identification:_identify(galil_description) by extensions ['colcon_pkg']
+[2.520s] Level 1:colcon.colcon_core.package_identification:_identify(galil_description) by extension 'colcon_pkg'
+[2.520s] Level 1:colcon.colcon_core.package_identification:_identify(galil_description) by extensions ['colcon_meta']
+[2.520s] Level 1:colcon.colcon_core.package_identification:_identify(galil_description) by extension 'colcon_meta'
+[2.520s] Level 1:colcon.colcon_core.package_identification:_identify(galil_description) by extensions ['ros']
+[2.520s] Level 1:colcon.colcon_core.package_identification:_identify(galil_description) by extension 'ros'
+[2.537s] DEBUG:colcon.colcon_core.package_identification:Package 'galil_description' with type 'ros.ament_cmake' and name 'galil_description'
+[2.537s] Level 1:colcon.colcon_core.package_identification:_identify(galil_driver) by extensions ['ignore', 'ignore_ament_install']
+[2.537s] Level 1:colcon.colcon_core.package_identification:_identify(galil_driver) by extension 'ignore'
+[2.537s] Level 1:colcon.colcon_core.package_identification:_identify(galil_driver) by extension 'ignore_ament_install'
+[2.537s] Level 1:colcon.colcon_core.package_identification:_identify(galil_driver) by extensions ['colcon_pkg']
+[2.537s] Level 1:colcon.colcon_core.package_identification:_identify(galil_driver) by extension 'colcon_pkg'
+[2.538s] Level 1:colcon.colcon_core.package_identification:_identify(galil_driver) by extensions ['colcon_meta']
+[2.538s] Level 1:colcon.colcon_core.package_identification:_identify(galil_driver) by extension 'colcon_meta'
+[2.538s] Level 1:colcon.colcon_core.package_identification:_identify(galil_driver) by extensions ['ros']
+[2.538s] Level 1:colcon.colcon_core.package_identification:_identify(galil_driver) by extension 'ros'
+[2.540s] DEBUG:colcon.colcon_core.package_identification:Package 'galil_driver' with type 'ros.ament_cmake' and name 'galil_driver'
+[2.540s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extensions ['ignore', 'ignore_ament_install']
+[2.540s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extension 'ignore'
+[2.540s] Level 1:colcon.colcon_core.package_identification:_identify(install) ignored
+[2.541s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extensions ['ignore', 'ignore_ament_install']
+[2.541s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extension 'ignore'
+[2.541s] Level 1:colcon.colcon_core.package_identification:_identify(log) ignored
+[2.541s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) using defaults
+[2.541s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) discover
+[2.541s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) using defaults
+[2.541s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) discover
+[2.541s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) using defaults
+[2.761s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) check parameters
+[2.761s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) discover
+[2.834s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 4 installed packages in /home/yujie/camera_ros2_ws/install
+[2.835s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 4 installed packages in /home/yujie/ros2_ws/install
+[2.838s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 241 installed packages in /opt/ros/humble
+[2.840s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) using defaults
+[3.005s] Level 5:colcon.colcon_core.verb:set package 'galil_description' build argument 'cmake_args' from command line to 'None'
+[3.005s] Level 5:colcon.colcon_core.verb:set package 'galil_description' build argument 'cmake_target' from command line to 'None'
+[3.005s] Level 5:colcon.colcon_core.verb:set package 'galil_description' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[3.005s] Level 5:colcon.colcon_core.verb:set package 'galil_description' build argument 'cmake_clean_cache' from command line to 'False'
+[3.005s] Level 5:colcon.colcon_core.verb:set package 'galil_description' build argument 'cmake_clean_first' from command line to 'False'
+[3.005s] Level 5:colcon.colcon_core.verb:set package 'galil_description' build argument 'cmake_force_configure' from command line to 'False'
+[3.005s] Level 5:colcon.colcon_core.verb:set package 'galil_description' build argument 'ament_cmake_args' from command line to 'None'
+[3.005s] Level 5:colcon.colcon_core.verb:set package 'galil_description' build argument 'catkin_cmake_args' from command line to 'None'
+[3.005s] Level 5:colcon.colcon_core.verb:set package 'galil_description' build argument 'catkin_skip_building_tests' from command line to 'False'
+[3.005s] DEBUG:colcon.colcon_core.verb:Building package 'galil_description' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/yujie/Daniel_ws/galil_test/galil-amiro/build/galil_description', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_description', 'merge_install': False, 'path': '/home/yujie/Daniel_ws/galil_test/galil-amiro/galil_description', 'symlink_install': False, 'test_result_base': None}
+[3.006s] Level 5:colcon.colcon_core.verb:set package 'galil_driver' build argument 'cmake_args' from command line to 'None'
+[3.006s] Level 5:colcon.colcon_core.verb:set package 'galil_driver' build argument 'cmake_target' from command line to 'None'
+[3.006s] Level 5:colcon.colcon_core.verb:set package 'galil_driver' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[3.006s] Level 5:colcon.colcon_core.verb:set package 'galil_driver' build argument 'cmake_clean_cache' from command line to 'False'
+[3.006s] Level 5:colcon.colcon_core.verb:set package 'galil_driver' build argument 'cmake_clean_first' from command line to 'False'
+[3.006s] Level 5:colcon.colcon_core.verb:set package 'galil_driver' build argument 'cmake_force_configure' from command line to 'False'
+[3.006s] Level 5:colcon.colcon_core.verb:set package 'galil_driver' build argument 'ament_cmake_args' from command line to 'None'
+[3.006s] Level 5:colcon.colcon_core.verb:set package 'galil_driver' build argument 'catkin_cmake_args' from command line to 'None'
+[3.007s] Level 5:colcon.colcon_core.verb:set package 'galil_driver' build argument 'catkin_skip_building_tests' from command line to 'False'
+[3.007s] DEBUG:colcon.colcon_core.verb:Building package 'galil_driver' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/yujie/Daniel_ws/galil_test/galil-amiro/build/galil_driver', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver', 'merge_install': False, 'path': '/home/yujie/Daniel_ws/galil_test/galil-amiro/galil_driver', 'symlink_install': False, 'test_result_base': None}
+[3.007s] INFO:colcon.colcon_core.executor:Executing jobs using 'parallel' executor
+[3.008s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete
+[3.009s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/yujie/Daniel_ws/galil_test/galil-amiro/galil_description' with build type 'ament_cmake'
+[3.009s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/yujie/Daniel_ws/galil_test/galil-amiro/galil_description'
+[3.056s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_core.shell.bat': Not used on non-Windows systems
+[3.056s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[3.057s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[3.064s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/yujie/Daniel_ws/galil_test/galil-amiro/galil_driver' with build type 'ament_cmake'
+[3.064s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/yujie/Daniel_ws/galil_test/galil-amiro/galil_driver'
+[3.065s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[3.065s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[3.079s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/yujie/Daniel_ws/galil_test/galil-amiro/build/galil_description': CMAKE_PREFIX_PATH=/home/yujie/camera_ros2_ws/install/spinnaker_synchronized_camera_driver:/home/yujie/camera_ros2_ws/install/spinnaker_camera_driver:/home/yujie/camera_ros2_ws/install/flir_camera_msgs:/home/yujie/camera_ros2_ws/install/flir_camera_description:/home/yujie/ros2_ws/install/spinnaker_synchronized_camera_driver:/opt/ros/humble:/home/yujie/ros2_ws/install/spinnaker_camera_driver:/home/yujie/ros2_ws/install/flir_camera_msgs:/home/yujie/ros2_ws/install/flir_camera_description /usr/bin/cmake /home/yujie/Daniel_ws/galil_test/galil-amiro/galil_description -DCMAKE_INSTALL_PREFIX=/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_description
+[3.083s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/yujie/Daniel_ws/galil_test/galil-amiro/build/galil_driver': CMAKE_PREFIX_PATH=/home/yujie/camera_ros2_ws/install/spinnaker_synchronized_camera_driver:/home/yujie/camera_ros2_ws/install/spinnaker_camera_driver:/home/yujie/camera_ros2_ws/install/flir_camera_msgs:/home/yujie/camera_ros2_ws/install/flir_camera_description:/home/yujie/ros2_ws/install/spinnaker_synchronized_camera_driver:/opt/ros/humble:/home/yujie/ros2_ws/install/spinnaker_camera_driver:/home/yujie/ros2_ws/install/flir_camera_msgs:/home/yujie/ros2_ws/install/flir_camera_description /usr/bin/cmake /home/yujie/Daniel_ws/galil_test/galil-amiro/galil_driver -DCMAKE_INSTALL_PREFIX=/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver
+[9.139s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/yujie/Daniel_ws/galil_test/galil-amiro/build/galil_description' returned '0': CMAKE_PREFIX_PATH=/home/yujie/camera_ros2_ws/install/spinnaker_synchronized_camera_driver:/home/yujie/camera_ros2_ws/install/spinnaker_camera_driver:/home/yujie/camera_ros2_ws/install/flir_camera_msgs:/home/yujie/camera_ros2_ws/install/flir_camera_description:/home/yujie/ros2_ws/install/spinnaker_synchronized_camera_driver:/opt/ros/humble:/home/yujie/ros2_ws/install/spinnaker_camera_driver:/home/yujie/ros2_ws/install/flir_camera_msgs:/home/yujie/ros2_ws/install/flir_camera_description /usr/bin/cmake /home/yujie/Daniel_ws/galil_test/galil-amiro/galil_description -DCMAKE_INSTALL_PREFIX=/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_description
+[9.143s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/yujie/Daniel_ws/galil_test/galil-amiro/build/galil_description': CMAKE_PREFIX_PATH=/home/yujie/camera_ros2_ws/install/spinnaker_synchronized_camera_driver:/home/yujie/camera_ros2_ws/install/spinnaker_camera_driver:/home/yujie/camera_ros2_ws/install/flir_camera_msgs:/home/yujie/camera_ros2_ws/install/flir_camera_description:/home/yujie/ros2_ws/install/spinnaker_synchronized_camera_driver:/opt/ros/humble:/home/yujie/ros2_ws/install/spinnaker_camera_driver:/home/yujie/ros2_ws/install/flir_camera_msgs:/home/yujie/ros2_ws/install/flir_camera_description /usr/bin/cmake --build /home/yujie/Daniel_ws/galil_test/galil-amiro/build/galil_description -- -j8 -l8
+[9.218s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/yujie/Daniel_ws/galil_test/galil-amiro/build/galil_driver' returned '0': CMAKE_PREFIX_PATH=/home/yujie/camera_ros2_ws/install/spinnaker_synchronized_camera_driver:/home/yujie/camera_ros2_ws/install/spinnaker_camera_driver:/home/yujie/camera_ros2_ws/install/flir_camera_msgs:/home/yujie/camera_ros2_ws/install/flir_camera_description:/home/yujie/ros2_ws/install/spinnaker_synchronized_camera_driver:/opt/ros/humble:/home/yujie/ros2_ws/install/spinnaker_camera_driver:/home/yujie/ros2_ws/install/flir_camera_msgs:/home/yujie/ros2_ws/install/flir_camera_description /usr/bin/cmake /home/yujie/Daniel_ws/galil_test/galil-amiro/galil_driver -DCMAKE_INSTALL_PREFIX=/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver
+[9.221s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/yujie/Daniel_ws/galil_test/galil-amiro/build/galil_driver': CMAKE_PREFIX_PATH=/home/yujie/camera_ros2_ws/install/spinnaker_synchronized_camera_driver:/home/yujie/camera_ros2_ws/install/spinnaker_camera_driver:/home/yujie/camera_ros2_ws/install/flir_camera_msgs:/home/yujie/camera_ros2_ws/install/flir_camera_description:/home/yujie/ros2_ws/install/spinnaker_synchronized_camera_driver:/opt/ros/humble:/home/yujie/ros2_ws/install/spinnaker_camera_driver:/home/yujie/ros2_ws/install/flir_camera_msgs:/home/yujie/ros2_ws/install/flir_camera_description /usr/bin/cmake --build /home/yujie/Daniel_ws/galil_test/galil-amiro/build/galil_driver -- -j8 -l8
+[9.232s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/yujie/Daniel_ws/galil_test/galil-amiro/build/galil_description' returned '0': CMAKE_PREFIX_PATH=/home/yujie/camera_ros2_ws/install/spinnaker_synchronized_camera_driver:/home/yujie/camera_ros2_ws/install/spinnaker_camera_driver:/home/yujie/camera_ros2_ws/install/flir_camera_msgs:/home/yujie/camera_ros2_ws/install/flir_camera_description:/home/yujie/ros2_ws/install/spinnaker_synchronized_camera_driver:/opt/ros/humble:/home/yujie/ros2_ws/install/spinnaker_camera_driver:/home/yujie/ros2_ws/install/flir_camera_msgs:/home/yujie/ros2_ws/install/flir_camera_description /usr/bin/cmake --build /home/yujie/Daniel_ws/galil_test/galil-amiro/build/galil_description -- -j8 -l8
+[9.252s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/yujie/Daniel_ws/galil_test/galil-amiro/build/galil_description': CMAKE_PREFIX_PATH=/home/yujie/camera_ros2_ws/install/spinnaker_synchronized_camera_driver:/home/yujie/camera_ros2_ws/install/spinnaker_camera_driver:/home/yujie/camera_ros2_ws/install/flir_camera_msgs:/home/yujie/camera_ros2_ws/install/flir_camera_description:/home/yujie/ros2_ws/install/spinnaker_synchronized_camera_driver:/opt/ros/humble:/home/yujie/ros2_ws/install/spinnaker_camera_driver:/home/yujie/ros2_ws/install/flir_camera_msgs:/home/yujie/ros2_ws/install/flir_camera_description /usr/bin/cmake --install /home/yujie/Daniel_ws/galil_test/galil-amiro/build/galil_description
+[9.386s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(galil_description)
+[9.387s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/yujie/Daniel_ws/galil_test/galil-amiro/build/galil_description' returned '0': CMAKE_PREFIX_PATH=/home/yujie/camera_ros2_ws/install/spinnaker_synchronized_camera_driver:/home/yujie/camera_ros2_ws/install/spinnaker_camera_driver:/home/yujie/camera_ros2_ws/install/flir_camera_msgs:/home/yujie/camera_ros2_ws/install/flir_camera_description:/home/yujie/ros2_ws/install/spinnaker_synchronized_camera_driver:/opt/ros/humble:/home/yujie/ros2_ws/install/spinnaker_camera_driver:/home/yujie/ros2_ws/install/flir_camera_msgs:/home/yujie/ros2_ws/install/flir_camera_description /usr/bin/cmake --install /home/yujie/Daniel_ws/galil_test/galil-amiro/build/galil_description
+[9.667s] Level 1:colcon.colcon_core.environment:checking '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_description' for CMake module files
+[9.668s] Level 1:colcon.colcon_core.environment:checking '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_description' for CMake config files
+[9.668s] Level 1:colcon.colcon_core.shell:create_environment_hook('galil_description', 'cmake_prefix_path')
+[9.669s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_description/share/galil_description/hook/cmake_prefix_path.ps1'
+[9.670s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_description/share/galil_description/hook/cmake_prefix_path.dsv'
+[9.671s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_description/share/galil_description/hook/cmake_prefix_path.sh'
+[9.672s] Level 1:colcon.colcon_core.environment:checking '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_description/bin'
+[9.672s] Level 1:colcon.colcon_core.environment:checking '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_description/lib/pkgconfig/galil_description.pc'
+[9.673s] Level 1:colcon.colcon_core.environment:checking '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_description/lib/python3.10/site-packages'
+[9.673s] Level 1:colcon.colcon_core.environment:checking '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_description/bin'
+[9.674s] INFO:colcon.colcon_core.shell:Creating package script '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_description/share/galil_description/package.ps1'
+[9.675s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_description/share/galil_description/package.dsv'
+[9.676s] INFO:colcon.colcon_core.shell:Creating package script '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_description/share/galil_description/package.sh'
+[9.677s] INFO:colcon.colcon_core.shell:Creating package script '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_description/share/galil_description/package.bash'
+[9.679s] INFO:colcon.colcon_core.shell:Creating package script '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_description/share/galil_description/package.zsh'
+[9.680s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_description/share/colcon-core/packages/galil_description)
+[9.681s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(galil_description)
+[9.682s] Level 1:colcon.colcon_core.environment:checking '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_description' for CMake module files
+[9.683s] Level 1:colcon.colcon_core.environment:checking '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_description' for CMake config files
+[9.683s] Level 1:colcon.colcon_core.shell:create_environment_hook('galil_description', 'cmake_prefix_path')
+[9.683s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_description/share/galil_description/hook/cmake_prefix_path.ps1'
+[9.684s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_description/share/galil_description/hook/cmake_prefix_path.dsv'
+[9.685s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_description/share/galil_description/hook/cmake_prefix_path.sh'
+[9.686s] Level 1:colcon.colcon_core.environment:checking '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_description/bin'
+[9.686s] Level 1:colcon.colcon_core.environment:checking '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_description/lib/pkgconfig/galil_description.pc'
+[9.686s] Level 1:colcon.colcon_core.environment:checking '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_description/lib/python3.10/site-packages'
+[9.687s] Level 1:colcon.colcon_core.environment:checking '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_description/bin'
+[9.687s] INFO:colcon.colcon_core.shell:Creating package script '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_description/share/galil_description/package.ps1'
+[9.688s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_description/share/galil_description/package.dsv'
+[9.689s] INFO:colcon.colcon_core.shell:Creating package script '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_description/share/galil_description/package.sh'
+[9.690s] INFO:colcon.colcon_core.shell:Creating package script '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_description/share/galil_description/package.bash'
+[9.690s] INFO:colcon.colcon_core.shell:Creating package script '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_description/share/galil_description/package.zsh'
+[9.691s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_description/share/colcon-core/packages/galil_description)
+[18.547s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/yujie/Daniel_ws/galil_test/galil-amiro/build/galil_driver' returned '0': CMAKE_PREFIX_PATH=/home/yujie/camera_ros2_ws/install/spinnaker_synchronized_camera_driver:/home/yujie/camera_ros2_ws/install/spinnaker_camera_driver:/home/yujie/camera_ros2_ws/install/flir_camera_msgs:/home/yujie/camera_ros2_ws/install/flir_camera_description:/home/yujie/ros2_ws/install/spinnaker_synchronized_camera_driver:/opt/ros/humble:/home/yujie/ros2_ws/install/spinnaker_camera_driver:/home/yujie/ros2_ws/install/flir_camera_msgs:/home/yujie/ros2_ws/install/flir_camera_description /usr/bin/cmake --build /home/yujie/Daniel_ws/galil_test/galil-amiro/build/galil_driver -- -j8 -l8
+[18.549s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/yujie/Daniel_ws/galil_test/galil-amiro/build/galil_driver': CMAKE_PREFIX_PATH=/home/yujie/camera_ros2_ws/install/spinnaker_synchronized_camera_driver:/home/yujie/camera_ros2_ws/install/spinnaker_camera_driver:/home/yujie/camera_ros2_ws/install/flir_camera_msgs:/home/yujie/camera_ros2_ws/install/flir_camera_description:/home/yujie/ros2_ws/install/spinnaker_synchronized_camera_driver:/opt/ros/humble:/home/yujie/ros2_ws/install/spinnaker_camera_driver:/home/yujie/ros2_ws/install/flir_camera_msgs:/home/yujie/ros2_ws/install/flir_camera_description /usr/bin/cmake --install /home/yujie/Daniel_ws/galil_test/galil-amiro/build/galil_driver
+[18.578s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(galil_driver)
+[18.579s] Level 1:colcon.colcon_core.environment:checking '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver' for CMake module files
+[18.580s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/yujie/Daniel_ws/galil_test/galil-amiro/build/galil_driver' returned '0': CMAKE_PREFIX_PATH=/home/yujie/camera_ros2_ws/install/spinnaker_synchronized_camera_driver:/home/yujie/camera_ros2_ws/install/spinnaker_camera_driver:/home/yujie/camera_ros2_ws/install/flir_camera_msgs:/home/yujie/camera_ros2_ws/install/flir_camera_description:/home/yujie/ros2_ws/install/spinnaker_synchronized_camera_driver:/opt/ros/humble:/home/yujie/ros2_ws/install/spinnaker_camera_driver:/home/yujie/ros2_ws/install/flir_camera_msgs:/home/yujie/ros2_ws/install/flir_camera_description /usr/bin/cmake --install /home/yujie/Daniel_ws/galil_test/galil-amiro/build/galil_driver
+[18.581s] Level 1:colcon.colcon_core.environment:checking '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver' for CMake config files
+[18.581s] Level 1:colcon.colcon_core.shell:create_environment_hook('galil_driver', 'cmake_prefix_path')
+[18.581s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver/share/galil_driver/hook/cmake_prefix_path.ps1'
+[18.582s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver/share/galil_driver/hook/cmake_prefix_path.dsv'
+[18.583s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver/share/galil_driver/hook/cmake_prefix_path.sh'
+[18.584s] Level 1:colcon.colcon_core.environment:checking '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver/lib'
+[18.584s] Level 1:colcon.colcon_core.shell:create_environment_hook('galil_driver', 'ld_library_path_lib')
+[18.585s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver/share/galil_driver/hook/ld_library_path_lib.ps1'
+[18.585s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver/share/galil_driver/hook/ld_library_path_lib.dsv'
+[18.586s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver/share/galil_driver/hook/ld_library_path_lib.sh'
+[18.587s] Level 1:colcon.colcon_core.environment:checking '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver/bin'
+[18.587s] Level 1:colcon.colcon_core.environment:checking '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver/lib/pkgconfig/galil_driver.pc'
+[18.587s] Level 1:colcon.colcon_core.environment:checking '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver/lib/python3.10/site-packages'
+[18.588s] Level 1:colcon.colcon_core.environment:checking '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver/bin'
+[18.588s] INFO:colcon.colcon_core.shell:Creating package script '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver/share/galil_driver/package.ps1'
+[18.589s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver/share/galil_driver/package.dsv'
+[18.590s] INFO:colcon.colcon_core.shell:Creating package script '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver/share/galil_driver/package.sh'
+[18.591s] INFO:colcon.colcon_core.shell:Creating package script '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver/share/galil_driver/package.bash'
+[18.591s] INFO:colcon.colcon_core.shell:Creating package script '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver/share/galil_driver/package.zsh'
+[18.592s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver/share/colcon-core/packages/galil_driver)
+[18.593s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(galil_driver)
+[18.593s] Level 1:colcon.colcon_core.environment:checking '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver' for CMake module files
+[18.594s] Level 1:colcon.colcon_core.environment:checking '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver' for CMake config files
+[18.595s] Level 1:colcon.colcon_core.shell:create_environment_hook('galil_driver', 'cmake_prefix_path')
+[18.595s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver/share/galil_driver/hook/cmake_prefix_path.ps1'
+[18.596s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver/share/galil_driver/hook/cmake_prefix_path.dsv'
+[18.597s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver/share/galil_driver/hook/cmake_prefix_path.sh'
+[18.598s] Level 1:colcon.colcon_core.environment:checking '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver/lib'
+[18.598s] Level 1:colcon.colcon_core.shell:create_environment_hook('galil_driver', 'ld_library_path_lib')
+[18.598s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver/share/galil_driver/hook/ld_library_path_lib.ps1'
+[18.599s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver/share/galil_driver/hook/ld_library_path_lib.dsv'
+[18.599s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver/share/galil_driver/hook/ld_library_path_lib.sh'
+[18.600s] Level 1:colcon.colcon_core.environment:checking '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver/bin'
+[18.600s] Level 1:colcon.colcon_core.environment:checking '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver/lib/pkgconfig/galil_driver.pc'
+[18.601s] Level 1:colcon.colcon_core.environment:checking '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver/lib/python3.10/site-packages'
+[18.601s] Level 1:colcon.colcon_core.environment:checking '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver/bin'
+[18.602s] INFO:colcon.colcon_core.shell:Creating package script '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver/share/galil_driver/package.ps1'
+[18.603s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver/share/galil_driver/package.dsv'
+[18.604s] INFO:colcon.colcon_core.shell:Creating package script '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver/share/galil_driver/package.sh'
+[18.605s] INFO:colcon.colcon_core.shell:Creating package script '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver/share/galil_driver/package.bash'
+[18.605s] INFO:colcon.colcon_core.shell:Creating package script '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver/share/galil_driver/package.zsh'
+[18.606s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_driver/share/colcon-core/packages/galil_driver)
+[18.606s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:closing loop
+[18.607s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:loop closed
+[18.607s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete finished with '0'
+[18.607s] DEBUG:colcon.colcon_core.event_reactor:joining thread
+[18.650s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.terminal_notifier': Not used on non-Darwin systems
+[18.650s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.win32': Not used on non-Windows systems
+[18.650s] INFO:colcon.colcon_notification.desktop_notification:Sending desktop notification using 'notify2'
+[18.669s] DEBUG:colcon.colcon_core.event_reactor:joined thread
+[18.669s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/local_setup.ps1'
+[18.691s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/_local_setup_util_ps1.py'
+[18.705s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/setup.ps1'
+[18.708s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/local_setup.sh'
+[18.712s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/_local_setup_util_sh.py'
+[18.713s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/setup.sh'
+[18.715s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/local_setup.bash'
+[18.728s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/setup.bash'
+[18.731s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/local_setup.zsh'
+[18.740s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/yujie/Daniel_ws/galil_test/galil-amiro/install/setup.zsh'

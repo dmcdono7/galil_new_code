@@ -1,0 +1,75 @@
+[0.069s] Invoking command in '/home/yujie/Daniel_ws/galil_test/galil-amiro/build/galil_description': CMAKE_PREFIX_PATH=/home/yujie/camera_ros2_ws/install/spinnaker_synchronized_camera_driver:/home/yujie/camera_ros2_ws/install/spinnaker_camera_driver:/home/yujie/camera_ros2_ws/install/flir_camera_msgs:/home/yujie/camera_ros2_ws/install/flir_camera_description:/home/yujie/ros2_ws/install/spinnaker_synchronized_camera_driver:/opt/ros/humble:/home/yujie/ros2_ws/install/spinnaker_camera_driver:/home/yujie/ros2_ws/install/flir_camera_msgs:/home/yujie/ros2_ws/install/flir_camera_description /usr/bin/cmake /home/yujie/Daniel_ws/galil_test/galil-amiro/galil_description -DCMAKE_INSTALL_PREFIX=/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_description
+[0.576s] -- The C compiler identification is GNU 11.4.0
+[0.726s] -- The CXX compiler identification is GNU 11.4.0
+[0.743s] -- Detecting C compiler ABI info
+[0.982s] -- Detecting C compiler ABI info - done
+[0.996s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.997s] -- Detecting C compile features
+[1.013s] -- Detecting C compile features - done
+[1.020s] -- Detecting CXX compiler ABI info
+[1.212s] -- Detecting CXX compiler ABI info - done
+[1.227s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[1.227s] -- Detecting CXX compile features
+[1.228s] -- Detecting CXX compile features - done
+[1.327s] -- Found ament_cmake: 1.3.12 (/opt/ros/humble/share/ament_cmake/cmake)
+[1.757s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+[2.102s] -- Found robot_state_publisher: 3.0.3 (/opt/ros/humble/share/robot_state_publisher/cmake)
+[2.445s] -- Found rosidl_generator_c: 3.1.8 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[2.509s] -- Found rosidl_adapter: 3.1.8 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[2.562s] -- Found rosidl_generator_cpp: 3.1.8 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[2.724s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[2.820s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[3.382s] -- Found eigen3_cmake_module: 0.1.1 (/opt/ros/humble/share/eigen3_cmake_module/cmake)
+[3.393s] -- Found Eigen3: TRUE (found version "3.4.0") 
+[3.393s] -- Ensuring Eigen3 include directory is part of orocos-kdl CMake target
+[3.765s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[3.843s] -- Found rmw_fastrtps_cpp: 6.2.9 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[4.316s] -- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.2")  
+[4.436s] -- Found FastRTPS: /opt/ros/humble/include  
+[4.522s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[4.540s] -- Looking for pthread.h
+[4.754s] -- Looking for pthread.h - found
+[4.754s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+[4.927s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+[4.929s] -- Found Threads: TRUE  
+[5.750s] -- Found rviz2: 11.2.25 (/opt/ros/humble/share/rviz2/cmake)
+[5.765s] -- Found xacro: 2.1.1 (/opt/ros/humble/share/xacro/cmake)
+[5.777s] -- Found ament_lint_auto: 0.12.14 (/opt/ros/humble/share/ament_lint_auto/cmake)
+[6.042s] -- Added test 'lint_cmake' to check CMake code style
+[6.046s] -- Added test 'xmllint' to check XML markup files
+[6.078s] -- Configuring done
+[6.089s] -- Generating done
+[6.109s] -- Build files have been written to: /home/yujie/Daniel_ws/galil_test/galil-amiro/build/galil_description
+[6.130s] Invoked command in '/home/yujie/Daniel_ws/galil_test/galil-amiro/build/galil_description' returned '0': CMAKE_PREFIX_PATH=/home/yujie/camera_ros2_ws/install/spinnaker_synchronized_camera_driver:/home/yujie/camera_ros2_ws/install/spinnaker_camera_driver:/home/yujie/camera_ros2_ws/install/flir_camera_msgs:/home/yujie/camera_ros2_ws/install/flir_camera_description:/home/yujie/ros2_ws/install/spinnaker_synchronized_camera_driver:/opt/ros/humble:/home/yujie/ros2_ws/install/spinnaker_camera_driver:/home/yujie/ros2_ws/install/flir_camera_msgs:/home/yujie/ros2_ws/install/flir_camera_description /usr/bin/cmake /home/yujie/Daniel_ws/galil_test/galil-amiro/galil_description -DCMAKE_INSTALL_PREFIX=/home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_description
+[6.133s] Invoking command in '/home/yujie/Daniel_ws/galil_test/galil-amiro/build/galil_description': CMAKE_PREFIX_PATH=/home/yujie/camera_ros2_ws/install/spinnaker_synchronized_camera_driver:/home/yujie/camera_ros2_ws/install/spinnaker_camera_driver:/home/yujie/camera_ros2_ws/install/flir_camera_msgs:/home/yujie/camera_ros2_ws/install/flir_camera_description:/home/yujie/ros2_ws/install/spinnaker_synchronized_camera_driver:/opt/ros/humble:/home/yujie/ros2_ws/install/spinnaker_camera_driver:/home/yujie/ros2_ws/install/flir_camera_msgs:/home/yujie/ros2_ws/install/flir_camera_description /usr/bin/cmake --build /home/yujie/Daniel_ws/galil_test/galil-amiro/build/galil_description -- -j8 -l8
+[6.222s] Invoked command in '/home/yujie/Daniel_ws/galil_test/galil-amiro/build/galil_description' returned '0': CMAKE_PREFIX_PATH=/home/yujie/camera_ros2_ws/install/spinnaker_synchronized_camera_driver:/home/yujie/camera_ros2_ws/install/spinnaker_camera_driver:/home/yujie/camera_ros2_ws/install/flir_camera_msgs:/home/yujie/camera_ros2_ws/install/flir_camera_description:/home/yujie/ros2_ws/install/spinnaker_synchronized_camera_driver:/opt/ros/humble:/home/yujie/ros2_ws/install/spinnaker_camera_driver:/home/yujie/ros2_ws/install/flir_camera_msgs:/home/yujie/ros2_ws/install/flir_camera_description /usr/bin/cmake --build /home/yujie/Daniel_ws/galil_test/galil-amiro/build/galil_description -- -j8 -l8
+[6.242s] Invoking command in '/home/yujie/Daniel_ws/galil_test/galil-amiro/build/galil_description': CMAKE_PREFIX_PATH=/home/yujie/camera_ros2_ws/install/spinnaker_synchronized_camera_driver:/home/yujie/camera_ros2_ws/install/spinnaker_camera_driver:/home/yujie/camera_ros2_ws/install/flir_camera_msgs:/home/yujie/camera_ros2_ws/install/flir_camera_description:/home/yujie/ros2_ws/install/spinnaker_synchronized_camera_driver:/opt/ros/humble:/home/yujie/ros2_ws/install/spinnaker_camera_driver:/home/yujie/ros2_ws/install/flir_camera_msgs:/home/yujie/ros2_ws/install/flir_camera_description /usr/bin/cmake --install /home/yujie/Daniel_ws/galil_test/galil-amiro/build/galil_description
+[6.257s] -- Install configuration: ""
+[6.257s] -- Installing: /home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_description/share/galil_description/urdf
+[6.258s] -- Installing: /home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_description/share/galil_description/urdf/materials.xacro
+[6.258s] -- Installing: /home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_description/share/galil_description/urdf/galil.xacro
+[6.258s] -- Installing: /home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_description/share/galil_description/urdf/galil.ros2_control.xacro
+[6.258s] -- Installing: /home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_description/share/galil_description/urdf/galil.urdf.xacro
+[6.258s] -- Installing: /home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_description/share/galil_description/meshes
+[6.259s] -- Installing: /home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_description/share/galil_description/meshes/needle_link.stl
+[6.262s] -- Installing: /home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_description/share/galil_description/meshes/horizontal_link.stl
+[6.288s] -- Installing: /home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_description/share/galil_description/meshes/vertical_link.stl
+[6.309s] -- Installing: /home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_description/share/galil_description/meshes/base_link.stl
+[6.370s] -- Installing: /home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_description/share/galil_description/rviz
+[6.370s] -- Installing: /home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_description/share/galil_description/rviz/urdf.rviz
+[6.370s] -- Installing: /home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_description/share/ament_index/resource_index/package_run_dependencies/galil_description
+[6.370s] -- Installing: /home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_description/share/ament_index/resource_index/parent_prefix_path/galil_description
+[6.371s] -- Installing: /home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_description/share/galil_description/environment/ament_prefix_path.sh
+[6.371s] -- Installing: /home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_description/share/galil_description/environment/ament_prefix_path.dsv
+[6.371s] -- Installing: /home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_description/share/galil_description/environment/path.sh
+[6.371s] -- Installing: /home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_description/share/galil_description/environment/path.dsv
+[6.372s] -- Installing: /home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_description/share/galil_description/local_setup.bash
+[6.372s] -- Installing: /home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_description/share/galil_description/local_setup.sh
+[6.372s] -- Installing: /home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_description/share/galil_description/local_setup.zsh
+[6.372s] -- Installing: /home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_description/share/galil_description/local_setup.dsv
+[6.373s] -- Installing: /home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_description/share/galil_description/package.dsv
+[6.373s] -- Installing: /home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_description/share/ament_index/resource_index/packages/galil_description
+[6.373s] -- Installing: /home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_description/share/galil_description/cmake/galil_descriptionConfig.cmake
+[6.374s] -- Installing: /home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_description/share/galil_description/cmake/galil_descriptionConfig-version.cmake
+[6.374s] -- Installing: /home/yujie/Daniel_ws/galil_test/galil-amiro/install/galil_description/share/galil_description/package.xml
+[6.377s] Invoked command in '/home/yujie/Daniel_ws/galil_test/galil-amiro/build/galil_description' returned '0': CMAKE_PREFIX_PATH=/home/yujie/camera_ros2_ws/install/spinnaker_synchronized_camera_driver:/home/yujie/camera_ros2_ws/install/spinnaker_camera_driver:/home/yujie/camera_ros2_ws/install/flir_camera_msgs:/home/yujie/camera_ros2_ws/install/flir_camera_description:/home/yujie/ros2_ws/install/spinnaker_synchronized_camera_driver:/opt/ros/humble:/home/yujie/ros2_ws/install/spinnaker_camera_driver:/home/yujie/ros2_ws/install/flir_camera_msgs:/home/yujie/ros2_ws/install/flir_camera_description /usr/bin/cmake --install /home/yujie/Daniel_ws/galil_test/galil-amiro/build/galil_description
