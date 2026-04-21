@@ -1,0 +1,32 @@
+[0.011s] Invoking command in '/home/amiro/Daniel/galil test/galil RSP/galil-RSP/build/galil_description': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/amiro/Daniel/galil test/galil RSP/galil-RSP/build/galil_description -- -j20 -l20
+[0.044s] Invoked command in '/home/amiro/Daniel/galil test/galil RSP/galil-RSP/build/galil_description' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/amiro/Daniel/galil test/galil RSP/galil-RSP/build/galil_description -- -j20 -l20
+[0.053s] Invoking command in '/home/amiro/Daniel/galil test/galil RSP/galil-RSP/build/galil_description': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/amiro/Daniel/galil test/galil RSP/galil-RSP/build/galil_description
+[0.059s] -- Install configuration: ""
+[0.059s] -- Up-to-date: /home/amiro/Daniel/galil test/galil RSP/galil-RSP/install/galil_description/share/galil_description/urdf
+[0.059s] -- Installing: /home/amiro/Daniel/galil test/galil RSP/galil-RSP/install/galil_description/share/galil_description/urdf/galil.ros2_control.xacro
+[0.059s] -- Up-to-date: /home/amiro/Daniel/galil test/galil RSP/galil-RSP/install/galil_description/share/galil_description/urdf/galil.xacro
+[0.059s] -- Up-to-date: /home/amiro/Daniel/galil test/galil RSP/galil-RSP/install/galil_description/share/galil_description/urdf/materials.xacro
+[0.059s] -- Up-to-date: /home/amiro/Daniel/galil test/galil RSP/galil-RSP/install/galil_description/share/galil_description/urdf/galil.urdf.xacro
+[0.059s] -- Up-to-date: /home/amiro/Daniel/galil test/galil RSP/galil-RSP/install/galil_description/share/galil_description/meshes
+[0.059s] -- Up-to-date: /home/amiro/Daniel/galil test/galil RSP/galil-RSP/install/galil_description/share/galil_description/meshes/needle_link.stl
+[0.060s] -- Up-to-date: /home/amiro/Daniel/galil test/galil RSP/galil-RSP/install/galil_description/share/galil_description/meshes/vertical_link.stl
+[0.060s] -- Up-to-date: /home/amiro/Daniel/galil test/galil RSP/galil-RSP/install/galil_description/share/galil_description/meshes/horizontal_link.stl
+[0.060s] -- Up-to-date: /home/amiro/Daniel/galil test/galil RSP/galil-RSP/install/galil_description/share/galil_description/meshes/base_link.stl
+[0.061s] -- Up-to-date: /home/amiro/Daniel/galil test/galil RSP/galil-RSP/install/galil_description/share/galil_description/rviz
+[0.061s] -- Up-to-date: /home/amiro/Daniel/galil test/galil RSP/galil-RSP/install/galil_description/share/galil_description/rviz/urdf.rviz
+[0.061s] -- Up-to-date: /home/amiro/Daniel/galil test/galil RSP/galil-RSP/install/galil_description/share/ament_index/resource_index/package_run_dependencies/galil_description
+[0.061s] -- Up-to-date: /home/amiro/Daniel/galil test/galil RSP/galil-RSP/install/galil_description/share/ament_index/resource_index/parent_prefix_path/galil_description
+[0.061s] -- Up-to-date: /home/amiro/Daniel/galil test/galil RSP/galil-RSP/install/galil_description/share/galil_description/environment/ament_prefix_path.sh
+[0.061s] -- Up-to-date: /home/amiro/Daniel/galil test/galil RSP/galil-RSP/install/galil_description/share/galil_description/environment/ament_prefix_path.dsv
+[0.062s] -- Up-to-date: /home/amiro/Daniel/galil test/galil RSP/galil-RSP/install/galil_description/share/galil_description/environment/path.sh
+[0.062s] -- Up-to-date: /home/amiro/Daniel/galil test/galil RSP/galil-RSP/install/galil_description/share/galil_description/environment/path.dsv
+[0.062s] -- Up-to-date: /home/amiro/Daniel/galil test/galil RSP/galil-RSP/install/galil_description/share/galil_description/local_setup.bash
+[0.062s] -- Up-to-date: /home/amiro/Daniel/galil test/galil RSP/galil-RSP/install/galil_description/share/galil_description/local_setup.sh
+[0.063s] -- Up-to-date: /home/amiro/Daniel/galil test/galil RSP/galil-RSP/install/galil_description/share/galil_description/local_setup.zsh
+[0.063s] -- Up-to-date: /home/amiro/Daniel/galil test/galil RSP/galil-RSP/install/galil_description/share/galil_description/local_setup.dsv
+[0.063s] -- Up-to-date: /home/amiro/Daniel/galil test/galil RSP/galil-RSP/install/galil_description/share/galil_description/package.dsv
+[0.063s] -- Up-to-date: /home/amiro/Daniel/galil test/galil RSP/galil-RSP/install/galil_description/share/ament_index/resource_index/packages/galil_description
+[0.063s] -- Up-to-date: /home/amiro/Daniel/galil test/galil RSP/galil-RSP/install/galil_description/share/galil_description/cmake/galil_descriptionConfig.cmake
+[0.063s] -- Up-to-date: /home/amiro/Daniel/galil test/galil RSP/galil-RSP/install/galil_description/share/galil_description/cmake/galil_descriptionConfig-version.cmake
+[0.063s] -- Up-to-date: /home/amiro/Daniel/galil test/galil RSP/galil-RSP/install/galil_description/share/galil_description/package.xml
+[0.064s] Invoked command in '/home/amiro/Daniel/galil test/galil RSP/galil-RSP/build/galil_description' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/amiro/Daniel/galil test/galil RSP/galil-RSP/build/galil_description

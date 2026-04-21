@@ -1,0 +1,161 @@
+/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp: In member function ‘bool galil_driver::GalilSystemHardwareInterface::send_galil_command(const string&)’:
+/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:42:25: warning: ‘GReturn GCommand(GCon, GCStringIn, GBufOut, GSize, GSize*)’ is deprecated [-Wdeprecated-declarations]
+   42 |     int error = GCommand(connection, command.c_str(), buffer, BUFFER_LENGTH, &bytes_returned);
+      |                 ~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from /usr/include/gclib.h:16,
+                 from /home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/include/galil_driver/hardware_interface.hpp:18,
+                 from /home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:14:
+/usr/include/gclib_compat.h:168:26: note: declared here
+  168 | GCLIB_DEPRECATED GReturn GCommand(GCon g, GCStringIn command, GBufOut buffer, GSize buffer_len, GSize* bytes_returned);
+      |                          ^~~~~~~~
+/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:51:17: warning: ‘GReturn GCommand(GCon, GCStringIn, GBufOut, GSize, GSize*)’ is deprecated [-Wdeprecated-declarations]
+   51 |     if( GCommand(connection, "TC1", error_buffer, BUFFER_LENGTH, &bytes_returned) == G_NO_ERROR ){
+      |         ~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from /usr/include/gclib.h:16,
+                 from /home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/include/galil_driver/hardware_interface.hpp:18,
+                 from /home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:14:
+/usr/include/gclib_compat.h:168:26: note: declared here
+  168 | GCLIB_DEPRECATED GReturn GCommand(GCon g, GCStringIn command, GBufOut buffer, GSize buffer_len, GSize* bytes_returned);
+      |                          ^~~~~~~~
+/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp: In member function ‘virtual hardware_interface::CallbackReturn galil_driver::GalilSystemHardwareInterface::on_configure(const rclcpp_lifecycle::State&)’:
+/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:184:14: warning: ‘GReturn GOpen(GCStringIn, Context**)’ is deprecated [-Wdeprecated-declarations]
+  184 |     if( GOpen( address.c_str(), &connection ) == G_NO_ERROR ){
+      |         ~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from /usr/include/gclib.h:16,
+                 from /home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/include/galil_driver/hardware_interface.hpp:18,
+                 from /home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:14:
+/usr/include/gclib_compat.h:106:26: note: declared here
+  106 | GCLIB_DEPRECATED GReturn GOpen(GCStringIn connection_string, GCon* g);
+      |                          ^~~~~
+/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:180:11: warning: unused variable ‘BUFFER_LENGTH’ [-Wunused-variable]
+  180 |     GSize BUFFER_LENGTH=32;
+      |           ^~~~~~~~~~~~~
+/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:181:11: warning: unused variable ‘bytes_returned’ [-Wunused-variable]
+  181 |     GSize bytes_returned;
+      |           ^~~~~~~~~~~~~~
+/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:182:10: warning: unused variable ‘buffer’ [-Wunused-variable]
+  182 |     char buffer[32];
+      |          ^~~~~~
+/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp: In member function ‘virtual hardware_interface::return_type galil_driver::GalilSystemHardwareInterface::prepare_command_mode_switch(const std::vector<std::__cxx11::basic_string<char> >&, const std::vector<std::__cxx11::basic_string<char> >&)’:
+/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:272:31: warning: ‘GReturn GCommand(GCon, GCStringIn, GBufOut, GSize, GSize*)’ is deprecated [-Wdeprecated-declarations]
+  272 |           int error = GCommand(connection, command, buffer, BUFFER_LENGTH, &bytes_returned );
+      |                       ~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from /usr/include/gclib.h:16,
+                 from /home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/include/galil_driver/hardware_interface.hpp:18,
+                 from /home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:14:
+/usr/include/gclib_compat.h:168:26: note: declared here
+  168 | GCLIB_DEPRECATED GReturn GCommand(GCon g, GCStringIn command, GBufOut buffer, GSize buffer_len, GSize* bytes_returned);
+      |                          ^~~~~~~~
+/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:290:31: warning: ‘GReturn GCommand(GCon, GCStringIn, GBufOut, GSize, GSize*)’ is deprecated [-Wdeprecated-declarations]
+  290 |           int error = GCommand(connection, command, buffer, BUFFER_LENGTH, &bytes_returned );
+      |                       ~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from /usr/include/gclib.h:16,
+                 from /home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/include/galil_driver/hardware_interface.hpp:18,
+                 from /home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:14:
+/usr/include/gclib_compat.h:168:26: note: declared here
+  168 | GCLIB_DEPRECATED GReturn GCommand(GCon g, GCStringIn command, GBufOut buffer, GSize buffer_len, GSize* bytes_returned);
+      |                          ^~~~~~~~
+/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:285:16: warning: unused variable ‘channels’ [-Wunused-variable]
+  285 |           char channels[] = "ABCD";
+      |                ^~~~~~~~
+/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp: In member function ‘virtual hardware_interface::return_type galil_driver::GalilSystemHardwareInterface::perform_command_mode_switch(const std::vector<std::__cxx11::basic_string<char> >&, const std::vector<std::__cxx11::basic_string<char> >&)’:
+/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:381:31: warning: ‘GReturn GCommand(GCon, GCStringIn, GBufOut, GSize, GSize*)’ is deprecated [-Wdeprecated-declarations]
+  381 |           int error = GCommand(connection, command, buffer, BUFFER_LENGTH, &bytes_returned );
+      |                       ~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from /usr/include/gclib.h:16,
+                 from /home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/include/galil_driver/hardware_interface.hpp:18,
+                 from /home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:14:
+/usr/include/gclib_compat.h:168:26: note: declared here
+  168 | GCLIB_DEPRECATED GReturn GCommand(GCon g, GCStringIn command, GBufOut buffer, GSize buffer_len, GSize* bytes_returned);
+      |                          ^~~~~~~~
+/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:376:16: warning: unused variable ‘channels’ [-Wunused-variable]
+  376 |           char channels[] = "ABCD";
+      |                ^~~~~~~~
+/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp: In member function ‘virtual hardware_interface::return_type galil_driver::GalilSystemHardwareInterface::read(const rclcpp::Time&, const rclcpp::Duration&)’:
+/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:411:17: warning: ‘GReturn GCommand(GCon, GCStringIn, GBufOut, GSize, GSize*)’ is deprecated [-Wdeprecated-declarations]
+  411 |     if( GCommand(connection, "TP", buffer, BUFFER_LENGTH, &bytes_returned ) == G_NO_ERROR ){
+      |         ~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from /usr/include/gclib.h:16,
+                 from /home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/include/galil_driver/hardware_interface.hpp:18,
+                 from /home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:14:
+/usr/include/gclib_compat.h:168:26: note: declared here
+  168 | GCLIB_DEPRECATED GReturn GCommand(GCon g, GCStringIn command, GBufOut buffer, GSize buffer_len, GSize* bytes_returned);
+      |                          ^~~~~~~~
+/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:423:40: warning: statement has no effect [-Wunused-value]
+  423 |       hardware_interface::return_type::ERROR;
+      |       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~
+/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:425:17: warning: ‘GReturn GCommand(GCon, GCStringIn, GBufOut, GSize, GSize*)’ is deprecated [-Wdeprecated-declarations]
+  425 |     if( GCommand(connection, "TV", buffer, BUFFER_LENGTH, &bytes_returned ) == G_NO_ERROR ){
+      |         ~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from /usr/include/gclib.h:16,
+                 from /home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/include/galil_driver/hardware_interface.hpp:18,
+                 from /home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:14:
+/usr/include/gclib_compat.h:168:26: note: declared here
+  168 | GCLIB_DEPRECATED GReturn GCommand(GCon g, GCStringIn command, GBufOut buffer, GSize buffer_len, GSize* bytes_returned);
+      |                          ^~~~~~~~
+/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:437:40: warning: statement has no effect [-Wunused-value]
+  437 |       hardware_interface::return_type::ERROR;
+      |       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~
+/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp: In member function ‘virtual hardware_interface::return_type galil_driver::GalilSystemHardwareInterface::write(const rclcpp::Time&, const rclcpp::Duration&)’:
+/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:528:27: warning: ‘GReturn GCommand(GCon, GCStringIn, GBufOut, GSize, GSize*)’ is deprecated [-Wdeprecated-declarations]
+  528 |       int error = GCommand(connection, command, buffer, BUFFER_LENGTH, &bytes_returned );
+      |                   ~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from /usr/include/gclib.h:16,
+                 from /home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/include/galil_driver/hardware_interface.hpp:18,
+                 from /home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:14:
+/usr/include/gclib_compat.h:168:26: note: declared here
+  168 | GCLIB_DEPRECATED GReturn GCommand(GCon g, GCStringIn command, GBufOut buffer, GSize buffer_len, GSize* bytes_returned);
+      |                          ^~~~~~~~
+/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:531:27: warning: ‘GReturn GCommand(GCon, GCStringIn, GBufOut, GSize, GSize*)’ is deprecated [-Wdeprecated-declarations]
+  531 |           error = GCommand(connection, "BG", buffer, BUFFER_LENGTH, &bytes_returned );
+      |                   ~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from /usr/include/gclib.h:16,
+                 from /home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/include/galil_driver/hardware_interface.hpp:18,
+                 from /home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:14:
+/usr/include/gclib_compat.h:168:26: note: declared here
+  168 | GCLIB_DEPRECATED GReturn GCommand(GCon g, GCStringIn command, GBufOut buffer, GSize buffer_len, GSize* bytes_returned);
+      |                          ^~~~~~~~
+/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:536:29: warning: ‘GReturn GCommand(GCon, GCStringIn, GBufOut, GSize, GSize*)’ is deprecated [-Wdeprecated-declarations]
+  536 |             error = GCommand(connection, "TC1", buffer, BUFFER_LENGTH, &bytes_returned );
+      |                     ~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from /usr/include/gclib.h:16,
+                 from /home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/include/galil_driver/hardware_interface.hpp:18,
+                 from /home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:14:
+/usr/include/gclib_compat.h:168:26: note: declared here
+  168 | GCLIB_DEPRECATED GReturn GCommand(GCon g, GCStringIn command, GBufOut buffer, GSize buffer_len, GSize* bytes_returned);
+      |                          ^~~~~~~~
+/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:538:46: warning: statement has no effect [-Wunused-value]
+  538 |             hardware_interface::return_type::ERROR;
+      |             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~
+/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:545:25: warning: ‘GReturn GCommand(GCon, GCStringIn, GBufOut, GSize, GSize*)’ is deprecated [-Wdeprecated-declarations]
+  545 |         error = GCommand(connection, "TC1", buffer, BUFFER_LENGTH, &bytes_returned );
+      |                 ~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from /usr/include/gclib.h:16,
+                 from /home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/include/galil_driver/hardware_interface.hpp:18,
+                 from /home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:14:
+/usr/include/gclib_compat.h:168:26: note: declared here
+  168 | GCLIB_DEPRECATED GReturn GCommand(GCon g, GCStringIn command, GBufOut buffer, GSize buffer_len, GSize* bytes_returned);
+      |                          ^~~~~~~~
+/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:547:42: warning: statement has no effect [-Wunused-value]
+  547 |         hardware_interface::return_type::ERROR;
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~
+/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:513:36: warning: ‘%c’ directive writing 1 byte into a region of size between 0 and 1023 [-Wformat-overflow=]
+  513 |           { sprintf( command, "%s%d%c", command, ((int)(hw_commands_position_[i]*gears_m_2_cnt[i])), separator ); }
+      |                                    ^~
+/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:513:20: note: ‘sprintf’ output between 3 and 1036 bytes into a destination of size 1024
+  513 |           { sprintf( command, "%s%d%c", command, ((int)(hw_commands_position_[i]*gears_m_2_cnt[i])), separator ); }
+      |             ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:513:20: warning: ‘sprintf’ argument 3 overlaps destination object ‘command’ [-Wrestrict]
+/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:492:10: note: destination object referenced by ‘restrict’-qualified argument 1 was declared here
+  492 |     char command[1024]="";
+      |          ^~~~~~~
+/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:519:34: warning: ‘%c’ directive writing 1 byte into a region of size between 0 and 1023 [-Wformat-overflow=]
+  519 |           sprintf( command, "%s%d%c", command, ((int)(hw_commands_position_[i]*gears_m_2_cnt[i])), separator );
+      |                                  ^~
+/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:519:18: note: ‘sprintf’ output between 3 and 1036 bytes into a destination of size 1024
+  519 |           sprintf( command, "%s%d%c", command, ((int)(hw_commands_position_[i]*gears_m_2_cnt[i])), separator );
+      |           ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:519:18: warning: ‘sprintf’ argument 3 overlaps destination object ‘command’ [-Wrestrict]
+/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:492:10: note: destination object referenced by ‘restrict’-qualified argument 1 was declared here
+  492 |     char command[1024]="";
+      |          ^~~~~~~

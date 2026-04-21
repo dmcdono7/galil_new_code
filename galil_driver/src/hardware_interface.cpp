@@ -1,4 +1,9 @@
 #include <algorithm>
+#include <cmath>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+#include <limits>
 #include <memory>
 #include <string>
 #include <utility>
@@ -10,13 +15,125 @@
 
 namespace galil_driver {
 
+  namespace {
+    constexpr int COMMAND_MODE_IDLE = 0;
+    constexpr int COMMAND_MODE_POSITION = 1;
+    constexpr int COMMAND_MODE_LEGACY_VELOCITY = 2;
+    constexpr int COMMAND_MODE_REAL_VELOCITY = 3;
+    constexpr int GALIL_MIN_NONZERO_JOG_SPEED = 2;
+    constexpr const char* HW_IF_REAL_VELOCITY = "real_velocity";
+  }
+
   GalilSystemHardwareInterface::~GalilSystemHardwareInterface(){
     on_deactivate(rclcpp_lifecycle::State());
+  }
+
+  char GalilSystemHardwareInterface::axis_letter(std::size_t index) const{
+    static constexpr char AXES[] = "ABCDEFGH";
+    return index < (sizeof(AXES) - 1) ? AXES[index] : '?';
+  }
+
+  bool GalilSystemHardwareInterface::send_galil_command(const std::string& command){
+    GSize BUFFER_LENGTH=1024;
+    GSize bytes_returned;
+    char buffer[1024]="";
+
+    std::cout << command << std::endl;
+    int error = GCommand(connection, command.c_str(), buffer, BUFFER_LENGTH, &bytes_returned);
+    if( error == G_NO_ERROR ){
+      return true;
+    }
+
+    RCLCPP_ERROR(rclcpp::get_logger("GalilSystemHardwareInterface"),
+		 "Failed to send command: %s error code %d", command.c_str(), error);
+
+    char error_buffer[1024]="";
+    if( GCommand(connection, "TC1", error_buffer, BUFFER_LENGTH, &bytes_returned) == G_NO_ERROR ){
+      RCLCPP_ERROR(rclcpp::get_logger("GalilSystemHardwareInterface"),
+		   "TC1: %s.", error_buffer);
+    }
+    else{
+      RCLCPP_ERROR(rclcpp::get_logger("GalilSystemHardwareInterface"),
+		   "Failed to query Galil TC1 after command failure.");
+    }
+
+    return false;
+  }
+
+  int GalilSystemHardwareInterface::real_velocity_command_counts(std::size_t index) const{
+    if( index >= hw_commands_real_velocity_.size() ){
+      return 0;
+    }
+
+    const double command = hw_commands_real_velocity_[index];
+    if( std::isnan(command) ){
+      return 0;
+    }
+
+    const double scale = index < gears_m_2_cnt.size() ? gears_m_2_cnt[index] : 1.0;
+    const int counts = static_cast<int>(std::lround(command * scale));
+    if( std::abs(counts) < GALIL_MIN_NONZERO_JOG_SPEED ){
+      return 0;
+    }
+
+    return counts;
+  }
+
+  bool GalilSystemHardwareInterface::stop_real_velocity_axis(std::size_t index){
+    if( index >= real_velocity_jog_active_.size() ){
+      return true;
+    }
+
+    if( !real_velocity_jog_active_[index] ){
+      last_real_velocity_counts_[index] = 0;
+      return true;
+    }
+
+    char command[32]="";
+    std::snprintf(command, sizeof(command), "ST %c", axis_letter(index));
+    if( !send_galil_command(command) ){
+      return false;
+    }
+
+    real_velocity_jog_active_[index] = false;
+    last_real_velocity_counts_[index] = 0;
+    return true;
+  }
+
+  bool GalilSystemHardwareInterface::stop_all_real_velocity_axes(){
+    bool ok = true;
+    for( std::size_t i=0; i<real_velocity_jog_active_.size(); i++ ){
+      ok = stop_real_velocity_axis(i) && ok;
+    }
+    return ok;
+  }
+
+  bool GalilSystemHardwareInterface::servo_here_real_velocity_axes(const std::vector<std::size_t>& axes){
+    std::string axis_mask;
+    for( const auto index : axes ){
+      if( index < info_.joints.size() ){
+	axis_mask.push_back(axis_letter(index));
+      }
+    }
+
+    if( axis_mask.empty() ){
+      return true;
+    }
+
+    for( const auto index : axes ){
+      if( index < hw_commands_real_velocity_.size() ){
+	hw_commands_real_velocity_[index] = 0.0;
+	last_real_velocity_counts_[index] = 0;
+	real_velocity_jog_active_[index] = false;
+      }
+    }
+
+    return send_galil_command("SH " + axis_mask);
   }
   
   hardware_interface::CallbackReturn
   GalilSystemHardwareInterface::on_init(const hardware_interface::HardwareInfo& info){
-    cmd_mode_ = 0;
+    cmd_mode_ = COMMAND_MODE_IDLE;
 
     if( hardware_interface::SystemInterface::on_init(info) !=
 	hardware_interface::CallbackReturn::SUCCESS ){
@@ -30,6 +147,9 @@ namespace galil_driver {
     hw_states_effort_.resize(info_.joints.size(), std::numeric_limits<double>::quiet_NaN());
     hw_commands_position_.resize(info_.joints.size(), std::numeric_limits<double>::quiet_NaN());
     hw_commands_velocity_.resize(info_.joints.size(), std::numeric_limits<double>::quiet_NaN());
+    hw_commands_real_velocity_.resize(info_.joints.size(), 0.0);
+    last_real_velocity_counts_.resize(info_.joints.size(), 0);
+    real_velocity_jog_active_.resize(info_.joints.size(), false);
 
     for (const hardware_interface::ComponentInfo & joint : info_.joints){
       for ( std::size_t i=0; i<joint.command_interfaces.size(); i++ ){
@@ -37,6 +157,8 @@ namespace galil_driver {
 	  RCLCPP_INFO(rclcpp::get_logger("GalilSystemHardwareInterface"), " %s has position command interface.", joint.name.c_str() );
 	if( joint.command_interfaces[i].name == hardware_interface::HW_IF_VELOCITY )
 	  RCLCPP_INFO(rclcpp::get_logger("GalilSystemHardwareInterface"), " %s has velocity command interface.", joint.name.c_str() );
+	if( joint.command_interfaces[i].name == HW_IF_REAL_VELOCITY )
+	  RCLCPP_INFO(rclcpp::get_logger("GalilSystemHardwareInterface"), " %s has real_velocity command interface.", joint.name.c_str() );
       }
       for ( std::size_t i=0; i<joint.state_interfaces.size(); i++ ){
 	if( joint.state_interfaces[i].name == hardware_interface::HW_IF_POSITION )
@@ -104,6 +226,9 @@ namespace galil_driver {
       command_interfaces.emplace_back(hardware_interface::CommandInterface(info_.joints[i].name,
 									   hardware_interface::HW_IF_VELOCITY,
 									   &hw_commands_velocity_[i]) );
+      command_interfaces.emplace_back(hardware_interface::CommandInterface(info_.joints[i].name,
+									   HW_IF_REAL_VELOCITY,
+									   &hw_commands_real_velocity_[i]) );
     }
     return command_interfaces;
   }
@@ -115,6 +240,9 @@ namespace galil_driver {
   
   hardware_interface::CallbackReturn
   GalilSystemHardwareInterface::on_deactivate(const rclcpp_lifecycle::State& /*previous_state*/){
+    if( !stop_all_real_velocity_axes() ){
+      return hardware_interface::CallbackReturn::ERROR;
+    }
     return hardware_interface::CallbackReturn::SUCCESS;
   }
   
@@ -165,6 +293,16 @@ namespace galil_driver {
 			  "Failed to send command: %s, error code %d", command, error);
 	  }
 	}
+
+	if(key == info_.joints[i].name + "/" + HW_IF_REAL_VELOCITY){
+	  hw_commands_real_velocity_[i] = 0.0;
+	  if( !stop_real_velocity_axis(i) ){
+	    ret_val = hardware_interface::return_type::ERROR;
+	  }
+	  if( cmd_mode_ == COMMAND_MODE_REAL_VELOCITY ){
+	    cmd_mode_ = COMMAND_MODE_IDLE;
+	  }
+	}
       }
     }
 
@@ -172,12 +310,18 @@ namespace galil_driver {
       std::cout << "start: " << key << std::endl;
       for (auto i = 0u; i < info_.joints.size(); i++) {
 	if(key == info_.joints[i].name + "/" + hardware_interface::HW_IF_POSITION) {
-	  cmd_mode_ = 1;
+	  cmd_mode_ = COMMAND_MODE_POSITION;
 	  hw_commands_velocity_[i] = 0.0;
 	}
 	if(key == info_.joints[i].name + "/" + hardware_interface::HW_IF_VELOCITY) {
-	  cmd_mode_ = 2;
+	  cmd_mode_ = COMMAND_MODE_LEGACY_VELOCITY;
 	  hw_commands_velocity_[i] = 0.0;
+	}
+	if(key == info_.joints[i].name + "/" + HW_IF_REAL_VELOCITY) {
+	  cmd_mode_ = COMMAND_MODE_REAL_VELOCITY;
+	  hw_commands_real_velocity_[i] = 0.0;
+	  last_real_velocity_counts_[i] = 0;
+	  real_velocity_jog_active_[i] = false;
 	}
       }
     }
@@ -192,6 +336,7 @@ namespace galil_driver {
 
     std::cout << "GalilSystemHardwareInterface::perform_command_mode_switch" << std::endl;
     hardware_interface::return_type ret_val = hardware_interface::return_type::OK;
+    std::vector<std::size_t> real_velocity_start_axes;
 
     for (const auto& key : stop_interfaces){
       std::cout << "stop: " << key << std::endl;
@@ -201,6 +346,15 @@ namespace galil_driver {
 	}
 	if(key == info_.joints[i].name + "/" + hardware_interface::HW_IF_VELOCITY){
 	  hw_commands_velocity_[i] = 0.0;
+	}
+	if(key == info_.joints[i].name + "/" + HW_IF_REAL_VELOCITY){
+	  hw_commands_real_velocity_[i] = 0.0;
+	  if( !stop_real_velocity_axis(i) ){
+	    ret_val = hardware_interface::return_type::ERROR;
+	  }
+	  if( cmd_mode_ == COMMAND_MODE_REAL_VELOCITY ){
+	    cmd_mode_ = COMMAND_MODE_IDLE;
+	  }
 	}
       }
     }
@@ -230,7 +384,18 @@ namespace galil_driver {
 			  "Failed to send command: %s, error code %d", command, error);
 	  }
 	}
+	if(key == info_.joints[i].name + "/" + HW_IF_REAL_VELOCITY){
+	  cmd_mode_ = COMMAND_MODE_REAL_VELOCITY;
+	  hw_commands_real_velocity_[i] = 0.0;
+	  last_real_velocity_counts_[i] = 0;
+	  real_velocity_jog_active_[i] = false;
+	  real_velocity_start_axes.push_back(i);
+	}
       }
+    }
+
+    if( !real_velocity_start_axes.empty() && !servo_here_real_velocity_axes(real_velocity_start_axes) ){
+      ret_val = hardware_interface::return_type::ERROR;
     }
     
     return ret_val;
@@ -273,9 +438,56 @@ namespace galil_driver {
     }
     return hardware_interface::return_type::OK;
   }
+
+  hardware_interface::return_type GalilSystemHardwareInterface::write_real_velocity(){
+    for( std::size_t i=0; i<info_.joints.size(); i++ ){
+      const int command_counts = real_velocity_command_counts(i);
+
+      if( command_counts == last_real_velocity_counts_[i] &&
+	  (command_counts != 0 || !real_velocity_jog_active_[i]) ){
+	continue;
+      }
+
+      if( command_counts == 0 ){
+	if( !stop_real_velocity_axis(i) ){
+	  return hardware_interface::return_type::ERROR;
+	}
+	continue;
+      }
+
+      char jog_command[64]="";
+      std::snprintf(jog_command, sizeof(jog_command), "JG%c=%d", axis_letter(i), command_counts);
+      if( !send_galil_command(jog_command) ){
+	if( real_velocity_jog_active_[i] ){
+	  stop_real_velocity_axis(i);
+	}
+	return hardware_interface::return_type::ERROR;
+      }
+
+      if( !real_velocity_jog_active_[i] ){
+	char begin_command[32]="";
+	std::snprintf(begin_command, sizeof(begin_command), "BG %c", axis_letter(i));
+	if( !send_galil_command(begin_command) ){
+	  char stop_command[32]="";
+	  std::snprintf(stop_command, sizeof(stop_command), "ST %c", axis_letter(i));
+	  send_galil_command(stop_command);
+	  return hardware_interface::return_type::ERROR;
+	}
+	real_velocity_jog_active_[i] = true;
+      }
+
+      last_real_velocity_counts_[i] = command_counts;
+    }
+
+    return hardware_interface::return_type::OK;
+  }
   
   hardware_interface::return_type GalilSystemHardwareInterface::write(const rclcpp::Time& /*time*/,
 								      const rclcpp::Duration& period){
+
+    if( cmd_mode_ == COMMAND_MODE_REAL_VELOCITY ){
+      return write_real_velocity();
+    }
 
     char command[1024]="";
     GSize BUFFER_LENGTH=1024;
@@ -283,9 +495,9 @@ namespace galil_driver {
     char buffer[1024];
 
     std::cout << period.seconds() << std::endl;
-    if( cmd_mode_ == 1 )
+    if( cmd_mode_ == COMMAND_MODE_POSITION )
       { sprintf( command, "PA " ); }
-    if( cmd_mode_ == 2 )
+    if( cmd_mode_ == COMMAND_MODE_LEGACY_VELOCITY )
       { sprintf( command, "PA " ); } // for position tracking mode
 
     for( std::size_t i=0; i<info_.joints.size(); i++ ){
@@ -295,12 +507,12 @@ namespace galil_driver {
 	separator=' ';
       
       // The following blocks assume that i follows ABCD
-      if( cmd_mode_ == 1 ){
+      if( cmd_mode_ == COMMAND_MODE_POSITION ){
 	if( !isnan(hw_commands_position_[i]) && 0<strlen(command) )
 	  // Position Absolute command
 	  { sprintf( command, "%s%d%c", command, ((int)(hw_commands_position_[i]*gears_m_2_cnt[i])), separator ); }
       }
-      if( cmd_mode_ == 2 ){
+      if( cmd_mode_ == COMMAND_MODE_LEGACY_VELOCITY ){
 	if( !isnan(hw_commands_velocity_[i]) && 0<strlen(command) ){
 	  // JoG command stinks so we use PT with incremental position
 	  hw_commands_position_[i] += period.seconds() * hw_commands_velocity_[i]*gears_m_2_cnt[i];
@@ -315,7 +527,7 @@ namespace galil_driver {
       std::cout << command << std::endl;
       int error = GCommand(connection, command, buffer, BUFFER_LENGTH, &bytes_returned );
       if( error == G_NO_ERROR ){
-	if( cmd_mode_ == 1 ){
+	if( cmd_mode_ == COMMAND_MODE_POSITION ){
 	  error = GCommand(connection, "BG", buffer, BUFFER_LENGTH, &bytes_returned );
 	  if( error == G_NO_ERROR ){}
 	  else{

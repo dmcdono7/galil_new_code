@@ -14,6 +14,9 @@ controller_manager:
     velocity_controller:
       type: velocity_controllers/JointGroupVelocityController
 
+    real_velocity_controller:
+      type: velocity_controllers/JointGroupVelocityController
+
     position_controller:
       type: position_controllers/JointGroupPositionController
 
@@ -49,6 +52,15 @@ velocity_controller:
       - vertical_joint
       - needle_drive_joint
     interface_name: velocity
+
+real_velocity_controller:
+  ros__parameters:
+    joints:
+      - insertion_joint
+      - horizontal_joint
+      - vertical_joint
+      - needle_drive_joint
+    interface_name: real_velocity
 
 position_controller:
   ros__parameters:

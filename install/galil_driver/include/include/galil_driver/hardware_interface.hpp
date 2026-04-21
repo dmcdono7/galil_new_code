@@ -14,7 +14,10 @@
 #include "geometry_msgs/msg/transform_stamped.hpp"
 #include "tf2_geometry_msgs/tf2_geometry_msgs.hpp"
 
+#include <cstddef>
 #include <gclib.h>
+#include <string>
+#include <vector>
 
 namespace galil_driver{
 
@@ -44,12 +47,23 @@ namespace galil_driver{
 								const std::vector<std::string>& stop_interfaces) override;
     
   private:
+    char axis_letter(std::size_t index) const;
+    bool send_galil_command(const std::string& command);
+    int real_velocity_command_counts(std::size_t index) const;
+    bool stop_real_velocity_axis(std::size_t index);
+    bool stop_all_real_velocity_axes();
+    bool servo_here_real_velocity_axes(const std::vector<std::size_t>& axes);
+    hardware_interface::return_type write_real_velocity();
+
     hardware_interface::HardwareInfo info_;
     std::vector<double> hw_commands_position_;
     std::vector<double> hw_commands_velocity_;
+    std::vector<double> hw_commands_real_velocity_;
     std::vector<double> hw_states_position_;
     std::vector<double> hw_states_velocity_;
     std::vector<double> hw_states_effort_;
+    std::vector<int> last_real_velocity_counts_;
+    std::vector<bool> real_velocity_jog_active_;
     int cmd_mode_;
 
     //std::vector< char > channels;

@@ -1,0 +1,142 @@
+[01m[K/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:[m[K In member function ‘[01m[Kvirtual hardware_interface::CallbackReturn galil_driver::GalilSystemHardwareInterface::on_configure(const rclcpp_lifecycle::State&)[m[K’:
+[01m[K/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:62:14:[m[K [01;35m[Kwarning: [m[K‘[01m[KGReturn GOpen(GCStringIn, Context**)[m[K’ is deprecated [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-declarations-Wdeprecated-declarations]8;;[m[K]
+   62 |     if( [01;35m[KGOpen( address.c_str(), &connection )[m[K == G_NO_ERROR ){
+      |         [01;35m[K~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+In file included from [01m[K/usr/include/gclib.h:16[m[K,
+                 from [01m[K/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/include/galil_driver/hardware_interface.hpp:17[m[K,
+                 from [01m[K/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:9[m[K:
+[01m[K/usr/include/gclib_compat.h:106:26:[m[K [01;36m[Knote: [m[Kdeclared here
+  106 | GCLIB_DEPRECATED GReturn [01;36m[KGOpen[m[K(GCStringIn connection_string, GCon* g);
+      |                          [01;36m[K^~~~~[m[K
+[01m[K/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:58:11:[m[K [01;35m[Kwarning: [m[Kunused variable ‘[01m[KBUFFER_LENGTH[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable-Wunused-variable]8;;[m[K]
+   58 |     GSize [01;35m[KBUFFER_LENGTH[m[K=32;
+      |           [01;35m[K^~~~~~~~~~~~~[m[K
+[01m[K/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:59:11:[m[K [01;35m[Kwarning: [m[Kunused variable ‘[01m[Kbytes_returned[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable-Wunused-variable]8;;[m[K]
+   59 |     GSize [01;35m[Kbytes_returned[m[K;
+      |           [01;35m[K^~~~~~~~~~~~~~[m[K
+[01m[K/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:60:10:[m[K [01;35m[Kwarning: [m[Kunused variable ‘[01m[Kbuffer[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable-Wunused-variable]8;;[m[K]
+   60 |     char [01;35m[Kbuffer[m[K[32];
+      |          [01;35m[K^~~~~~[m[K
+[01m[K/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:[m[K In member function ‘[01m[Kvirtual hardware_interface::return_type galil_driver::GalilSystemHardwareInterface::prepare_command_mode_switch(const std::vector<std::__cxx11::basic_string<char> >&, const std::vector<std::__cxx11::basic_string<char> >&)[m[K’:
+[01m[K/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:144:31:[m[K [01;35m[Kwarning: [m[K‘[01m[KGReturn GCommand(GCon, GCStringIn, GBufOut, GSize, GSize*)[m[K’ is deprecated [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-declarations-Wdeprecated-declarations]8;;[m[K]
+  144 |           int error = [01;35m[KGCommand(connection, command, buffer, BUFFER_LENGTH, &bytes_returned )[m[K;
+      |                       [01;35m[K~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+In file included from [01m[K/usr/include/gclib.h:16[m[K,
+                 from [01m[K/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/include/galil_driver/hardware_interface.hpp:17[m[K,
+                 from [01m[K/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:9[m[K:
+[01m[K/usr/include/gclib_compat.h:168:26:[m[K [01;36m[Knote: [m[Kdeclared here
+  168 | GCLIB_DEPRECATED GReturn [01;36m[KGCommand[m[K(GCon g, GCStringIn command, GBufOut buffer, GSize buffer_len, GSize* bytes_returned);
+      |                          [01;36m[K^~~~~~~~[m[K
+[01m[K/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:162:31:[m[K [01;35m[Kwarning: [m[K‘[01m[KGReturn GCommand(GCon, GCStringIn, GBufOut, GSize, GSize*)[m[K’ is deprecated [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-declarations-Wdeprecated-declarations]8;;[m[K]
+  162 |           int error = [01;35m[KGCommand(connection, command, buffer, BUFFER_LENGTH, &bytes_returned )[m[K;
+      |                       [01;35m[K~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+In file included from [01m[K/usr/include/gclib.h:16[m[K,
+                 from [01m[K/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/include/galil_driver/hardware_interface.hpp:17[m[K,
+                 from [01m[K/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:9[m[K:
+[01m[K/usr/include/gclib_compat.h:168:26:[m[K [01;36m[Knote: [m[Kdeclared here
+  168 | GCLIB_DEPRECATED GReturn [01;36m[KGCommand[m[K(GCon g, GCStringIn command, GBufOut buffer, GSize buffer_len, GSize* bytes_returned);
+      |                          [01;36m[K^~~~~~~~[m[K
+[01m[K/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:157:16:[m[K [01;35m[Kwarning: [m[Kunused variable ‘[01m[Kchannels[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable-Wunused-variable]8;;[m[K]
+  157 |           char [01;35m[Kchannels[m[K[] = "ABCD";
+      |                [01;35m[K^~~~~~~~[m[K
+[01m[K/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:[m[K In member function ‘[01m[Kvirtual hardware_interface::return_type galil_driver::GalilSystemHardwareInterface::perform_command_mode_switch(const std::vector<std::__cxx11::basic_string<char> >&, const std::vector<std::__cxx11::basic_string<char> >&)[m[K’:
+[01m[K/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:227:31:[m[K [01;35m[Kwarning: [m[K‘[01m[KGReturn GCommand(GCon, GCStringIn, GBufOut, GSize, GSize*)[m[K’ is deprecated [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-declarations-Wdeprecated-declarations]8;;[m[K]
+  227 |           int error = [01;35m[KGCommand(connection, command, buffer, BUFFER_LENGTH, &bytes_returned )[m[K;
+      |                       [01;35m[K~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+In file included from [01m[K/usr/include/gclib.h:16[m[K,
+                 from [01m[K/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/include/galil_driver/hardware_interface.hpp:17[m[K,
+                 from [01m[K/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:9[m[K:
+[01m[K/usr/include/gclib_compat.h:168:26:[m[K [01;36m[Knote: [m[Kdeclared here
+  168 | GCLIB_DEPRECATED GReturn [01;36m[KGCommand[m[K(GCon g, GCStringIn command, GBufOut buffer, GSize buffer_len, GSize* bytes_returned);
+      |                          [01;36m[K^~~~~~~~[m[K
+[01m[K/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:222:16:[m[K [01;35m[Kwarning: [m[Kunused variable ‘[01m[Kchannels[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable-Wunused-variable]8;;[m[K]
+  222 |           char [01;35m[Kchannels[m[K[] = "ABCD";
+      |                [01;35m[K^~~~~~~~[m[K
+[01m[K/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:[m[K In member function ‘[01m[Kvirtual hardware_interface::return_type galil_driver::GalilSystemHardwareInterface::read(const rclcpp::Time&, const rclcpp::Duration&)[m[K’:
+[01m[K/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:246:17:[m[K [01;35m[Kwarning: [m[K‘[01m[KGReturn GCommand(GCon, GCStringIn, GBufOut, GSize, GSize*)[m[K’ is deprecated [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-declarations-Wdeprecated-declarations]8;;[m[K]
+  246 |     if( [01;35m[KGCommand(connection, "TP", buffer, BUFFER_LENGTH, &bytes_returned )[m[K == G_NO_ERROR ){
+      |         [01;35m[K~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+In file included from [01m[K/usr/include/gclib.h:16[m[K,
+                 from [01m[K/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/include/galil_driver/hardware_interface.hpp:17[m[K,
+                 from [01m[K/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:9[m[K:
+[01m[K/usr/include/gclib_compat.h:168:26:[m[K [01;36m[Knote: [m[Kdeclared here
+  168 | GCLIB_DEPRECATED GReturn [01;36m[KGCommand[m[K(GCon g, GCStringIn command, GBufOut buffer, GSize buffer_len, GSize* bytes_returned);
+      |                          [01;36m[K^~~~~~~~[m[K
+[01m[K/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:258:40:[m[K [01;35m[Kwarning: [m[Kstatement has no effect [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-value-Wunused-value]8;;[m[K]
+  258 |       [01;35m[Khardware_interface::return_type::ERROR[m[K;
+      |       [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~[m[K
+[01m[K/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:260:17:[m[K [01;35m[Kwarning: [m[K‘[01m[KGReturn GCommand(GCon, GCStringIn, GBufOut, GSize, GSize*)[m[K’ is deprecated [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-declarations-Wdeprecated-declarations]8;;[m[K]
+  260 |     if( [01;35m[KGCommand(connection, "TV", buffer, BUFFER_LENGTH, &bytes_returned )[m[K == G_NO_ERROR ){
+      |         [01;35m[K~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+In file included from [01m[K/usr/include/gclib.h:16[m[K,
+                 from [01m[K/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/include/galil_driver/hardware_interface.hpp:17[m[K,
+                 from [01m[K/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:9[m[K:
+[01m[K/usr/include/gclib_compat.h:168:26:[m[K [01;36m[Knote: [m[Kdeclared here
+  168 | GCLIB_DEPRECATED GReturn [01;36m[KGCommand[m[K(GCon g, GCStringIn command, GBufOut buffer, GSize buffer_len, GSize* bytes_returned);
+      |                          [01;36m[K^~~~~~~~[m[K
+[01m[K/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:272:40:[m[K [01;35m[Kwarning: [m[Kstatement has no effect [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-value-Wunused-value]8;;[m[K]
+  272 |       [01;35m[Khardware_interface::return_type::ERROR[m[K;
+      |       [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~[m[K
+[01m[K/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:[m[K In member function ‘[01m[Kvirtual hardware_interface::return_type galil_driver::GalilSystemHardwareInterface::write(const rclcpp::Time&, const rclcpp::Duration&)[m[K’:
+[01m[K/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:316:27:[m[K [01;35m[Kwarning: [m[K‘[01m[KGReturn GCommand(GCon, GCStringIn, GBufOut, GSize, GSize*)[m[K’ is deprecated [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-declarations-Wdeprecated-declarations]8;;[m[K]
+  316 |       int error = [01;35m[KGCommand(connection, command, buffer, BUFFER_LENGTH, &bytes_returned )[m[K;
+      |                   [01;35m[K~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+In file included from [01m[K/usr/include/gclib.h:16[m[K,
+                 from [01m[K/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/include/galil_driver/hardware_interface.hpp:17[m[K,
+                 from [01m[K/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:9[m[K:
+[01m[K/usr/include/gclib_compat.h:168:26:[m[K [01;36m[Knote: [m[Kdeclared here
+  168 | GCLIB_DEPRECATED GReturn [01;36m[KGCommand[m[K(GCon g, GCStringIn command, GBufOut buffer, GSize buffer_len, GSize* bytes_returned);
+      |                          [01;36m[K^~~~~~~~[m[K
+[01m[K/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:319:27:[m[K [01;35m[Kwarning: [m[K‘[01m[KGReturn GCommand(GCon, GCStringIn, GBufOut, GSize, GSize*)[m[K’ is deprecated [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-declarations-Wdeprecated-declarations]8;;[m[K]
+  319 |           error = [01;35m[KGCommand(connection, "BG", buffer, BUFFER_LENGTH, &bytes_returned )[m[K;
+      |                   [01;35m[K~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+In file included from [01m[K/usr/include/gclib.h:16[m[K,
+                 from [01m[K/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/include/galil_driver/hardware_interface.hpp:17[m[K,
+                 from [01m[K/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:9[m[K:
+[01m[K/usr/include/gclib_compat.h:168:26:[m[K [01;36m[Knote: [m[Kdeclared here
+  168 | GCLIB_DEPRECATED GReturn [01;36m[KGCommand[m[K(GCon g, GCStringIn command, GBufOut buffer, GSize buffer_len, GSize* bytes_returned);
+      |                          [01;36m[K^~~~~~~~[m[K
+[01m[K/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:324:29:[m[K [01;35m[Kwarning: [m[K‘[01m[KGReturn GCommand(GCon, GCStringIn, GBufOut, GSize, GSize*)[m[K’ is deprecated [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-declarations-Wdeprecated-declarations]8;;[m[K]
+  324 |             error = [01;35m[KGCommand(connection, "TC1", buffer, BUFFER_LENGTH, &bytes_returned )[m[K;
+      |                     [01;35m[K~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+In file included from [01m[K/usr/include/gclib.h:16[m[K,
+                 from [01m[K/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/include/galil_driver/hardware_interface.hpp:17[m[K,
+                 from [01m[K/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:9[m[K:
+[01m[K/usr/include/gclib_compat.h:168:26:[m[K [01;36m[Knote: [m[Kdeclared here
+  168 | GCLIB_DEPRECATED GReturn [01;36m[KGCommand[m[K(GCon g, GCStringIn command, GBufOut buffer, GSize buffer_len, GSize* bytes_returned);
+      |                          [01;36m[K^~~~~~~~[m[K
+[01m[K/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:326:46:[m[K [01;35m[Kwarning: [m[Kstatement has no effect [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-value-Wunused-value]8;;[m[K]
+  326 |             [01;35m[Khardware_interface::return_type::ERROR[m[K;
+      |             [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~[m[K
+[01m[K/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:333:25:[m[K [01;35m[Kwarning: [m[K‘[01m[KGReturn GCommand(GCon, GCStringIn, GBufOut, GSize, GSize*)[m[K’ is deprecated [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-declarations-Wdeprecated-declarations]8;;[m[K]
+  333 |         error = [01;35m[KGCommand(connection, "TC1", buffer, BUFFER_LENGTH, &bytes_returned )[m[K;
+      |                 [01;35m[K~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+In file included from [01m[K/usr/include/gclib.h:16[m[K,
+                 from [01m[K/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/include/galil_driver/hardware_interface.hpp:17[m[K,
+                 from [01m[K/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:9[m[K:
+[01m[K/usr/include/gclib_compat.h:168:26:[m[K [01;36m[Knote: [m[Kdeclared here
+  168 | GCLIB_DEPRECATED GReturn [01;36m[KGCommand[m[K(GCon g, GCStringIn command, GBufOut buffer, GSize buffer_len, GSize* bytes_returned);
+      |                          [01;36m[K^~~~~~~~[m[K
+[01m[K/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:335:42:[m[K [01;35m[Kwarning: [m[Kstatement has no effect [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-value-Wunused-value]8;;[m[K]
+  335 |         [01;35m[Khardware_interface::return_type::ERROR[m[K;
+      |         [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~[m[K
+[01m[K/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:301:36:[m[K [01;35m[Kwarning: [m[K‘[01m[K%c[m[K’ directive writing 1 byte into a region of size between 0 and 1023 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wformat-overflow=-Wformat-overflow=]8;;[m[K]
+  301 |           { sprintf( command, "%s%d[01;35m[K%c[m[K", command, ((int)(hw_commands_position_[i]*gears_m_2_cnt[i])), separator ); }
+      |                                    [01;35m[K^~[m[K
+[01m[K/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:301:20:[m[K [01;36m[Knote: [m[K‘[01m[Ksprintf[m[K’ output between 3 and 1036 bytes into a destination of size 1024
+  301 |           { [01;36m[Ksprintf( command, "%s%d%c", command, ((int)(hw_commands_position_[i]*gears_m_2_cnt[i])), separator )[m[K; }
+      |             [01;36m[K~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:301:20:[m[K [01;35m[Kwarning: [m[K‘[01m[Ksprintf[m[K’ argument 3 overlaps destination object ‘[01m[Kcommand[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wrestrict-Wrestrict]8;;[m[K]
+[01m[K/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:280:10:[m[K [01;36m[Knote: [m[Kdestination object referenced by ‘[01m[Krestrict[m[K’-qualified argument 1 was declared here
+  280 |     char [01;36m[Kcommand[m[K[1024]="";
+      |          [01;36m[K^~~~~~~[m[K
+[01m[K/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:307:34:[m[K [01;35m[Kwarning: [m[K‘[01m[K%c[m[K’ directive writing 1 byte into a region of size between 0 and 1023 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wformat-overflow=-Wformat-overflow=]8;;[m[K]
+  307 |           sprintf( command, "%s%d[01;35m[K%c[m[K", command, ((int)(hw_commands_position_[i]*gears_m_2_cnt[i])), separator );
+      |                                  [01;35m[K^~[m[K
+[01m[K/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:307:18:[m[K [01;36m[Knote: [m[K‘[01m[Ksprintf[m[K’ output between 3 and 1036 bytes into a destination of size 1024
+  307 |           [01;36m[Ksprintf( command, "%s%d%c", command, ((int)(hw_commands_position_[i]*gears_m_2_cnt[i])), separator )[m[K;
+      |           [01;36m[K~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:307:18:[m[K [01;35m[Kwarning: [m[K‘[01m[Ksprintf[m[K’ argument 3 overlaps destination object ‘[01m[Kcommand[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wrestrict-Wrestrict]8;;[m[K]
+[01m[K/home/amiro/Daniel/galil test/galil RSP/galil-RSP/galil_driver/src/hardware_interface.cpp:280:10:[m[K [01;36m[Knote: [m[Kdestination object referenced by ‘[01m[Krestrict[m[K’-qualified argument 1 was declared here
+  280 |     char [01;36m[Kcommand[m[K[1024]="";
+      |          [01;36m[K^~~~~~~[m[K
