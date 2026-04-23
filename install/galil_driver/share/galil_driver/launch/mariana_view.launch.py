@@ -186,7 +186,7 @@ def generate_launch_description():
         )
 
     controllers_active=["joint_state_broadcaster", "position_controller"]
-    controllers_inactive=["spacenav_controller", "broyden_controller", "velocity_controller", "real_velocity_controller"]
+    controllers_inactive=["spacenav_controller", "broyden_controller", "velocity_controller", "real_velocity_controller", "sine_real_velocity_controller"]
     controller_spawners=[controller_spawner(controllers_active)] + [
         controller_spawner(controllers_inactive, active=False)
     ]

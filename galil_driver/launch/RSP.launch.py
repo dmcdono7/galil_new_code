@@ -9,6 +9,7 @@ from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
 from launch_ros.parameter_descriptions import ParameterFile
 
+
 def generate_launch_description():
     # Declare arguments
     declared_arguments = []
@@ -75,7 +76,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "initial_joint_controller",
-            default_value="position_controller",
+            default_value="real_velocity_controller",
             description="Initially loaded robot controller"
         )
     )
@@ -98,7 +99,7 @@ def generate_launch_description():
     # Initialize Arguments
     description_package = LaunchConfiguration("description_package")
     runtime_config_package = LaunchConfiguration("runtime_config_package")
-    
+
     description_file = LaunchConfiguration("description_file")
     controllers_file = LaunchConfiguration("controllers_file")
 
@@ -109,10 +110,10 @@ def generate_launch_description():
     activate_joint_controller = LaunchConfiguration("activate_joint_controllers")
     controller_spawner_timeout = LaunchConfiguration("controller_spawner_timeout")
     initial_joint_controller = LaunchConfiguration("initial_joint_controller")
-    
+
     gui = LaunchConfiguration("gui")
     name = LaunchConfiguration("name")
-    
+
     # Get URDF via xacro
     robot_description_content = Command(
         [
@@ -145,14 +146,6 @@ def generate_launch_description():
         output="both",
     )
 
-    #robot_controllers = PathJoinSubstitution(
-    #    [
-    #        FindPackageShare("galil_driver"),
-    #        "config",
-    #        "galil.yaml",
-    #    ]
-    #)
-
     # Get RViz config
     rviz_config = PathJoinSubstitution(
         [
@@ -170,8 +163,8 @@ def generate_launch_description():
     )
 
     def controller_spawner(controllers, active=True):
-        inactive_flags = ["--inactive"] if not active else[]
-        print( controllers )
+        inactive_flags = ["--inactive"] if not active else []
+        print(controllers)
         return Node(
             package="controller_manager",
             executable="spawner",
@@ -185,9 +178,15 @@ def generate_launch_description():
             + controllers
         )
 
-    controllers_active=["joint_state_broadcaster", "position_controller"]
-    controllers_inactive=["spacenav_controller", "broyden_controller", "velocity_controller", "real_velocity_controller", "sine_real_velocity_controller"]
-    controller_spawners=[controller_spawner(controllers_active)] + [
+    controllers_active = ["joint_state_broadcaster", "real_velocity_controller"]
+    controllers_inactive = [
+        "spacenav_controller",
+        "broyden_controller",
+        "velocity_controller",
+        "position_controller",
+        "sine_real_velocity_controller",
+    ]
+    controller_spawners = [controller_spawner(controllers_active)] + [
         controller_spawner(controllers_inactive, active=False)
     ]
 
@@ -203,7 +202,7 @@ def generate_launch_description():
         ],
         condition=IfCondition(activate_joint_controller),
     )
-    
+
     initial_joint_controller_spawner_stopped = Node(
         package="controller_manager",
         executable="spawner",
@@ -217,35 +216,35 @@ def generate_launch_description():
         ],
         condition=UnlessCondition(activate_joint_controller),
     )
-    
+
     robot_state_pub_node = Node(
         package="robot_state_publisher",
         executable="robot_state_publisher",
         output="both",
         parameters=[robot_description],
     )
-    #joint_state_pub_node = Node(
-    #    package="joint_state_publisher_gui",
-    #    executable="joint_state_publisher_gui",
-    #    output="both",
-    #)    
-    #joint_state_broadcaster_spawner = Node(
-    #    package="controller_manager",
-    #    executable="spawner",
-    #    arguments=["joint_state_broadcaster", "--controller-manager", "/controller_manager"],
-    #)
-    #robot_controller_spawner = Node(
-    #    package="controller_manager",
-    #    executable="spawner",
-    #    arguments=["position_trajectory", "--controller-manager", "/controller_manager"],
-    #    output="screen"
-    #)
-    #delay_robot_controller_spawner_after_joint_state_broadcaster_spawner = RegisterEventHandler(
-    #    event_handler=OnProcessExit(
-    #        target_action=joint_state_broadcaster_spawner,
-    #        on_exit=[robot_controller_spawner],
-    #    )
-    #)
+    # joint_state_pub_node = Node(
+    #     package="joint_state_publisher_gui",
+    #     executable="joint_state_publisher_gui",
+    #     output="both",
+    # )
+    # joint_state_broadcaster_spawner = Node(
+    #     package="controller_manager",
+    #     executable="spawner",
+    #     arguments=["joint_state_broadcaster", "--controller-manager", "/controller_manager"],
+    # )
+    # robot_controller_spawner = Node(
+    #     package="controller_manager",
+    #     executable="spawner",
+    #     arguments=["position_trajectory", "--controller-manager", "/controller_manager"],
+    #     output="screen"
+    # )
+    # delay_robot_controller_spawner_after_joint_state_broadcaster_spawner = RegisterEventHandler(
+    #     event_handler=OnProcessExit(
+    #         target_action=joint_state_broadcaster_spawner,
+    #         on_exit=[robot_controller_spawner],
+    #     )
+    # )
     # Depending on gui parameter, either launch joint_state_publisher or joint_state_publisher_gui
     # joint_state_publisher_node = Node(
     #     package='joint_state_publisher',
@@ -264,10 +263,10 @@ def generate_launch_description():
         # joint_state_publisher_node,
         # joint_state_publisher_node_gui,
         rviz_node,
-        #initial_joint_controller_spawner_started,
-        #initial_joint_controller_spawner_stopped,
-        #joint_state_broadcaster_spawner,
-        #delay_robot_controller_spawner_after_joint_state_broadcaster_spawner,    
+        # initial_joint_controller_spawner_started,
+        # initial_joint_controller_spawner_stopped,
+        # joint_state_broadcaster_spawner,
+        # delay_robot_controller_spawner_after_joint_state_broadcaster_spawner,
     ] + controller_spawners
 
     return LaunchDescription(declared_arguments + nodes)

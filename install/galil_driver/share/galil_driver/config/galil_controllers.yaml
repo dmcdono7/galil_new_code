@@ -17,6 +17,9 @@ controller_manager:
     real_velocity_controller:
       type: forward_command_controller/ForwardCommandController
 
+    sine_real_velocity_controller:
+      type: galil_test_controllers/SineRealVelocityController
+
     position_controller:
       type: position_controllers/JointGroupPositionController
 
@@ -61,6 +64,21 @@ real_velocity_controller:
       - vertical_joint
       - needle_drive_joint
     interface_name: real_velocity
+
+sine_real_velocity_controller:
+  ros__parameters:
+    joints:
+      - insertion_joint
+      - horizontal_joint
+      - vertical_joint
+      - needle_drive_joint
+    interface_name: real_velocity
+    joint_index: 0
+    amplitude: 200.0
+    frequency: 0.05
+    offset: 0.0
+    phase: 0.0
+    duration: 0.0
 
 position_controller:
   ros__parameters:

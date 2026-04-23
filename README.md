@@ -41,9 +41,20 @@ ros2 control switch_controllers --deactivate position_controller --activate velo
 
 ros2 topic pub -1 /velocity_controller/commands std_msgs/msg/Float64MultiArray "{data: [0.0, 0.0, 0.0, 0.0]}"
 
-To use real_velocity_controller
+### To use real_velocity_controller
+ros2 launch galil_driver RSP.launch.py
+
 
 ros2 control switch_controllers --deactivate position_controller --activate real_velocity_controller
 
 ros2 topic pub -1 /real_velocity_controller/commands std_msgs/msg/Float64MultiArray "{data: [0.0, 0.0, 0.0, 0.0]}"
+
+### sine controller
+Switch from the normal real-velocity controller to the lockstep sine test controller:
+
+
+ros2 control switch_controllers --deactivate real_velocity_controller --activate sine_real_velocity_controller
+
+
+
 

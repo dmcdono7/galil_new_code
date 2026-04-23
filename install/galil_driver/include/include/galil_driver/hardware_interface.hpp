@@ -47,11 +47,26 @@ namespace galil_driver{
 								const std::vector<std::string>& stop_interfaces) override;
     
   private:
+    struct RealVelocityInitSettings {
+      double kp;
+      double ki;
+      double kd;
+      double it;
+      double ac;
+      double dc;
+      bool valid;
+    };
+
     char axis_letter(std::size_t index) const;
     bool send_galil_command(const std::string& command);
     int real_velocity_command_counts(std::size_t index) const;
     bool stop_real_velocity_axis(std::size_t index);
     bool stop_all_real_velocity_axes();
+    bool parse_real_velocity_init_settings(std::size_t index, RealVelocityInitSettings& settings);
+    bool send_real_velocity_init_command(
+      const std::string& name,
+      const std::vector<double>& values);
+    bool initialize_real_velocity_axes(const std::vector<std::size_t>& axes);
     bool servo_here_real_velocity_axes(const std::vector<std::size_t>& axes);
     hardware_interface::return_type write_real_velocity();
 
@@ -64,6 +79,7 @@ namespace galil_driver{
     std::vector<double> hw_states_effort_;
     std::vector<int> last_real_velocity_counts_;
     std::vector<bool> real_velocity_jog_active_;
+    std::vector<RealVelocityInitSettings> real_velocity_init_settings_;
     int cmd_mode_;
 
     //std::vector< char > channels;

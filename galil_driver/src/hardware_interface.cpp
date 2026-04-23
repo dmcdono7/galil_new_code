@@ -1,10 +1,14 @@
 #include <algorithm>
+#include <cctype>
 #include <cmath>
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
+#include <exception>
+#include <iomanip>
 #include <limits>
 #include <memory>
+#include <sstream>
 #include <string>
 #include <utility>
 #include <vector>
@@ -22,6 +26,38 @@ namespace galil_driver {
     constexpr int COMMAND_MODE_REAL_VELOCITY = 3;
     constexpr int GALIL_MIN_NONZERO_JOG_SPEED = 2;
     constexpr const char* HW_IF_REAL_VELOCITY = "real_velocity";
+    constexpr const char* REAL_VELOCITY_INIT_PLACEHOLDER = "SET_ME";
+    constexpr const char* REAL_VELOCITY_KP_PARAM = "real_velocity_kp";
+    constexpr const char* REAL_VELOCITY_KI_PARAM = "real_velocity_ki";
+    constexpr const char* REAL_VELOCITY_KD_PARAM = "real_velocity_kd";
+    constexpr const char* REAL_VELOCITY_IT_PARAM = "real_velocity_it";
+    constexpr const char* REAL_VELOCITY_AC_PARAM = "real_velocity_ac";
+    constexpr const char* REAL_VELOCITY_DC_PARAM = "real_velocity_dc";
+
+    std::string trim_copy(const std::string& value){
+      const auto begin = std::find_if_not(value.begin(), value.end(), [](unsigned char character) {
+	return std::isspace(character) != 0;
+      });
+      const auto end = std::find_if_not(value.rbegin(), value.rend(), [](unsigned char character) {
+	return std::isspace(character) != 0;
+      }).base();
+
+      if( begin >= end ){
+	return "";
+      }
+
+      return std::string(begin, end);
+    }
+
+    std::string format_galil_number(double value){
+      if( std::abs(value - std::llround(value)) < 1e-9 ){
+	return std::to_string(std::llround(value));
+      }
+
+      std::ostringstream stream;
+      stream << std::setprecision(15) << value;
+      return stream.str();
+    }
   }
 
   GalilSystemHardwareInterface::~GalilSystemHardwareInterface(){
@@ -108,6 +144,187 @@ namespace galil_driver {
     return ok;
   }
 
+  bool GalilSystemHardwareInterface::parse_real_velocity_init_settings(
+    std::size_t index,
+    RealVelocityInitSettings& settings)
+  {
+    if( index >= info_.joints.size() ){
+      RCLCPP_ERROR(
+	rclcpp::get_logger("GalilSystemHardwareInterface"),
+	"real_velocity init settings requested for invalid joint index %zu",
+	index);
+      return false;
+    }
+
+    const auto& joint = info_.joints[index];
+    const auto parse_param =
+      [&](const char* name,
+	  double& value,
+	  double min_value,
+	  bool min_inclusive,
+	  bool require_max,
+	  double max_value,
+	  bool max_inclusive) -> bool
+    {
+      const auto parameter = joint.parameters.find(name);
+      if( parameter == joint.parameters.end() ){
+	RCLCPP_ERROR(
+	  rclcpp::get_logger("GalilSystemHardwareInterface"),
+	  "Joint %s is missing required real_velocity parameter %s",
+	  joint.name.c_str(),
+	  name);
+	return false;
+      }
+
+      const std::string raw_value = trim_copy(parameter->second);
+      if( raw_value.empty() || raw_value == REAL_VELOCITY_INIT_PLACEHOLDER ){
+	RCLCPP_ERROR(
+	  rclcpp::get_logger("GalilSystemHardwareInterface"),
+	  "Joint %s parameter %s must be replaced with a numeric value before activating real_velocity_controller",
+	  joint.name.c_str(),
+	  name);
+	return false;
+      }
+
+      try{
+	std::size_t parsed_characters = 0;
+	value = std::stod(raw_value, &parsed_characters);
+	if( parsed_characters != raw_value.size() ){
+	  throw std::invalid_argument("trailing characters");
+	}
+      }
+      catch(const std::exception&){
+	RCLCPP_ERROR(
+	  rclcpp::get_logger("GalilSystemHardwareInterface"),
+	  "Joint %s parameter %s must be numeric, got '%s'",
+	  joint.name.c_str(),
+	  name,
+	  parameter->second.c_str());
+	return false;
+      }
+
+      if( !std::isfinite(value) ){
+	RCLCPP_ERROR(
+	  rclcpp::get_logger("GalilSystemHardwareInterface"),
+	  "Joint %s parameter %s must be a finite numeric value, got '%s'",
+	  joint.name.c_str(),
+	  name,
+	  parameter->second.c_str());
+	return false;
+      }
+
+      const bool min_invalid = min_inclusive ? (value < min_value) : (value <= min_value);
+      const bool max_invalid = require_max ? (max_inclusive ? (value > max_value) : (value >= max_value)) : false;
+      if( min_invalid || max_invalid ){
+	if( require_max ){
+	  RCLCPP_ERROR(
+	    rclcpp::get_logger("GalilSystemHardwareInterface"),
+	    "Joint %s parameter %s=%s is out of range %c%g, %g%c",
+	    joint.name.c_str(),
+	    name,
+	    raw_value.c_str(),
+	    min_inclusive ? '[' : '(',
+	    min_value,
+	    max_value,
+	    max_inclusive ? ']' : ')');
+	}
+	else{
+	  RCLCPP_ERROR(
+	    rclcpp::get_logger("GalilSystemHardwareInterface"),
+	    "Joint %s parameter %s=%s must be %s %g",
+	    joint.name.c_str(),
+	    name,
+	    raw_value.c_str(),
+	    min_inclusive ? ">=" : ">",
+	    min_value);
+	}
+	return false;
+      }
+
+      return true;
+    };
+
+    if( !parse_param(REAL_VELOCITY_KP_PARAM, settings.kp, 0.0, true, false, 0.0, true) ||
+	!parse_param(REAL_VELOCITY_KI_PARAM, settings.ki, 0.0, true, false, 0.0, true) ||
+	!parse_param(REAL_VELOCITY_KD_PARAM, settings.kd, 0.0, true, false, 0.0, true) ||
+	!parse_param(REAL_VELOCITY_IT_PARAM, settings.it, 0.004, true, true, 1.0, true) ||
+	!parse_param(REAL_VELOCITY_AC_PARAM, settings.ac, 0.0, false, false, 0.0, true) ||
+	!parse_param(REAL_VELOCITY_DC_PARAM, settings.dc, 0.0, false, false, 0.0, true) ){
+      return false;
+    }
+
+    settings.valid = true;
+    return true;
+  }
+
+  bool GalilSystemHardwareInterface::send_real_velocity_init_command(
+    const std::string& name,
+    const std::vector<double>& values)
+  {
+    if( values.size() != info_.joints.size() ){
+      RCLCPP_ERROR(
+	rclcpp::get_logger("GalilSystemHardwareInterface"),
+	"Refusing to send %s because value count %zu does not match joint count %zu",
+	name.c_str(),
+	values.size(),
+	info_.joints.size());
+      return false;
+    }
+
+    std::ostringstream command;
+    command << name << " ";
+    for( std::size_t i=0; i<values.size(); i++ ){
+      if( i != 0 ){
+	command << ",";
+      }
+      command << format_galil_number(values[i]);
+    }
+
+    return send_galil_command(command.str());
+  }
+
+  bool GalilSystemHardwareInterface::initialize_real_velocity_axes(const std::vector<std::size_t>& axes){
+    if( axes.empty() ){
+      return true;
+    }
+
+    std::vector<double> kp_values;
+    std::vector<double> ki_values;
+    std::vector<double> kd_values;
+    std::vector<double> it_values;
+    std::vector<double> ac_values;
+    std::vector<double> dc_values;
+
+    kp_values.reserve(info_.joints.size());
+    ki_values.reserve(info_.joints.size());
+    kd_values.reserve(info_.joints.size());
+    it_values.reserve(info_.joints.size());
+    ac_values.reserve(info_.joints.size());
+    dc_values.reserve(info_.joints.size());
+
+    for( std::size_t i=0; i<info_.joints.size(); i++ ){
+      RealVelocityInitSettings settings{};
+      if( !parse_real_velocity_init_settings(i, settings) ){
+	return false;
+      }
+
+      real_velocity_init_settings_[i] = settings;
+      kp_values.push_back(settings.kp);
+      ki_values.push_back(settings.ki);
+      kd_values.push_back(settings.kd);
+      it_values.push_back(settings.it);
+      ac_values.push_back(settings.ac);
+      dc_values.push_back(settings.dc);
+    }
+
+    return send_real_velocity_init_command("KP", kp_values) &&
+	   send_real_velocity_init_command("KI", ki_values) &&
+	   send_real_velocity_init_command("KD", kd_values) &&
+	   send_real_velocity_init_command("IT", it_values) &&
+	   send_real_velocity_init_command("AC", ac_values) &&
+	   send_real_velocity_init_command("DC", dc_values);
+  }
+
   bool GalilSystemHardwareInterface::servo_here_real_velocity_axes(const std::vector<std::size_t>& axes){
     std::string axis_mask;
     for( const auto index : axes ){
@@ -150,6 +367,9 @@ namespace galil_driver {
     hw_commands_real_velocity_.resize(info_.joints.size(), 0.0);
     last_real_velocity_counts_.resize(info_.joints.size(), 0);
     real_velocity_jog_active_.resize(info_.joints.size(), false);
+    real_velocity_init_settings_.resize(
+      info_.joints.size(),
+      RealVelocityInitSettings{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, false});
 
     for (const hardware_interface::ComponentInfo & joint : info_.joints){
       for ( std::size_t i=0; i<joint.command_interfaces.size(); i++ ){
@@ -394,8 +614,19 @@ namespace galil_driver {
       }
     }
 
-    if( !real_velocity_start_axes.empty() && !servo_here_real_velocity_axes(real_velocity_start_axes) ){
-      ret_val = hardware_interface::return_type::ERROR;
+    if( !real_velocity_start_axes.empty() ){
+      if( !initialize_real_velocity_axes(real_velocity_start_axes) ||
+	  !servo_here_real_velocity_axes(real_velocity_start_axes) ){
+	ret_val = hardware_interface::return_type::ERROR;
+	cmd_mode_ = COMMAND_MODE_IDLE;
+	for( const auto index : real_velocity_start_axes ){
+	  if( index < hw_commands_real_velocity_.size() ){
+	    hw_commands_real_velocity_[index] = 0.0;
+	    last_real_velocity_counts_[index] = 0;
+	    real_velocity_jog_active_[index] = false;
+	  }
+	}
+      }
     }
     
     return ret_val;

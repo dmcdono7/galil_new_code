@@ -1,0 +1,11 @@
+<library path="galil_test_controllers">
+  <class
+    name="galil_test_controllers/SineRealVelocityController"
+    type="galil_test_controllers::SineRealVelocityController"
+    base_class_type="controller_interface::ControllerInterface">
+    <description>
+      sine-wave generator that commands joint real_velocity interfaces inside
+      controller-manager.
+    </description>
+  </class>
+</library>
