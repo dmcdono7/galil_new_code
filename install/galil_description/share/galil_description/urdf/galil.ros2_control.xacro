@@ -17,12 +17,12 @@
           <param name="max"> 0.005</param>
         </command_interface>
         <command_interface name="real_velocity"/>
-        <param name="real_velocity_kp">SET_ME</param>
-        <param name="real_velocity_ki">SET_ME</param>
-        <param name="real_velocity_kd">SET_ME</param>
-        <param name="real_velocity_it">SET_ME</param>
-        <param name="real_velocity_ac">SET_ME</param>
-        <param name="real_velocity_dc">SET_ME</param>
+        <param name="real_velocity_kp">100</param>
+        <param name="real_velocity_ki">0</param>
+        <param name="real_velocity_kd">64</param>
+        <param name="real_velocity_it">1</param>
+        <param name="real_velocity_ac">256000</param>
+        <param name="real_velocity_dc">256000</param>
         <state_interface name="position">
           <param name="initial_value">0</param>
         </state_interface>
@@ -39,12 +39,12 @@
           <param name="max"> 0.005</param>
         </command_interface>
         <command_interface name="real_velocity"/>
-        <param name="real_velocity_kp">SET_ME</param>
-        <param name="real_velocity_ki">SET_ME</param>
-        <param name="real_velocity_kd">SET_ME</param>
-        <param name="real_velocity_it">SET_ME</param>
-        <param name="real_velocity_ac">SET_ME</param>
-        <param name="real_velocity_dc">SET_ME</param>
+        <param name="real_velocity_kp">100</param>
+        <param name="real_velocity_ki">0</param>
+        <param name="real_velocity_kd">64</param>
+        <param name="real_velocity_it">1</param>
+        <param name="real_velocity_ac">256000</param>
+        <param name="real_velocity_dc">256000</param>
         <state_interface name="position">
           <param name="initial_value">0</param>
         </state_interface>
@@ -61,12 +61,12 @@
           <param name="max"> 0.005</param>
         </command_interface>
         <command_interface name="real_velocity"/>
-        <param name="real_velocity_kp">SET_ME</param>
-        <param name="real_velocity_ki">SET_ME</param>
-        <param name="real_velocity_kd">SET_ME</param>
-        <param name="real_velocity_it">SET_ME</param>
-        <param name="real_velocity_ac">SET_ME</param>
-        <param name="real_velocity_dc">SET_ME</param>
+        <param name="real_velocity_kp">100</param>
+        <param name="real_velocity_ki">0</param>
+        <param name="real_velocity_kd">64</param>
+        <param name="real_velocity_it">1</param>
+        <param name="real_velocity_ac">256000</param>
+        <param name="real_velocity_dc">256000</param>
         <state_interface name="position">
           <param name="initial_value">0</param>
         </state_interface>
@@ -83,12 +83,12 @@
           <param name="max"> 0.005</param>
         </command_interface>
         <command_interface name="real_velocity"/>
-        <param name="real_velocity_kp">SET_ME</param>
-        <param name="real_velocity_ki">SET_ME</param>
-        <param name="real_velocity_kd">SET_ME</param>
-        <param name="real_velocity_it">SET_ME</param>
-        <param name="real_velocity_ac">SET_ME</param>
-        <param name="real_velocity_dc">SET_ME</param>
+        <param name="real_velocity_kp">35</param>
+        <param name="real_velocity_ki">0</param>
+        <param name="real_velocity_kd">50</param>
+        <param name="real_velocity_it">1</param>
+        <param name="real_velocity_ac">256000</param>
+        <param name="real_velocity_dc">256000</param>
         <state_interface name="position">
           <param name="initial_value">0</param>
         </state_interface>
