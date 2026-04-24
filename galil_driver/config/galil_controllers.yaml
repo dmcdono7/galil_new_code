@@ -5,9 +5,6 @@ controller_manager:
     joint_state_broadcaster:
       type: joint_state_broadcaster/JointStateBroadcaster
 
-    broyden_controller:
-      type: needle_controllers/BroydenController
-      
     velocity_controller:
       type: velocity_controllers/JointGroupVelocityController
 
@@ -19,16 +16,6 @@ controller_manager:
 
     position_controller:
       type: position_controllers/JointGroupPositionController
-
-broyden_controller:
-  ros__parameters:
-    joints:
-      - horizontal_joint
-      - insertion_joint
-      - vertical_joint
-    robot_base_link: world
-    end_effector_link: tip
-    interface_name: velocity
 
 velocity_controller:
   ros__parameters:

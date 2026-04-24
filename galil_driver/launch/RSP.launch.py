@@ -180,7 +180,6 @@ def generate_launch_description():
 
     controllers_active = ["joint_state_broadcaster", "real_velocity_controller"]
     controllers_inactive = [
-        "broyden_controller",
         "velocity_controller",
         "position_controller",
         "sine_real_velocity_controller",
