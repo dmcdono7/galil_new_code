@@ -38,7 +38,7 @@ SineRealVelocityController::state_interface_configuration() const
 controller_interface::CallbackReturn SineRealVelocityController::on_init()
 {
   auto_declare<std::vector<std::string>>("joints", {});
-  auto_declare<std::string>("interface_name", "real_velocity");
+  auto_declare<std::string>("interface_name", "velocity");
   auto_declare<int>("joint_index", 0);
   auto_declare<double>("amplitude", 1000.0);
   auto_declare<double>("frequency", 0.05);

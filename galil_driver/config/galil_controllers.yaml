@@ -43,7 +43,7 @@ sine_real_velocity_controller:
       - vertical_joint
       - needle_drive_joint
     interface_name: real_velocity
-    joint_index: 3
+    joint_index: 1
     amplitude: 2500.0
     frequency: 0.05
     offset: 0.0
