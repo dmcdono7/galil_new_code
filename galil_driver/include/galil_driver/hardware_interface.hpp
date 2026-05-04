@@ -16,6 +16,7 @@
 
 #include <cstddef>
 #include <gclib.h>
+#include <gclib_record.h>
 #include <string>
 #include <vector>
 
@@ -84,7 +85,11 @@ namespace galil_driver{
 
     //std::vector< char > channels;
     std::vector<double> gears_m_2_cnt;
-    
+    std::vector<double> torque_constants_;
+    double check_timeout_;
+    bool estop_triggered_;
+    //change
+    std::string ip_address_;
     GCon connection;
   };
 }

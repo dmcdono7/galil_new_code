@@ -4,8 +4,20 @@
   <xacro:macro name="galil_ros2_control">
     <ros2_control name="galil" type="system">
       <hardware>
-        <plugin>galil_driver/GalilSystemHardwareInterface</plugin>
-      </hardware>
+        <xacro:if value="$(arg use_simulation)">
+          <plugin>ign_ros2_control/IgnitionSystem</plugin>
+        </xacro:if>
+        <xacro:unless value="$(arg use_simulation)">
+          <xacro:if value="$(arg use_fake_hardware)">
+            <plugin>mock_components/GenericSystem</plugin>
+          </xacro:if>
+          <xacro:unless value="$(arg use_fake_hardware)">
+            <plugin>galil_driver/GalilSystemHardwareInterface</plugin>
+            <param name="ip_address">169.254.0.51</param>
+            <param name="check_timeout">0.1</param> 
+          </xacro:unless>
+        </xacro:unless>
+     </hardware>
       
       <joint name="insertion_joint">
         <command_interface name="position">
@@ -17,6 +29,8 @@
           <param name="max"> 0.005</param>
         </command_interface>
         <command_interface name="real_velocity"/>
+	<param name="gear_ratio">1.0</param>
+        <param name="torque_constant">1.0</param>
         <param name="real_velocity_kp">100</param>
         <param name="real_velocity_ki">0</param>
         <param name="real_velocity_kd">64</param>
@@ -27,6 +41,7 @@
           <param name="initial_value">0</param>
         </state_interface>
         <state_interface name="velocity"/>
+        <state_interface name="effort"/> 
       </joint>
 
       <joint name="horizontal_joint">
@@ -39,6 +54,8 @@
           <param name="max"> 0.005</param>
         </command_interface>
         <command_interface name="real_velocity"/>
+        <param name="gear_ratio">1.0</param>
+        <param name="torque_constant">1.0</param>
         <param name="real_velocity_kp">100</param>
         <param name="real_velocity_ki">0</param>
         <param name="real_velocity_kd">64</param>
@@ -49,6 +66,7 @@
           <param name="initial_value">0</param>
         </state_interface>
         <state_interface name="velocity"/>
+        <state_interface name="effort"/> 
       </joint>
 
       <joint name="vertical_joint">
@@ -61,6 +79,8 @@
           <param name="max"> 0.005</param>
         </command_interface>
         <command_interface name="real_velocity"/>
+        <param name="gear_ratio">1.0</param>
+        <param name="torque_constant">1.0</param>
         <param name="real_velocity_kp">100</param>
         <param name="real_velocity_ki">0</param>
         <param name="real_velocity_kd">64</param>
@@ -71,6 +91,7 @@
           <param name="initial_value">0</param>
         </state_interface>
         <state_interface name="velocity"/>
+        <state_interface name="effort"/> 
       </joint>
       
       <joint name="needle_drive_joint">
@@ -83,6 +104,8 @@
           <param name="max"> 0.005</param>
         </command_interface>
         <command_interface name="real_velocity"/>
+        <param name="gear_ratio">1.0</param>
+        <param name="torque_constant">1.0</param>
         <param name="real_velocity_kp">35</param>
         <param name="real_velocity_ki">0</param>
         <param name="real_velocity_kd">50</param>
@@ -93,10 +116,15 @@
           <param name="initial_value">0</param>
         </state_interface>
         <state_interface name="velocity"/>
+        <state_interface name="effort"/> 
       </joint>
-
     </ros2_control>
-
+    <gazebo>
+      <plugin filename="libign_ros2_control-system.so" name="ign_ros2_control::IgnitionROS2ControlPlugin">
+        <parameters>$(find galil_driver)/config/galil_controllers.yaml</parameters>
+        <controller_manager_node_name>controller_manager</controller_manager_node_name>
+      </plugin>
+    </gazebo>
   </xacro:macro>
 
 </robot>

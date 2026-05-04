@@ -1,10 +1,10 @@
 
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument, RegisterEventHandler
+from launch.actions import DeclareLaunchArgument, RegisterEventHandler,IncludeLaunchDescription, AppendEnvironmentVariable
 from launch.conditions import IfCondition, UnlessCondition
 from launch.event_handlers import OnProcessExit
 from launch.substitutions import Command, FindExecutable, LaunchConfiguration, PathJoinSubstitution
-
+from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
 from launch_ros.parameter_descriptions import ParameterFile
@@ -13,6 +13,7 @@ from launch_ros.parameter_descriptions import ParameterFile
 def generate_launch_description():
     # Declare arguments
     declared_arguments = []
+    ign_path = AppendEnvironmentVariable(name='IGN_GAZEBO_RESOURCE_PATH',value=PathJoinSubstitution([FindPackageShare('galil_description'),'..']))
     declared_arguments.append(
         DeclareLaunchArgument(
             "description_package",
@@ -95,6 +96,21 @@ def generate_launch_description():
             description="Name of the Galil system",
         )
     )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "use_simulation",
+            default_value="false",
+            description="Launch Gazebo",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "use_fake_hardware",
+            default_value="false",
+            description="Use Fake Hardware",
+        )
+    )
+
 
     # Initialize Arguments
     description_package = LaunchConfiguration("description_package")
@@ -113,6 +129,8 @@ def generate_launch_description():
 
     gui = LaunchConfiguration("gui")
     name = LaunchConfiguration("name")
+    use_simulation = LaunchConfiguration("use_simulation")
+    use_fake_hardware = LaunchConfiguration("use_fake_hardware")
 
     # Get URDF via xacro
     robot_description_content = Command(
@@ -128,12 +146,47 @@ def generate_launch_description():
             " ",
             "tf_prefix:=",
             tf_prefix,
+            " ",
+            "use_simulation:=",
+            use_simulation,
+            " ",
+            "use_fake_hardware:=",
+            use_fake_hardware
         ]
     )
     robot_description = {"robot_description": robot_description_content}
 
     initial_joint_controllers = PathJoinSubstitution(
         [FindPackageShare(runtime_config_package), "config", controllers_file]
+    )
+
+    ignition_launch_description = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            [FindPackageShare("ros_gz_sim"), "/launch/gz_sim.launch.py"]
+        ),
+        launch_arguments={"gz_args": " -r -v 4 empty.sdf"}.items(),
+        condition=IfCondition(use_simulation)
+    )
+
+    #add robot to gazebo
+    ignition_spawn_robot = Node(
+        condition=IfCondition(use_simulation),
+        package="ros_gz_sim",
+        executable="create",
+        output="screen",
+        arguments=[
+            "-string",
+            robot_description_content,
+            "-name", name,
+            "-z","0.1"
+        ],
+    )
+    #robot state publisher
+    robot_state_publisher_node = Node(
+        package="robot_state_publisher",
+        executable="robot_state_publisher",
+        output="both",
+        parameters=[robot_description],
     )
 
     control_node = Node(
@@ -144,6 +197,7 @@ def generate_launch_description():
             ParameterFile(initial_joint_controllers, allow_substs=True),
         ],
         output="both",
+        condition=UnlessCondition(use_simulation)
     )
 
     # Get RViz config
@@ -162,31 +216,46 @@ def generate_launch_description():
         condition=IfCondition(LaunchConfiguration('gui'))
     )
 
-    def controller_spawner(controllers, active=True):
-        inactive_flags = ["--inactive"] if not active else []
-        print(controllers)
-        return Node(
+    controllers_active = ["joint_state_broadcaster", "real_velocity_controller"]
+    controllers_inactive = ["position_controller","sine_real_velocity_controller"]
+    controller_spawners = []
+    
+
+    controller_spawners.append(
+        Node(
             package="controller_manager",
             executable="spawner",
-            arguments=[
-                "--controller-manager",
-                "/controller_manager",
-                "--controller-manager-timeout",
-                controller_spawner_timeout,
-            ]
-            + inactive_flags
-            + controllers
+            arguments=["joint_state_broadcaster", "--controller-manager", "/controller_manager", "--controller-manager-timeout", controller_spawner_timeout],
         )
+    )
 
-    controllers_active = ["joint_state_broadcaster", "real_velocity_controller"]
-    controllers_inactive = [
-        "velocity_controller",
-        "position_controller",
-        "sine_real_velocity_controller",
-    ]
-    controller_spawners = [controller_spawner(controllers_active)] + [
-        controller_spawner(controllers_inactive, active=False)
-    ]
+    controller_spawners.append(
+        Node(
+            package="controller_manager",
+            executable="spawner",
+            arguments=["real_velocity_controller", "--controller-manager", "/controller_manager", "--controller-manager-timeout", controller_spawner_timeout],
+            condition=UnlessCondition(use_simulation)
+        )
+    )
+
+    controller_spawners.append(
+        Node(
+            package="controller_manager",
+            executable="spawner",
+            arguments=["velocity_controller", "--controller-manager", "/controller_manager", "--controller-manager-timeout", controller_spawner_timeout],
+            condition=IfCondition(use_simulation)
+        )
+    )
+
+    for controller in controllers_inactive:
+        controller_spawners.append(
+            Node(
+                package="controller_manager",
+                executable="spawner",
+                arguments=[controller,"--controller-manager","/controller_manager","--controller-manager-timeout",controller_spawner_timeout,"--inactive"],
+            )
+        )
+    
 
     initial_joint_controller_spawner_started = Node(
         package="controller_manager",
@@ -215,12 +284,12 @@ def generate_launch_description():
         condition=UnlessCondition(activate_joint_controller),
     )
 
-    robot_state_pub_node = Node(
-        package="robot_state_publisher",
-        executable="robot_state_publisher",
-        output="both",
-        parameters=[robot_description],
-    )
+    #robot_state_pub_node = Node(
+    #    package="robot_state_publisher",
+    #    executable="robot_state_publisher",
+    #    output="both",
+    #    parameters=[robot_description],
+    #)
     # joint_state_pub_node = Node(
     #     package="joint_state_publisher_gui",
     #     executable="joint_state_publisher_gui",
@@ -256,8 +325,11 @@ def generate_launch_description():
     # )
 
     nodes = [
+        ign_path,
+        ignition_launch_description,
+        ignition_spawn_robot,
+        robot_state_publisher_node,
         control_node,
-        robot_state_pub_node,
         # joint_state_publisher_node,
         # joint_state_publisher_node_gui,
         rviz_node,

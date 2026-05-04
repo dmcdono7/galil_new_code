@@ -358,6 +358,14 @@ namespace galil_driver {
     }
 
     info_ = info;
+    
+    auto ip_read = info_.hardware_parameters.find("ip_address");
+    if(ip_read != info_.hardware_parameters.end()) { //if it exists
+        ip_address_ = ip_read->second; //save as the value
+    } else {
+        ip_address_ = "169.254.0.51";
+        RCLCPP_WARN(rclcpp::get_logger("GalilSystemHardwareInterface"), "ip_address was not found in the URDF. Defaulting to %s", ip_address_.c_str());
+    }
 
     hw_states_position_.resize(info_.joints.size(), std::numeric_limits<double>::quiet_NaN());
     hw_states_velocity_.resize(info_.joints.size(), std::numeric_limits<double>::quiet_NaN());
@@ -371,7 +379,44 @@ namespace galil_driver {
       info_.joints.size(),
       RealVelocityInitSettings{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, false});
 
+    gears_m_2_cnt.clear();
+    torque_constants_.clear();
+    estop_triggered_ = false;
+    check_timeout_ = 0.1;
+
+    auto time_read = info_.hardware_parameters.find("check_timeout");
+    if(time_read != info_.hardware_parameters.end()) { //if it exists
+        try{
+            check_timeout_ = std::stod(time_read->second); //save as the value
+        } catch (const std::exception& e){
+            RCLCPP_WARN(rclcpp::get_logger("GalilSystemHardwareInterface"), "Defaulting to 0.1s for timeout");
+        } 
+    }
+
     for (const hardware_interface::ComponentInfo & joint : info_.joints){
+      double gear_ratio = 1.0;
+      auto gear_read = joint.parameters.find("gear_ratio");
+      if(gear_read != joint.parameters.end()) {
+          try{
+              gear_ratio = std::stod(gear_read->second); //string to double
+          } catch (const std::exception& e) {
+              RCLCPP_WARN(rclcpp::get_logger("GalilSystemHardwareInterface"),"Defaulting to 1.0 for gear ratio");
+          }
+      }
+      gears_m_2_cnt.push_back(gear_ratio);
+
+      double torque_const = 1.0;
+      auto torque_read = joint.parameters.find("torque_constant");
+      if(torque_read != joint.parameters.end()) {
+          try{
+              torque_const = std::stod(torque_read->second); //string to double
+          } catch (const std::exception& e) {
+              RCLCPP_WARN(rclcpp::get_logger("GalilSystemHardwareInterface"),"Defaulting to 1.0 for torque ratio");
+          }
+      }
+      torque_constants_.push_back(torque_const);
+
+
       for ( std::size_t i=0; i<joint.command_interfaces.size(); i++ ){
 	if( joint.command_interfaces[i].name == hardware_interface::HW_IF_POSITION )
 	  RCLCPP_INFO(rclcpp::get_logger("GalilSystemHardwareInterface"), " %s has position command interface.", joint.name.c_str() );
@@ -400,22 +445,13 @@ namespace galil_driver {
     GSize BUFFER_LENGTH=32;
     GSize bytes_returned;
     char buffer[32];
-    std::string address("169.254.0.51");
-    if( GOpen( address.c_str(), &connection ) == G_NO_ERROR ){
+    if( GOpen( ip_address_.c_str(), &connection ) == G_NO_ERROR ){
       RCLCPP_INFO(rclcpp::get_logger("GalilSystemHardwareInterface"), "Connection to Galil successful.");
     }
     else{
       RCLCPP_ERROR(rclcpp::get_logger("GalilSystemHardwareInterface"), "Failed to open connection with Galil.");
       return hardware_interface::CallbackReturn::ERROR;
     }
-
-    // The BWH order:
-    // This should be in on_init and search for joint.name instead
-    // Likewise, gears should use URDF transmission
-    gears_m_2_cnt.push_back(1.0);
-    gears_m_2_cnt.push_back(1.0);
-    gears_m_2_cnt.push_back(1.0);
-    gears_m_2_cnt.push_back(1.0);
 
     RCLCPP_INFO(rclcpp::get_logger("GalilSystemHardwareInterface"), "Successfully configured!");
     return hardware_interface::CallbackReturn::SUCCESS;
@@ -635,8 +671,57 @@ namespace galil_driver {
   
   hardware_interface::return_type GalilSystemHardwareInterface::read( const rclcpp::Time& /*time*/,
 								      const rclcpp::Duration& /*period*/){
-    //RCLCPP_INFO(rclcpp::get_logger("GalilSystemHardwareInterface"), "Reading...");
-    GSize BUFFER_LENGTH=1024;
+    
+   //https://www.galil.com/sw/pub/all/doc/gclib/html/unionGDataRecord.html seems extremely useful to be in this structure
+   union GDataRecord record;
+
+   if(GRecord(connection, &record, G_QR) == G_NO_ERROR) {
+       for(std::size_t i=0; i<info_.joints.size();i++) {
+           double motor_pos = 0.0;
+           double vel = 0.0;
+           double torq = 0.0;
+           
+           switch(i) {
+               case 0: //axis A
+                   //https://www.galil.com/sw/pub/all/doc/gclib/html/structGDataRecord4000.html
+                   motor_pos = record.dmc4000.axis_a_motor_position;
+                   vel = record.dmc4000.axis_a_velocity;
+                   torq = record.dmc4000.axis_a_torque;
+                   break;
+               case 1: //axis B
+                   motor_pos = record.dmc4000.axis_b_motor_position;
+                   vel = record.dmc4000.axis_b_velocity;
+                   torq = record.dmc4000.axis_b_torque;
+                   break;
+               case 2: //axis C
+                   motor_pos = record.dmc4000.axis_c_motor_position;
+                   vel = record.dmc4000.axis_c_velocity;
+                   torq = record.dmc4000.axis_c_torque;
+                   break;
+               case 3: //axis D
+                   motor_pos = record.dmc4000.axis_d_motor_position;
+                   vel = record.dmc4000.axis_d_velocity;
+                   torq = record.dmc4000.axis_d_torque;
+                   break;
+               default:
+                   break;           
+           }       
+       
+           hw_states_position_[i] = motor_pos / gears_m_2_cnt[i];
+           hw_states_velocity_[i] = vel / gears_m_2_cnt[i];
+           hw_states_effort_[i] = torq * torque_constants_[i];
+       }
+       return hardware_interface::return_type::OK;
+   } else {
+       RCLCPP_ERROR(rclcpp::get_logger("GalilSystemHardwareInterface"),"Failed to read Galil record");
+       return hardware_interface::return_type::ERROR;
+   }
+   
+
+
+   //RCLCPP_INFO(rclcpp::get_logger("GalilSystemHardwareInterface"), "Reading...");
+
+   /* GSize BUFFER_LENGTH=1024;
     GSize bytes_returned;
     char buffer[1024];
     if( GCommand(connection, "TP", buffer, BUFFER_LENGTH, &bytes_returned ) == G_NO_ERROR ){
@@ -651,7 +736,7 @@ namespace galil_driver {
     }
     else{
       RCLCPP_ERROR(rclcpp::get_logger("GalilSystemHardwareInterface"), "Failed to send TP command to Galil.");
-      hardware_interface::return_type::ERROR;
+      return hardware_interface::return_type::ERROR;
     }
     if( GCommand(connection, "TV", buffer, BUFFER_LENGTH, &bytes_returned ) == G_NO_ERROR ){
       char * pch;
@@ -665,8 +750,26 @@ namespace galil_driver {
     }
     else{
       RCLCPP_ERROR(rclcpp::get_logger("GalilSystemHardwareInterface"), "Failed to send TV command to Galil.");
-      hardware_interface::return_type::ERROR;
+      return hardware_interface::return_type::ERROR;
     }
+
+    if( GCommand(connection, "TT", buffer, BUFFER_LENGTH, &bytes_returned ) == G_NO_ERROR ){
+      char * pch;
+      pch = strtok(buffer,",");
+      for( std::size_t i=0; i<info_.joints.size(); i++ ){
+        if(pch != NULL){
+          hw_states_effort_[i] = atof( pch ) * torque_constants_[i];
+          pch = strtok (NULL, ",");
+        }
+      }
+    }
+    else{
+      RCLCPP_ERROR(rclcpp::get_logger("GalilSystemHardwareInterface"), "Failed to send TT command to Galil.");
+      return hardware_interface::return_type::ERROR;
+    }*/
+
+    
+
     return hardware_interface::return_type::OK;
   }
 
@@ -715,6 +818,29 @@ namespace galil_driver {
   
   hardware_interface::return_type GalilSystemHardwareInterface::write(const rclcpp::Time& /*time*/,
 								      const rclcpp::Duration& period){
+
+
+    if(period.seconds() > check_timeout_) {
+        if(!estop_triggered_) {
+            RCLCPP_FATAL(rclcpp::get_logger("GalilSystemHardwareInterface"),"Timeout, the period has triggered an estop.");
+            estop_triggered_ = true; 
+        }
+    }
+
+    if(estop_triggered_) {
+        GSize BUFFER_LENGTH=32;
+        GSize bytes_returned;
+        char buffer[32];
+        GCommand(connection, "ST", buffer, BUFFER_LENGTH,&bytes_returned);
+
+        for(std::size_t i=0; i<info_.joints.size(); i++){
+            hw_commands_velocity_[i] = 0.0;
+            hw_commands_real_velocity_[i] = 0.0;
+        }
+
+        return hardware_interface::return_type::OK;
+    }
+
 
     if( cmd_mode_ == COMMAND_MODE_REAL_VELOCITY ){
       return write_real_velocity();

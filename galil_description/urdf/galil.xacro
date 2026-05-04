@@ -11,6 +11,18 @@
         </geometry>
         <material name="silver"/>
       </visual>
+      <collision>
+        <origin xyz="0 0 -0.025" rpy="0 0 ${-pi/2}"/>
+        <geometry>
+          <mesh filename="package://galil_description/meshes/base_link.stl"/>
+        </geometry>
+        <material name="silver"/>
+      </collision>
+      <inertial>
+        <mass value="1.0"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.01"/>
+      </inertial>
     </link>
     
     <link name="vertical_link">
@@ -21,6 +33,11 @@
         </geometry>
         <material name="silver"/>
       </visual>
+      <inertial>
+        <mass value="1.0"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.01"/>
+      </inertial>
     </link>
     
     <link name="horizontal_link">
@@ -31,6 +48,11 @@
         </geometry>
         <material name="silver"/>
       </visual>
+      <inertial>
+        <mass value="1.0"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.01"/>
+      </inertial>
     </link>
 
     <link name="needle_link">
@@ -41,6 +63,11 @@
         </geometry>
         <material name="silver"/>
       </visual>
+      <inertial>
+        <mass value="1.0"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.01"/>
+      </inertial>
     </link>
     
     <link name="needle_drive_link">
@@ -51,6 +78,11 @@
         </geometry>
         <material name="silver"/>
       </visual>
+      <inertial>
+        <mass value="1.0"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.01"/>
+      </inertial>
     </link>
 
     <joint name="vertical_joint" type="prismatic">
@@ -80,7 +112,7 @@
     <joint name="needle_drive_joint" type="prismatic">
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <parent link="horizontal_link"/>
-      <child link="needle__drive_link"/>
+      <child link="needle_drive_link"/>
       <axis xyz="0.0 1.0 0.0"/>
       <limit upper="0.1" lower="0.0" effort="100" velocity="100"/>
     </joint>
