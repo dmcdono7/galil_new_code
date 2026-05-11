@@ -6,6 +6,8 @@ Currently supports three useful command paths:
 - `real_velocity_controller` real_velocity command test controller
 - `sine_real_velocity_controller` a controller giving sine-wave real_velocity command
 
+All units are in meters. When using real hardware, the recommanded largest velocity is 0.0025 m/s.
+
 ## Prerequisites
 
 Galil gclib install instructions:
