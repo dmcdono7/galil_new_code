@@ -133,7 +133,7 @@
         <xacro:unless value="$(arg use_simulation)">
           <param name="gear_ratio">7880000.0</param>
         </xacro:unless>
-        <param name="torque_constant">1.0</param>
+        <param name="torque_constant">0.0459</param> <!--confirmed as a dataset-->
         <param name="real_velocity_kp">35</param>
         <param name="real_velocity_ki">0</param>
         <param name="real_velocity_kd">50</param>
