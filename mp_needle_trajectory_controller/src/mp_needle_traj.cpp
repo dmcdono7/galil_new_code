@@ -4,6 +4,9 @@
 #include <hardware_interface/types/hardware_interface_type_values.hpp>
 #include <rclcpp/parameter.hpp>
 
+#include <algorithm>
+#include <cmath>
+
 #include <tf2_geometry_msgs/tf2_geometry_msgs.hpp>
 #include <tf2/LinearMath/Quaternion.h>
 #include <tf2/LinearMath/Matrix3x3.h>
@@ -13,6 +16,7 @@ controller_interface::CallbackReturn MpNeedleTrajectoryController::on_init(){
   if(!initialized_){
     auto_declare<std::string>("interface_name", "");
     auto_declare<std::vector<std::string>>("joints", std::vector<std::string>());
+    auto_declare<double>("max_velocity", 0.005);
     initialized_ = true;
   }
   return controller_interface::CallbackReturn::SUCCESS;
@@ -35,6 +39,12 @@ controller_interface::CallbackReturn MpNeedleTrajectoryController::on_configure 
   std::cout << cmd_interface_type_ << std::endl;
   if(cmd_interface_type_.empty()){
     RCLCPP_ERROR(get_node()->get_logger(), "No command_interfaces specified");
+    return rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn::ERROR;
+  }
+
+  max_velocity_ = get_node()->get_parameter("max_velocity").as_double();
+  if(!std::isfinite(max_velocity_) || max_velocity_ <= 0.0){
+    RCLCPP_ERROR(get_node()->get_logger(), "max_velocity must be a positive finite value.");
     return rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn::ERROR;
   }
   
@@ -82,9 +92,15 @@ controller_interface::CallbackReturn MpNeedleTrajectoryController::on_activate(c
 		 joint_state_handles_.size());
     return CallbackReturn::ERROR;
   }
-  
+
+  last_command_positions_.resize(joint_names_.size(), 0.0);
+  for(std::size_t i=0; i<joint_state_handles_.size(); ++i){
+    last_command_positions_[i] = joint_state_handles_[i].get().get_value();
+  }
+  command_positions_initialized_ = true;
+
   active_ = true;
-  
+
   return controller_interface::CallbackReturn::SUCCESS;
 }
 
@@ -96,6 +112,7 @@ controller_interface::CallbackReturn MpNeedleTrajectoryController::on_deactivate
     this->release_interfaces();
   }
   active_ = false;
+  command_positions_initialized_ = false;
   return controller_interface::CallbackReturn::SUCCESS;
 }
 
@@ -166,8 +183,13 @@ void MpNeedleTrajectoryController::targetCallback(const geometry_msgs::msg::Poin
   }
 }
 
-controller_interface::return_type MpNeedleTrajectoryController::update(const rclcpp::Time&, const rclcpp::Duration&){
-  
+controller_interface::return_type MpNeedleTrajectoryController::update(const rclcpp::Time&, const rclcpp::Duration& period){
+
+  for(int i=0; i<static_cast<int>(joint_state_handles_.size()); ++i){
+    stages[i] = joint_state_handles_[i].get().get_value();
+    std::cout << "joint: " << i << "pos: " << stages[i] << std::endl;
+  }
+
   depth = stages[3]*1e3;
   float step = std::floor((depth +0.1) / insertion_step);
   
@@ -193,13 +215,8 @@ controller_interface::return_type MpNeedleTrajectoryController::update(const rcl
       
     }
     
-    for(int i=0; i<static_cast<int>(joint_names_.size()); ++i){
-      stages[i] = joint_state_handles_[i].get().get_value();
-      std::cout << "joint: " << i << "pos: " << stages[i] << std::endl;
-    }
-    
-    writeJointControlCmds(cmd);
-    
+    writeJointControlCmds(cmd, period);
+
   }
 
   return controller_interface::return_type::OK;
@@ -218,7 +235,10 @@ controller_interface::return_type MpNeedleTrajectoryController::update(const rcl
 //   }
 // }
 
-void MpNeedleTrajectoryController::writeJointControlCmds(const std::vector<double> & cmd){
+void MpNeedleTrajectoryController::writeJointControlCmds(
+  const std::vector<double> & cmd,
+  const rclcpp::Duration & period)
+{
 
   // for debugging
   if (cmd.size() != joint_cmd_handles_.size()) {
@@ -230,8 +250,23 @@ void MpNeedleTrajectoryController::writeJointControlCmds(const std::vector<doubl
     return;
   }
 
+  if(!command_positions_initialized_ || last_command_positions_.size() != cmd.size()){
+    last_command_positions_.resize(cmd.size(), 0.0);
+    for(std::size_t i=0; i<cmd.size(); ++i){
+      last_command_positions_[i] = joint_state_handles_[i].get().get_value();
+    }
+    command_positions_initialized_ = true;
+  }
+
+  const double max_delta = std::max(0.0, max_velocity_ * period.seconds());
   for (std::size_t i = 0; i < cmd.size(); ++i) {
-    joint_cmd_handles_[i].get().set_value(cmd[i]*1e-3);
+    const double desired_position = cmd[i] * 1e-3;
+    const double limited_position = std::clamp(
+      desired_position,
+      last_command_positions_[i] - max_delta,
+      last_command_positions_[i] + max_delta);
+    joint_cmd_handles_[i].get().set_value(limited_position);
+    last_command_positions_[i] = limited_position;
   }
 
 }

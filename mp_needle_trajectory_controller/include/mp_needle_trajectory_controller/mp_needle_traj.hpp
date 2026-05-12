@@ -66,10 +66,13 @@ protected:
   double horizon = 5.0;
   double depth = 0;
   double limit = 5.0;
+  double max_velocity_ = 0.005;
+  std::vector<double> last_command_positions_;
+  bool command_positions_initialized_ = false;
   
   MpcHelpers mpc = MpcHelpers(limit, insertion_step);
   
   // helper functions
-  void writeJointControlCmds(const std::vector<double> & cmd);
+  void writeJointControlCmds(const std::vector<double> & cmd, const rclcpp::Duration & period);
 
 };

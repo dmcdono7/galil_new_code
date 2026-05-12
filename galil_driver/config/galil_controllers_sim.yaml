@@ -28,6 +28,7 @@ mpc_controller:
       - vertical_joint
       - needle_drive_joint
     interface_name: position
+    max_velocity: 0.005
 
 velocity_controller:
   ros__parameters:
