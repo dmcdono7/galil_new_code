@@ -70,6 +70,6 @@ protected:
   MpcHelpers mpc = MpcHelpers(limit, insertion_step);
   
   // helper functions
-  void writeJointControlCmds(std::vector<double> cmd);
+  void writeJointControlCmds(const std::vector<double> & cmd);
 
 };

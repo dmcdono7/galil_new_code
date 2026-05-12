@@ -206,18 +206,34 @@ controller_interface::return_type MpNeedleTrajectoryController::update(const rcl
   
 }
 
-void MpNeedleTrajectoryController::writeJointControlCmds(std::vector<double> cmd){
+// void MpNeedleTrajectoryController::writeJointControlCmds(std::vector<double> cmd){
   
-  for (auto & command_interface : command_interfaces_) {
+//   for (auto & command_interface : command_interfaces_) {
     
-    for (std::size_t i=0; i<cmd.size(); ++i) {
+//     for (std::size_t i=0; i<cmd.size(); ++i) {
     
-      command_interface.set_value(cmd[i]);
+//       command_interface.set_value(cmd[i]);
       
-    }
-    
+//     }
+//   }
+// }
+
+void MpNeedleTrajectoryController::writeJointControlCmds(const std::vector<double> & cmd){
+
+  // for debugging
+  if (cmd.size() != joint_cmd_handles_.size()) {
+    RCLCPP_ERROR(
+      get_node()->get_logger(),
+      "Expected %zu joint commands, got %zu.",
+      joint_cmd_handles_.size(),
+      cmd.size());
+    return;
   }
-  
+
+  for (std::size_t i = 0; i < cmd.size(); ++i) {
+    joint_cmd_handles_[i].get().set_value(cmd[i]);
+  }
+
 }
 
 #include "pluginlib/class_list_macros.hpp"
