@@ -250,9 +250,12 @@ void MpNeedleTrajectoryController::writeJointControlCmds(
     return;
   }
 
+  for (std::size_t i = 0; i < cmd.size(); ++i) {
+    joint_cmd_handles_[i].get().set_value(cmd[i]*1e-3);
+  }
   // filter commands based on max_velocity and last command positions
 
-  if(!command_positions_initialized_ || last_command_positions_.size() != cmd.size()){
+  /*if(!command_positions_initialized_ || last_command_positions_.size() != cmd.size()){
     last_command_positions_.resize(cmd.size(), 0.0);
     for(std::size_t i=0; i<cmd.size(); ++i){
       last_command_positions_[i] = joint_state_handles_[i].get().get_value();
@@ -269,7 +272,7 @@ void MpNeedleTrajectoryController::writeJointControlCmds(
       last_command_positions_[i] + max_delta);
     joint_cmd_handles_[i].get().set_value(limited_position);
     last_command_positions_[i] = limited_position;
-  }
+  }*/
 
 }
 
