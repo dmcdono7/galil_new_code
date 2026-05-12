@@ -136,8 +136,8 @@
         <xacro:unless value="$(arg use_simulation)">
           <param name="gear_ratio">7880000.0</param>
         </xacro:unless>
-        <param name="torque_constant">1.0</param>
         <param name="position_max_velocity">0.005</param>
+        <param name="torque_constant">0.0459</param> <!--confirmed from motor datasheet-->
         <param name="real_velocity_kp">35</param>
         <param name="real_velocity_ki">0</param>
         <param name="real_velocity_kd">50</param>

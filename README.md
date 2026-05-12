@@ -142,7 +142,7 @@ Each joint currently exports these **state interfaces**:
 
 - `position`: read from Galil `TP`
 - `velocity`: read from Galil `TV`
-- `effort`: exported, but not currently filled with a real Galil effort signal
+- `effort`: read from Galil `TT`. 
 
 Each joint currently exports these **command interfaces**:
 
