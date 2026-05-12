@@ -969,7 +969,7 @@ namespace galil_driver {
       if( cmd_mode_ == COMMAND_MODE_LEGACY_VELOCITY ){
 	if( !isnan(hw_commands_velocity_[i]) && 0<strlen(command) ){
 	  // JoG command stinks so we use PT with incremental position
-	  hw_commands_position_[i] += period.seconds() * hw_commands_velocity_[i]*gears_m_2_cnt[i];
+	  hw_commands_position_[i] += period.seconds() * hw_commands_velocity_[i];
 	  sprintf( command, "%s%d%c", command, ((int)(hw_commands_position_[i]*gears_m_2_cnt[i])), separator );
 	}
       }
