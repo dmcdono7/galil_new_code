@@ -34,7 +34,7 @@ void MpcHelpers::update_jacobian() {
 
   Eigen::MatrixXd delta_base(3,1);
   Eigen::MatrixXd delta_base_T = delta_base.transpose();
-  delta_base << stages[3] - prev_stages[3], stages[1] - prev_stages[1], stages[2] - prev_stages[2];
+  delta_base << (stages[3] - prev_stages[3])*1e3, (stages[1] - prev_stages[1])*1e3, (stages[2] - prev_stages[2])*1e3;
   Eigen::MatrixXd delta_tip = tip - prev_tip;
   
   Eigen::MatrixXd J_delta_base = J * delta_base;
@@ -71,7 +71,7 @@ double MpcHelpers::objective(const std::vector<double>& uhat, std::vector<double
   std::vector<Eigen::MatrixXd> yhat;
   
   Eigen::MatrixXd yhat0 = tip;
-  std::vector<double> uhat0 = {stages[1], stages[2]}; // stage ind 1 is y axis, stage ind 2 is z axis
+  std::vector<double> uhat0 = {stages[1]*1e3, stages[2]*1e3}; // stage ind 1 is y axis, stage ind 2 is z axis
   
   Eigen::MatrixXd curr_u(1, 2);
   
@@ -134,12 +134,14 @@ std::vector<double> MpcHelpers::get_mpc_command(float H, double step_depth, int 
   
   std::vector<double> cmd(4);
   
+  std::cout << "tip: " << tip << std::endl;
+  
   if (step == 0) {
   
     cmd[0] = 0;
     cmd[1] = 0;
     cmd[2] = 0;
-    cmd[3] = 0.005; // x axis which controls insertion
+    cmd[3] = 5.0; // x axis which controls insertion
     
   } else if (H > 0) {
     MpcHelpers::update_jacobian();
@@ -193,7 +195,7 @@ std::vector<double> MpcHelpers::get_mpc_command(float H, double step_depth, int 
       cmd[0] = 0;
       cmd[1] = uhat[0];
       cmd[2] = uhat[1];
-      cmd[3] = std::fmin(target(0), step_depth);
+      cmd[3] = std::fmin(target(0), prev_cmd[3] + insertion_step);
     }
     
   } else {
@@ -204,10 +206,11 @@ std::vector<double> MpcHelpers::get_mpc_command(float H, double step_depth, int 
       cmd[2] = 0;
       cmd[3] = std::fmin(target(0), step_depth);
     } else {
+      std::cout << "here" << std::endl;
       cmd[0] = 0;
-      cmd[1] = 0;
-      cmd[2] = 0;
-      cmd[3] = std::fmin(target(0), step_depth);
+      cmd[1] = stages[1]*1e3;
+      cmd[2] = stages[2]*1e3;
+      cmd[3] = std::fmin(target(0), prev_cmd[3] + insertion_step);
     }
             
   }

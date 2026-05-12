@@ -10,7 +10,7 @@ def generate_launch_description():
     period = LaunchConfiguration('period')
     period_launch_arg = DeclareLaunchArgument(
         'period',
-        default_value='1000'
+        default_value='200'
     )
     
     # Declare launch configuration/argument "period"

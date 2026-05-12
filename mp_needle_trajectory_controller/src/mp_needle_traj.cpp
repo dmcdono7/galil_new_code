@@ -129,9 +129,9 @@ controller_interface::InterfaceConfiguration MpNeedleTrajectoryController::state
 void MpNeedleTrajectoryController::needleTipCallback(const geometry_msgs::msg::PoseStamped::SharedPtr needle_tip){
   if(active_){
     // position
-    needle_tip_pose[0] = needle_tip->pose.position.x*1e-3;
-    needle_tip_pose[1] = needle_tip->pose.position.y*1e-3;
-    needle_tip_pose[2] = needle_tip->pose.position.z*1e-3;
+    needle_tip_pose[0] = needle_tip->pose.position.x;
+    needle_tip_pose[1] = needle_tip->pose.position.y;
+    needle_tip_pose[2] = needle_tip->pose.position.z;
     
     // get x and z angles
     tf2::Quaternion tip;
@@ -153,11 +153,11 @@ void MpNeedleTrajectoryController::targetCallback(const geometry_msgs::msg::Poin
   if(active_ && !target_set_){
     
     // set the target point
-    target_point[0] = target->point.x*1e-3;
-    target_point[1] = target->point.y*1e-3;
-    target_point[2] = target->point.z*1e-3;
+    target_point[0] = target->point.x;
+    target_point[1] = target->point.y;
+    target_point[2] = target->point.z;
     
-    insertion_length = target->point.x*1e-3;
+    insertion_length = target->point.x;
     ns = std::floor(insertion_length / insertion_step);
         
     mpc.set_target_pose(target_point);
@@ -168,15 +168,15 @@ void MpNeedleTrajectoryController::targetCallback(const geometry_msgs::msg::Poin
 
 controller_interface::return_type MpNeedleTrajectoryController::update(const rclcpp::Time&, const rclcpp::Duration&){
   
-  float step = std::floor(depth / insertion_step);
+  depth = stages[3]*1e3;
+  float step = std::floor((depth +0.1) / insertion_step);
   
   float H = std::fmin(horizon, ns - step);
-  
-  if (H < 0) {
+  //std::cout << H << std::endl;
+  if (H < 0 ) {
   
     target_set_ = false;
     tip_set_ = false;
-    
     
   }
 
@@ -184,6 +184,7 @@ controller_interface::return_type MpNeedleTrajectoryController::update(const rcl
   
   if (target_set_ && tip_set_) {
     
+    tip_set_ = false;
     std::vector<double> cmd = mpc.get_mpc_command(H, step_depth, step, needle_tip_pose, stages, 0);
     
     for (std::size_t i = 0; i < 4; i++) {
@@ -191,17 +192,16 @@ controller_interface::return_type MpNeedleTrajectoryController::update(const rcl
       std::cout << "joint: " << i << "cmd: " << cmd[i] << std::endl;
       
     }
+    
+    for(int i=0; i<static_cast<int>(joint_names_.size()); ++i){
+      stages[i] = joint_state_handles_[i].get().get_value();
+      std::cout << "joint: " << i << "pos: " << stages[i] << std::endl;
+    }
+    
     writeJointControlCmds(cmd);
     
   }
-  
-  for(int i=0; i<static_cast<int>(joint_names_.size()); ++i){
-      stages[i] = joint_state_handles_[i].get().get_value();
-      std::cout << "joint: " << i << "pos: " << stages[i] << std::endl;
-  }
-  
-  depth = stages[3];
-  
+
   return controller_interface::return_type::OK;
   
 }
@@ -231,7 +231,7 @@ void MpNeedleTrajectoryController::writeJointControlCmds(const std::vector<doubl
   }
 
   for (std::size_t i = 0; i < cmd.size(); ++i) {
-    joint_cmd_handles_[i].get().set_value(cmd[i]);
+    joint_cmd_handles_[i].get().set_value(cmd[i]*1e-3);
   }
 
 }

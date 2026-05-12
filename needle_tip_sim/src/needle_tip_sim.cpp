@@ -37,6 +37,6 @@ void NeedleTipSim::publish( ){
   sim_tip_publisher->publish( p );
   
   int period;
-  get_parameter_or("period", period, 1000);
+  get_parameter_or("period", period, 200);
   rclcpp::sleep_for(std::chrono::milliseconds(period));
 }
