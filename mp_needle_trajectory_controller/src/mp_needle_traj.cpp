@@ -250,6 +250,8 @@ void MpNeedleTrajectoryController::writeJointControlCmds(
     return;
   }
 
+  // filter commands based on max_velocity and last command positions
+
   if(!command_positions_initialized_ || last_command_positions_.size() != cmd.size()){
     last_command_positions_.resize(cmd.size(), 0.0);
     for(std::size_t i=0; i<cmd.size(); ++i){
