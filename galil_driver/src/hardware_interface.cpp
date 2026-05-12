@@ -20,6 +20,7 @@
 namespace galil_driver {
 
   namespace {
+    // Mode IDs
     constexpr int COMMAND_MODE_IDLE = 0;
     constexpr int COMMAND_MODE_POSITION = 1;
     constexpr int COMMAND_MODE_LEGACY_VELOCITY = 2;
@@ -33,7 +34,9 @@ namespace galil_driver {
     constexpr const char* REAL_VELOCITY_IT_PARAM = "real_velocity_it";
     constexpr const char* REAL_VELOCITY_AC_PARAM = "real_velocity_ac";
     constexpr const char* REAL_VELOCITY_DC_PARAM = "real_velocity_dc";
+    constexpr const char* POSITION_MAX_VELOCITY_PARAM = "position_max_velocity";
 
+    // String cleanup
     std::string trim_copy(const std::string& value){
       const auto begin = std::find_if_not(value.begin(), value.end(), [](unsigned char character) {
 	return std::isspace(character) != 0;
@@ -49,6 +52,7 @@ namespace galil_driver {
       return std::string(begin, end);
     }
 
+    // Galil formatting
     std::string format_galil_number(double value){
       if( std::abs(value - std::llround(value)) < 1e-9 ){
 	return std::to_string(std::llround(value));
@@ -64,11 +68,13 @@ namespace galil_driver {
     on_deactivate(rclcpp_lifecycle::State());
   }
 
+  // Axis mapping
   char GalilSystemHardwareInterface::axis_letter(std::size_t index) const{
     static constexpr char AXES[] = "ABCDEFGH";
     return index < (sizeof(AXES) - 1) ? AXES[index] : '?';
   }
 
+  // Command sender
   bool GalilSystemHardwareInterface::send_galil_command(const std::string& command){
     GSize BUFFER_LENGTH=1024;
     GSize bytes_returned;
@@ -96,6 +102,7 @@ namespace galil_driver {
     return false;
   }
 
+  // Velocity scaling
   int GalilSystemHardwareInterface::real_velocity_command_counts(std::size_t index) const{
     if( index >= hw_commands_real_velocity_.size() ){
       return 0;
@@ -115,6 +122,7 @@ namespace galil_driver {
     return counts;
   }
 
+  // Jog stop
   bool GalilSystemHardwareInterface::stop_real_velocity_axis(std::size_t index){
     if( index >= real_velocity_jog_active_.size() ){
       return true;
@@ -136,6 +144,7 @@ namespace galil_driver {
     return true;
   }
 
+  // Stop all jogs
   bool GalilSystemHardwareInterface::stop_all_real_velocity_axes(){
     bool ok = true;
     for( std::size_t i=0; i<real_velocity_jog_active_.size(); i++ ){
@@ -144,6 +153,7 @@ namespace galil_driver {
     return ok;
   }
 
+  // PID parsing
   bool GalilSystemHardwareInterface::parse_real_velocity_init_settings(
     std::size_t index,
     RealVelocityInitSettings& settings)
@@ -257,7 +267,8 @@ namespace galil_driver {
     return true;
   }
 
-  bool GalilSystemHardwareInterface::send_real_velocity_init_command(
+  // Vector command
+  bool GalilSystemHardwareInterface::send_galil_vector_command(
     const std::string& name,
     const std::vector<double>& values)
   {
@@ -283,6 +294,7 @@ namespace galil_driver {
     return send_galil_command(command.str());
   }
 
+  // Real-velocity setup
   bool GalilSystemHardwareInterface::initialize_real_velocity_axes(const std::vector<std::size_t>& axes){
     if( axes.empty() ){
       return true;
@@ -317,14 +329,40 @@ namespace galil_driver {
       dc_values.push_back(settings.dc);
     }
 
-    return send_real_velocity_init_command("KP", kp_values) &&
-	   send_real_velocity_init_command("KI", ki_values) &&
-	   send_real_velocity_init_command("KD", kd_values) &&
-	   send_real_velocity_init_command("IT", it_values) &&
-	   send_real_velocity_init_command("AC", ac_values) &&
-	   send_real_velocity_init_command("DC", dc_values);
+    return send_galil_vector_command("KP", kp_values) &&
+	   send_galil_vector_command("KI", ki_values) &&
+	   send_galil_vector_command("KD", kd_values) &&
+	   send_galil_vector_command("IT", it_values) &&
+	   send_galil_vector_command("AC", ac_values) &&
+	   send_galil_vector_command("DC", dc_values);
   }
 
+  // Position speed setup
+  bool GalilSystemHardwareInterface::initialize_position_axes(const std::vector<std::size_t>& axes){
+    if( axes.empty() ){
+      return true;
+    }
+
+    if( position_max_velocity_.size() != info_.joints.size() ){
+      RCLCPP_ERROR(
+	rclcpp::get_logger("GalilSystemHardwareInterface"),
+	"Refusing to initialize position control because position_max_velocity count %zu does not match joint count %zu",
+	position_max_velocity_.size(),
+	info_.joints.size());
+      return false;
+    }
+
+    std::vector<double> speed_values;
+    speed_values.reserve(info_.joints.size());
+    for( std::size_t i=0; i<info_.joints.size(); i++ ){
+      const double speed_counts = position_max_velocity_[i] * gears_m_2_cnt[i];
+      speed_values.push_back(speed_counts);
+    }
+
+    return send_galil_vector_command("SP", speed_values);
+  }
+
+  // Servo here
   bool GalilSystemHardwareInterface::servo_here_real_velocity_axes(const std::vector<std::size_t>& axes){
     std::string axis_mask;
     for( const auto index : axes ){
@@ -348,6 +386,7 @@ namespace galil_driver {
     return send_galil_command("SH " + axis_mask);
   }
   
+  // Hardware setup
   hardware_interface::CallbackReturn
   GalilSystemHardwareInterface::on_init(const hardware_interface::HardwareInfo& info){
     cmd_mode_ = COMMAND_MODE_IDLE;
@@ -378,6 +417,7 @@ namespace galil_driver {
     real_velocity_init_settings_.resize(
       info_.joints.size(),
       RealVelocityInitSettings{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, false});
+    position_max_velocity_.clear();
 
     gears_m_2_cnt.clear();
     torque_constants_.clear();
@@ -404,6 +444,45 @@ namespace galil_driver {
           }
       }
       gears_m_2_cnt.push_back(gear_ratio);
+
+      double position_max_velocity = 0.0;
+      const auto position_max_velocity_read = joint.parameters.find(POSITION_MAX_VELOCITY_PARAM);
+      if(position_max_velocity_read == joint.parameters.end()) {
+	RCLCPP_ERROR(
+	  rclcpp::get_logger("GalilSystemHardwareInterface"),
+	  "Joint %s is missing required position control parameter %s",
+	  joint.name.c_str(),
+	  POSITION_MAX_VELOCITY_PARAM);
+	return hardware_interface::CallbackReturn::ERROR;
+      }
+
+      const std::string raw_position_max_velocity = trim_copy(position_max_velocity_read->second);
+      try{
+	std::size_t parsed_characters = 0;
+	position_max_velocity = std::stod(raw_position_max_velocity, &parsed_characters);
+	if( parsed_characters != raw_position_max_velocity.size() ){
+	  throw std::invalid_argument("trailing characters");
+	}
+      }
+      catch (const std::exception&){
+	RCLCPP_ERROR(
+	  rclcpp::get_logger("GalilSystemHardwareInterface"),
+	  "Joint %s parameter %s must be numeric, got '%s'",
+	  joint.name.c_str(),
+	  POSITION_MAX_VELOCITY_PARAM,
+	  position_max_velocity_read->second.c_str());
+	return hardware_interface::CallbackReturn::ERROR;
+      }
+      if( !std::isfinite(position_max_velocity) || position_max_velocity <= 0.0 ){
+	RCLCPP_ERROR(
+	  rclcpp::get_logger("GalilSystemHardwareInterface"),
+	  "Joint %s parameter %s must be a positive finite value, got %s",
+	  joint.name.c_str(),
+	  POSITION_MAX_VELOCITY_PARAM,
+	  position_max_velocity_read->second.c_str());
+	return hardware_interface::CallbackReturn::ERROR;
+      }
+      position_max_velocity_.push_back(position_max_velocity);
 
       double torque_const = 1.0;
       auto torque_read = joint.parameters.find("torque_constant");
@@ -438,6 +517,7 @@ namespace galil_driver {
     return hardware_interface::CallbackReturn::SUCCESS;
   }
 
+  // Galil connection
   hardware_interface::CallbackReturn
   GalilSystemHardwareInterface::on_configure(const rclcpp_lifecycle::State & /*previous_state*/){
     RCLCPP_INFO(rclcpp::get_logger("GalilSystemHardwareInterface"), "Configuring ...please wait...");
@@ -457,6 +537,7 @@ namespace galil_driver {
     return hardware_interface::CallbackReturn::SUCCESS;
   }
   
+  // State exports
   std::vector<hardware_interface::StateInterface> GalilSystemHardwareInterface::export_state_interfaces(){
     std::vector<hardware_interface::StateInterface> state_interfaces;
     for (std::size_t i=0; i<info_.joints.size(); i++){
@@ -473,6 +554,7 @@ namespace galil_driver {
     return state_interfaces;
   }
   
+  // Command exports
   std::vector<hardware_interface::CommandInterface> GalilSystemHardwareInterface::export_command_interfaces(){
     std::vector<hardware_interface::CommandInterface> command_interfaces;
     for (std::size_t i=0; i<info_.joints.size(); i++){
@@ -489,11 +571,13 @@ namespace galil_driver {
     return command_interfaces;
   }
   
+  // Activate hardware
   hardware_interface::CallbackReturn
   GalilSystemHardwareInterface::on_activate(const rclcpp_lifecycle::State& /*previous_state*/){
     return hardware_interface::CallbackReturn::SUCCESS;
   }
   
+  // Stop hardware
   hardware_interface::CallbackReturn
   GalilSystemHardwareInterface::on_deactivate(const rclcpp_lifecycle::State& /*previous_state*/){
     if( !stop_all_real_velocity_axes() ){
@@ -502,6 +586,7 @@ namespace galil_driver {
     return hardware_interface::CallbackReturn::SUCCESS;
   }
   
+  // Prepare switch
   hardware_interface::return_type
   GalilSystemHardwareInterface::prepare_command_mode_switch
   (const std::vector<std::string>& start_interfaces,
@@ -585,6 +670,7 @@ namespace galil_driver {
     return ret_val;
   }
   
+  // Perform switch
   hardware_interface::return_type
   GalilSystemHardwareInterface::perform_command_mode_switch
   (const std::vector<std::string>& start_interfaces,
@@ -593,6 +679,7 @@ namespace galil_driver {
     std::cout << "GalilSystemHardwareInterface::perform_command_mode_switch" << std::endl;
     hardware_interface::return_type ret_val = hardware_interface::return_type::OK;
     std::vector<std::size_t> real_velocity_start_axes;
+    std::vector<std::size_t> position_start_axes;
 
     for (const auto& key : stop_interfaces){
       std::cout << "stop: " << key << std::endl;
@@ -619,11 +706,12 @@ namespace galil_driver {
       std::cout << "start: " << key << std::endl;
       for (auto i = 0u; i < info_.joints.size(); i++) {
 	if(key == info_.joints[i].name + "/" + hardware_interface::HW_IF_POSITION){
-	  // This is to prevent sending old position when switching
-	  std::cout << "switch: " << hw_states_position_[i] << std::endl;
-	  hw_commands_position_[i] = hw_states_position_[i];
-	  hw_commands_velocity_[i] = 0.0;
-	}
+	      // This is to prevent sending old position when switching
+	      std::cout << "switch: " << hw_states_position_[i] << std::endl;
+	      hw_commands_position_[i] = hw_states_position_[i];
+	      hw_commands_velocity_[i] = 0.0;
+	      position_start_axes.push_back(i);
+	    }
 	if(key == info_.joints[i].name + "/" + hardware_interface::HW_IF_VELOCITY){
     hw_commands_position_[i] = hw_states_position_[i];
 	  hw_commands_velocity_[i] = 0.0;
@@ -650,6 +738,12 @@ namespace galil_driver {
       }
     }
 
+    if( !position_start_axes.empty() ){
+      if( !initialize_position_axes(position_start_axes) ){
+	ret_val = hardware_interface::return_type::ERROR;
+      }
+    }
+
     if( !real_velocity_start_axes.empty() ){
       if( !initialize_real_velocity_axes(real_velocity_start_axes) ||
 	  !servo_here_real_velocity_axes(real_velocity_start_axes) ){
@@ -669,6 +763,7 @@ namespace galil_driver {
   }
 
   
+  // State reads
   hardware_interface::return_type GalilSystemHardwareInterface::read( const rclcpp::Time& /*time*/,
 								      const rclcpp::Duration& /*period*/){
     
@@ -773,6 +868,7 @@ namespace galil_driver {
     return hardware_interface::return_type::OK;
   }
 
+  // Real-velocity writes
   hardware_interface::return_type GalilSystemHardwareInterface::write_real_velocity(){
     for( std::size_t i=0; i<info_.joints.size(); i++ ){
       const int command_counts = real_velocity_command_counts(i);
@@ -816,6 +912,7 @@ namespace galil_driver {
     return hardware_interface::return_type::OK;
   }
   
+  // Command writes
   hardware_interface::return_type GalilSystemHardwareInterface::write(const rclcpp::Time& /*time*/,
 								      const rclcpp::Duration& period){
 

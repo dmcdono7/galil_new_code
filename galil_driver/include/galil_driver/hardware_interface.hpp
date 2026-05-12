@@ -64,11 +64,12 @@ namespace galil_driver{
     bool stop_real_velocity_axis(std::size_t index);
     bool stop_all_real_velocity_axes();
     bool parse_real_velocity_init_settings(std::size_t index, RealVelocityInitSettings& settings);
-    bool send_real_velocity_init_command(
+    bool send_galil_vector_command(
       const std::string& name,
       const std::vector<double>& values);
     bool initialize_real_velocity_axes(const std::vector<std::size_t>& axes);
     bool servo_here_real_velocity_axes(const std::vector<std::size_t>& axes);
+    bool initialize_position_axes(const std::vector<std::size_t>& axes);
     hardware_interface::return_type write_real_velocity();
 
     hardware_interface::HardwareInfo info_;
@@ -81,6 +82,7 @@ namespace galil_driver{
     std::vector<int> last_real_velocity_counts_;
     std::vector<bool> real_velocity_jog_active_;
     std::vector<RealVelocityInitSettings> real_velocity_init_settings_;
+    std::vector<double> position_max_velocity_;
     int cmd_mode_;
 
     //std::vector< char > channels;
