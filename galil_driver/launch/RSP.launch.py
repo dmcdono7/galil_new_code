@@ -220,35 +220,17 @@ def generate_launch_description():
     )
 
     controllers_active = ["joint_state_broadcaster", "real_velocity_controller"]
-    controllers_inactive = ["position_controller","sine_real_velocity_controller"]
+    controllers_inactive = ["velocity_controller", "position_controller", "sine_real_velocity_controller"]
     controller_spawners = []
-    
 
-    controller_spawners.append(
-        Node(
-            package="controller_manager",
-            executable="spawner",
-            arguments=["joint_state_broadcaster", "--controller-manager", "/controller_manager", "--controller-manager-timeout", controller_spawner_timeout],
+    for controller in controllers_active:
+        controller_spawners.append(
+            Node(
+                package="controller_manager",
+                executable="spawner",
+                arguments=[controller, "--controller-manager", "/controller_manager", "--controller-manager-timeout", controller_spawner_timeout],
+            )
         )
-    )
-
-    controller_spawners.append(
-        Node(
-            package="controller_manager",
-            executable="spawner",
-            arguments=["real_velocity_controller", "--controller-manager", "/controller_manager", "--controller-manager-timeout", controller_spawner_timeout],
-            condition=IfCondition(use_simulation)
-        )
-    )
-
-    controller_spawners.append(
-        Node(
-            package="controller_manager",
-            executable="spawner",
-            arguments=["velocity_controller", "--controller-manager", "/controller_manager", "--controller-manager-timeout", controller_spawner_timeout],
-            condition=UnlessCondition(use_simulation)
-        )
-    )
 
     for controller in controllers_inactive:
         controller_spawners.append(
