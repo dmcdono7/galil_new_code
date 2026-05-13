@@ -15,9 +15,17 @@ Galil gclib install instructions:
 Galil Python wrapper docs:
 * https://www.galil.com/sw/pub/all/doc/gclib/html/python.html
 
-Nlopt? :
-* 
-
+Nlopt installation instructions:
+This gets tricky because the CPP header (nlopt.hpp) is not installed with the rest of the package. The extra installation steps are described below.
+* First, install the package library:
+```bash
+sudo apt install libnlopt
+```
+* Second, download the latest version of the NLopt library from here (it is under 'Download and Installation' library):
+  https://nlopt.readthedocs.io/en/latest/
+* Then, follow the instructions here (just the first two code blocks in the first two sections) to build it with cmake:
+  https://nlopt.readthedocs.io/en/latest/NLopt_Installation/
+After that you should be all set!
 ## Build
 
 ```bash
