@@ -187,7 +187,7 @@ controller_interface::return_type MpNeedleTrajectoryController::update(const rcl
 
   for(int i=0; i<static_cast<int>(joint_state_handles_.size()); ++i){
     stages[i] = joint_state_handles_[i].get().get_value();
-    std::cout << "joint: " << i << "pos: " << stages[i] << std::endl;
+    //std::cout << "joint: " << i << "pos: " << stages[i] << std::endl;
   }
 
   depth = stages[3]*1e3;

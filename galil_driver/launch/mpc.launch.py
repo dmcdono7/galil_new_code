@@ -219,8 +219,8 @@ def generate_launch_description():
         condition=IfCondition(LaunchConfiguration('gui'))
     )
 
-    controllers_active = ["joint_state_broadcaster", "real_velocity_controller"]
-    controllers_inactive = ["position_controller","sine_real_velocity_controller", "mpc_controller"]
+    controllers_active = ["joint_state_broadcaster", "mpc_controller"]
+    controllers_inactive = ["position_controller","sine_real_velocity_controller", "real_velocity_controller"]
     controller_spawners = []
     
 
@@ -236,17 +236,7 @@ def generate_launch_description():
         Node(
             package="controller_manager",
             executable="spawner",
-            arguments=["real_velocity_controller", "--controller-manager", "/controller_manager", "--controller-manager-timeout", controller_spawner_timeout],
-            condition=IfCondition(use_simulation)
-        )
-    )
-
-    controller_spawners.append(
-        Node(
-            package="controller_manager",
-            executable="spawner",
-            arguments=["velocity_controller", "--controller-manager", "/controller_manager", "--controller-manager-timeout", controller_spawner_timeout],
-            condition=UnlessCondition(use_simulation)
+            arguments=["mpc_controller", "--controller-manager", "/controller_manager", "--controller-manager-timeout", controller_spawner_timeout],
         )
     )
 
@@ -286,7 +276,7 @@ def generate_launch_description():
         ],
         condition=UnlessCondition(activate_joint_controller),
     )
-
+   
     #robot_state_pub_node = Node(
     #    package="robot_state_publisher",
     #    executable="robot_state_publisher",
