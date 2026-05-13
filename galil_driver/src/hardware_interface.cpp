@@ -765,51 +765,6 @@ namespace galil_driver {
   hardware_interface::return_type GalilSystemHardwareInterface::read( const rclcpp::Time& /*time*/,
 								      const rclcpp::Duration& /*period*/){
     
-   //https://www.galil.com/sw/pub/all/doc/gclib/html/unionGDataRecord.html seems extremely useful to be in this structure
-   /*union GDataRecord record;
-
-   if(GRecord(connection, &record, G_QR) == G_NO_ERROR) {
-       for(std::size_t i=0; i<info_.joints.size();i++) {
-           double motor_pos = 0.0;
-           double vel = 0.0;
-           double torq = 0.0;
-           
-           switch(i) {
-               case 0: //axis A
-                   //https://www.galil.com/sw/pub/all/doc/gclib/html/structGDataRecord4000.html
-                   motor_pos = record.dmc4000.axis_a_motor_position;
-                   vel = record.dmc4000.axis_a_velocity;
-                   torq = record.dmc4000.axis_a_torque;
-                   break;
-               case 1: //axis B
-                   motor_pos = record.dmc4000.axis_b_motor_position;
-                   vel = record.dmc4000.axis_b_velocity;
-                   torq = record.dmc4000.axis_b_torque;
-                   break;
-               case 2: //axis C
-                   motor_pos = record.dmc4000.axis_c_motor_position;
-                   vel = record.dmc4000.axis_c_velocity;
-                   torq = record.dmc4000.axis_c_torque;
-                   break;
-               case 3: //axis D
-                   motor_pos = record.dmc4000.axis_d_motor_position;
-                   vel = record.dmc4000.axis_d_velocity;
-                   torq = record.dmc4000.axis_d_torque;
-                   break;
-               default:
-                   break;           
-           }       
-       
-           hw_states_position_[i] = motor_pos / gears_m_2_cnt[i];
-           hw_states_velocity_[i] = vel / gears_m_2_cnt[i];
-           hw_states_effort_[i] = torq * torque_constants_[i];
-       }
-       return hardware_interface::return_type::OK;
-   } else {
-       RCLCPP_ERROR(rclcpp::get_logger("GalilSystemHardwareInterface"),"Failed to read Galil record");
-       return hardware_interface::return_type::ERROR;
-   }
-   */
 
 
    //RCLCPP_INFO(rclcpp::get_logger("GalilSystemHardwareInterface"), "Reading...");
