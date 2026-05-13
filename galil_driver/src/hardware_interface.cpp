@@ -522,9 +522,7 @@ namespace galil_driver {
   GalilSystemHardwareInterface::on_configure(const rclcpp_lifecycle::State & /*previous_state*/){
     RCLCPP_INFO(rclcpp::get_logger("GalilSystemHardwareInterface"), "Configuring ...please wait...");
 
-    GSize BUFFER_LENGTH=32;
-    GSize bytes_returned;
-    char buffer[32];
+    
     if( GOpen( ip_address_.c_str(), &connection ) == G_NO_ERROR ){
       RCLCPP_INFO(rclcpp::get_logger("GalilSystemHardwareInterface"), "Connection to Galil successful.");
     }
@@ -623,7 +621,7 @@ namespace galil_driver {
 
 	  GSize BUFFER_LENGTH=1024;
 	  GSize bytes_returned;
-	  char channels[] = "ABCD";
+
 	  char command[1024]="";
 	  char buffer[1024];
 	  sprintf( command, "PT 0,0,0,0" ); // turn off position tracking
@@ -717,7 +715,7 @@ namespace galil_driver {
 	  hw_commands_velocity_[i] = 0.0;
 	  GSize BUFFER_LENGTH=1024;
 	  GSize bytes_returned;
-	  char channels[] = "ABCD";
+
 	  char command[1024]="";
 	  char buffer[1024];
 	  sprintf( command, "PT 1,1,1,1" );
@@ -964,13 +962,16 @@ namespace galil_driver {
       if( cmd_mode_ == COMMAND_MODE_POSITION ){
 	if( !isnan(hw_commands_position_[i]) && 0<strlen(command) )
 	  // Position Absolute command
-	  { sprintf( command, "%s%d%c", command, ((int)(hw_commands_position_[i]*gears_m_2_cnt[i])), separator ); }
+	  { sprintf(command + strlen(command), "%d%c", ((int)(hw_commands_position_[i]*gears_m_2_cnt[i])), separator);}
+	  
+	  
+	  //sprintf( command, "%s%d%c", command, ((int)(hw_commands_position_[i]*gears_m_2_cnt[i])), separator ); }
       }
       if( cmd_mode_ == COMMAND_MODE_LEGACY_VELOCITY ){
 	if( !isnan(hw_commands_velocity_[i]) && 0<strlen(command) ){
 	  // JoG command stinks so we use PT with incremental position
 	  hw_commands_position_[i] += period.seconds() * hw_commands_velocity_[i];
-	  sprintf( command, "%s%d%c", command, ((int)(hw_commands_position_[i]*gears_m_2_cnt[i])), separator );
+	  sprintf(command + strlen(command), "%d%c", ((int)(hw_commands_position_[i]*gears_m_2_cnt[i])), separator);
 	}
       }
       
@@ -989,7 +990,7 @@ namespace galil_driver {
 			 command, error);
 	    error = GCommand(connection, "TC1", buffer, BUFFER_LENGTH, &bytes_returned );
 	    RCLCPP_ERROR(rclcpp::get_logger("GalilSystemHardwareInterface"), "TC1: %s.", buffer);
-	    hardware_interface::return_type::ERROR;
+	    return hardware_interface::return_type::ERROR;
 	  }
 	}
       }
@@ -998,7 +999,7 @@ namespace galil_driver {
 		     command, error);
 	error = GCommand(connection, "TC1", buffer, BUFFER_LENGTH, &bytes_returned );
 	RCLCPP_ERROR(rclcpp::get_logger("GalilSystemHardwareInterface"), "TC1: %s.", buffer);
-	hardware_interface::return_type::ERROR;
+	return hardware_interface::return_type::ERROR;
       }
     }
     else // empty command
