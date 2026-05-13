@@ -237,7 +237,7 @@ controller_interface::return_type MpNeedleTrajectoryController::update(const rcl
 
 void MpNeedleTrajectoryController::writeJointControlCmds(
   const std::vector<double> & cmd,
-  const rclcpp::Duration & period)
+  const rclcpp::Duration & /*period*/)
 {
 
   // for debugging
